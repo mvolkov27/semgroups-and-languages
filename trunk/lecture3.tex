@@ -1,0 +1,251 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hhline}
+\usepackage{a4}
+
+\mathsurround 1pt
+
+
+\DeclareSymbolFont{rsfscript}{OMS}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfscript}
+%для отношений Грина - например, $\mathrsfs{R}$
+
+\newtheorem{exercise}{Упражнение}
+\newtheorem{example}{Пример}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\renewcommand{\proofname}{Доказательство}
+
+\DeclareMathOperator{\Img}{\mathrm{Im}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+
+
+\begin{document}
+ \begin{center}
+ \large\bf Лекция 3, 07.10.11
+ \end{center}
+
+
+ \begin{proposition}
+  Любые две максимальные подгруппы внутри одного
+  $\mathrsfs{D}$-класса изоморфны.
+ \end{proposition}
+ \begin{proof} Пусть $H_1$ и $H_2$ -- две такие подгруппы. По следствию
+ из теоремы Миллера-Клиффорда существуют идемпотенты $e$ и $f$ такие, что
+ $H_1=H_e$ и $H_2=H_f$. Поскольку все происходит внутри одного $\mathrsfs{D}$-класса, имеем
+ $e\,\mathrsfs{D}\,f$. Таким образом, $e\,\mathrsfs{R}\,a\,\mathrsfs{L}\,f$
+ для некоторого $a\in S$. Из того, что $a\,\mathrsfs{L}\,f$, получаем, что существует элемент $a'\in
+ S^1$, для которого $f=a'a$.
+
+ На $H_e$ рассмотрим отображение, определенное правилом $x\mapsto a'xa$. Из леммы Грина и
+ утверждения, двойственного к ней, следует, что это отображение
+ есть биекция $H_e$ на $H_f$. Осталось проверить, что это отображение является гомоморфизмом.
+
+ Заметим, что $aa'a=af=a$. Отсюда $(aa')(aa')=(aa'a)a'=aa'$, т.\,е.\
+ $aa'$ --- идемпотент из $R_a$.
+
+ Для произвольных $x,y\in H_e$, поскольку $(aa')y=y$, получаем
+ $$(a'xa)(a'ya)=a'x(aa'y)a=a'xya,$$
+что и показывает, что отображение $x\mapsto a'xa$ есть гомоморфизм.
+\end{proof}
+
+ Элемент $a\in S$ называется \emph{регулярным}, если существует
+ такой $x\in S$, что $axa=a$. Класс отношения Грина
+ называется \emph{регулярным}, если все его элементы регулярны.
+
+
+ \begin{proposition}
+  Пусть $D$ -- некоторый $\mathrsfs{D}$-класс. Следующие
+  условия эквивалентны:
+   \begin{enumerate}
+    \item $D$ -- регулярный $\mathrsfs{D}$-класс;
+    \item в $D$ есть регулярный элемент;
+    \item каждый $\mathrsfs{R}$-класс внутри $D$ содержит
+    идемпотент;
+    \item каждый $\mathrsfs{L}$-класс внутри $D$ содержит
+    идемпотент;
+    \item в $D$ есть идемпотент;
+    \item существуют такие $x,y\in D$, что $xy\in D$.
+   \end{enumerate}
+    \end{proposition}
+
+ \begin{proof}
+Эквивалентность  условий (1)--(5) вытекает из следующей леммы и двойственного
+ей утверждения:
+
+\begin{lemma}
+  $\mathrsfs{R}$-класс регулярен тогда и только тогда, когда он
+  содержит идемпотент.
+\end{lemma}
+ \begin{proof}
+  Пусть $a\,\mathrsfs{R}\,e$, где $e$ --- идемпотент. Тогда
+ существует такой элемент $u\in S^1$, что $e=au$. Имеем
+ следующую цепочку равенств: $a=ea=e^2a=(au)ea=a(ue)a$. Поскольку
+  $ue\in S$, видим, что элемент $a$ регулярен.
+
+  Обратно, если $axa=a$ для  некоторого $x\in S$, то $ax$ --- идемпотент,
+  лежащий в $R_a$.
+ \end{proof}
+ Очевидно, что $(5)\Rightarrow (6)$, а импликация $(6)\Rightarrow(5)$ следует из теоремы
+ Миллера-Клиффорда.
+ \end{proof}
+
+  \paragraph{$\mathrsfs{D}$-строение моноида преобразований.}
+  Пусть $X$ -- множество. Через $T_X$ обозначим моноид всех
+  преобразований множества $X$. Для $\alpha\in T_X$ через $\Img\alpha$
+  обозначается \emph{образ} $\alpha$, т.\,е.\ множество
+$$\{y\in X\mid (\exists x\in X)\,y=x\alpha\},$$
+ а через $\Ker\alpha$ обозначается \emph{ядро} $\alpha$, т.\,е.\ разбиение
+ множества $X$, при котором элементы $x,y\in X$ принадлежат одному классу
+ тогда и только тогда, когда $x\alpha=y\alpha$. Заметим, что мощность множества
+ классов разбиения $\Ker\alpha$ (обозначаемая $|\Ker\alpha|$) равно мощности
+$|\Img\alpha|$ множества $\Img\alpha$.
+
+ \begin{proposition}
+   Для любых $\alpha,\beta\in T_X$ имеем:
+    \begin{enumerate}
+     \item $\alpha\le_{\mathrsfs{L}}\beta \Longleftrightarrow \Img \alpha\subseteq \Img
+     \beta$;
+     \item $\alpha\le_{\mathrsfs{R}}\beta \Longleftrightarrow \Ker \alpha\supseteq \Ker
+     \beta$;
+     \item $\alpha\le_{\mathrsfs{J}}\beta \Longleftrightarrow |\Img \alpha|\leq |\Img
+     \beta|$.
+    \end{enumerate}
+\end{proposition}
+
+ \begin{proof}
+     (1) Если $\alpha\le_{\mathrsfs{L}}\beta$, то существует
+     такое преобразование $\gamma\in T_X$, что $\alpha=\gamma\beta$.
+     Тогда $\Img \alpha=\Img \gamma\beta=(\Img \gamma)\beta\subseteq \Img \beta.$
+
+     Обратно, если $\Img \alpha\subseteq \Img\beta$, то для каждого $x\in
+     X$ существует такой $y\in X$, что $x\alpha=y\beta$.
+     Рассмотрим отображение $\gamma$, сопоставляющее каждому $x$
+     один из таких $y$. Тогда $\alpha=\gamma\beta$.
+
+\smallskip
+
+     (2) Если $\alpha\le_{\mathrsfs{R}}\beta$, то существует
+     такое преобразование $\gamma\in T_X$, что $\alpha=\beta\gamma$.
+
+     Пусть $(x,y)\in \Ker\beta$, т.\,е.\ $x\beta=y\beta$.
+     Тогда $x\alpha=x\beta\gamma=y\beta\gamma=y\alpha$.
+     Это значит, что $(x,y)\in \Ker\alpha$.
+
+     Обратно, если $\Ker \alpha\supseteq \Ker \beta$, то соответствие
+     $\gamma=\beta^{-1}\alpha$ является однозначным отображением и потому
+     принадлежит $T_X$. Ясно, что $\alpha=\beta\gamma$.
+
+
+\smallskip
+
+     (3) Если $\alpha\le_{\mathrsfs{J}}\beta$, то существуют
+     такие преобразования $\gamma,\delta\in T_X$, что
+     $\alpha=\gamma\beta\delta$. Отсюда немедленно получаем, что
+     $|\Img \alpha|\le|\Img \beta|$.
+
+     Обратно, рассмотрим отображение $\varepsilon: X\rightarrow
+     X$, которое каждому классу $\Ker \alpha$ сопоставляет элемент из
+     $\Img \beta$  так, что разным классам соответствуют разные элементы.
+     Поскольку $|\Ker \alpha|=|\Img \alpha|\le|\Img \beta|$, то организовать
+     такое отображение  возможно.
+
+     Так как $\Ker \varepsilon=\Ker \alpha$, по пункту (2) имеем
+     $\varepsilon\,\mathrsfs{R}\,\alpha$. Далее, $\Img \varepsilon\subseteq \Img
+     \beta$, поэтому по пункту (1) имеем $\varepsilon\le_{\mathrsfs{L}}\beta$.
+     Отсюда $\alpha\le_{\mathrsfs{D}}\beta$ и потому
+     $\alpha\le_{\mathrsfs{J}}\beta$.
+    \end{proof}
+
+Отметим, что из доказательства пункта (3) вытекает, что в моноиде  $T_X$
+отношения $\mathrsfs{D}$ и $\mathrsfs{J}$ совпадают.
+
+\begin{corollary}
+Для любых $\alpha,\beta\in T_X$ имеем:
+    \begin{enumerate}
+     \item $\alpha\,\mathrsfs{L}\,\beta \Longleftrightarrow \Img \alpha=\Img\beta$;
+     \item $\alpha\,\mathrsfs{R}\,\beta \Longleftrightarrow \Ker \alpha=\Ker\beta$;
+     \item $\alpha\,\mathrsfs{J}\,\beta \Longleftrightarrow \alpha\,\mathrsfs{D}\,\beta \Longleftrightarrow
+     |\Img \alpha|=|\Img\beta|$.
+    \end{enumerate}
+\end{corollary}
+
+В качестве примера рассмотрим $\mathrsfs{D}$-строение моноида всех
+преобразований 3-элемент\-ного множества $\{1,2,3\}$. Согласно доказанному, у
+него ровно три $\mathrsfs{D}$-класса: класс $D_3$ всех преобразований с
+3-элементным образом, класс $D_2$ всех преобразований с 2-элементным образом и
+класс $D_1$ всех преобразований с 1-элементным образом. Ясно, что
+преобразование 3-элементного множества, образ которого 3-элементен, есть не что
+иное как перестановка этого множества. Таким образом, класс $D_3$ состоит из 6
+перестановок исходного множества. Класс $D_1$ состоит из трех константных
+преобразований. Интереснее всего устроен класс $D_2$. Его egg-box картинка
+показана ниже.
+
+\begin{table}[hb]
+\begin{center}
+\begin{tabular}{c|c|c|c|}
+
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{$\{1,2\}$} &
+\multicolumn{1}{c}{$\{2,3\}$} &
+\multicolumn{1}{c}{$\{1,3\}$}\\
+ \cline{2-4}
+$1\mid 23$\rule{0pt}{14pt} &$\left(\begin{smallmatrix} 1&2&3\\
+1&2&2\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+2&1&1\end{smallmatrix}\right)$ ${}^*$&
+$\left(\begin{smallmatrix} 1&2&3\\
+1&3&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&1&1\end{smallmatrix}\right)$ ${}^*$&
+$\left(\begin{smallmatrix} 1&2&3\\
+2&3&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&2&2\end{smallmatrix}\right)$
+\\
+\cline{2-4}
+$2\mid 13$\rule{0pt}{14pt} &$\left(\begin{smallmatrix} 1&2&3\\
+1&2&1\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+2&1&2\end{smallmatrix}\right)$ ${}^*$&
+$\left(\begin{smallmatrix} 1&2&3\\
+1&3&1\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&1&3\end{smallmatrix}\right)$ &
+$\left(\begin{smallmatrix} 1&2&3\\
+2&3&2\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&2&3\end{smallmatrix}\right)$ ${}^*$
+\\
+  \cline{2-4}
+$3\mid 12$\rule{0pt}{14pt} &$\left(\begin{smallmatrix} 1&2&3\\
+1&1&2\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+2&2&1\end{smallmatrix}\right)$ &
+$\left(\begin{smallmatrix} 1&2&3\\
+1&1&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&3&1\end{smallmatrix}\right)$ ${}^*$&
+$\left(\begin{smallmatrix} 1&2&3\\
+2&2&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&3&2\end{smallmatrix}\right)$ ${}^*$
+\\
+  \cline{2-4}
+\end{tabular}
+\end{center}
+\caption{$\mathrsfs{D}$-класс моноида всех преобразований 3-элементного
+множества, состоящий из всех преобразований с 2-элементным образом. Над каждым
+$\mathrsfs{L}$-классом показано параметризующее его 2-элементное подмножество,
+а левее каждого $\mathrsfs{R}$-класса -- параметризующее его разбиение.
+Звездочкой отмечены $\mathrsfs{H}$-классы, содержащие идемпотент.}
+\end{table}
+\end{document}

@@ -1,0 +1,692 @@
+\documentclass[12pt]{book}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4}
+
+\mathsurround 1pt
+
+
+\DeclareSymbolFont{rsfscript}{OMS}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfscript}
+%для отношений Грина - например, $\mathrsfs{R}$
+
+\newtheorem{exercise}{Упражнение}[section]
+\newtheorem{proposition}{Предложение}[section]
+\newtheorem{corollary}{Следствие}[section]
+\newtheorem{lemma}{Лемма}[section]
+
+\DeclareMathOperator{\Img}{\mathrm{Im}} \DeclareMathOperator{\Ker}{\mathrm{ker}}
+
+
+\theoremstyle{remark}
+\newtheorem{example}{Пример}[section]
+\newtheorem{definition}{Определение}[section]
+
+\renewcommand{\proofname}{Доказательство}
+
+\begin{document}
+
+\chapter{Постановка задачи}
+
+\section{Предварительные сведения}
+
+Мы предполагаем, что читатель знаком с основами теории формальных языков и конечных автоматов в пределах стандартного университетского
+курса дискретной математики. В частности, мы предполагаем известной теорему Клини о том, что класс языков над данным конечным алфавитом
+$\Sigma$, распознаваемых конечными детерминированными автоматами, совпадает с классом \emph{рациональных} языков над $\Sigma$, т.\,е.\ с
+наименьшим классом языков, который
+\begin{itemize}
+\item[а)] содержит пустой язык и все языки вида $\{a\}$, где $a\in\Sigma$;
+\item[б)] вместе с любым языком $L$ содержит его \emph{итерацию} $L^*$, т.\,е.\ множество всевозможных конечных произведений слов из $L$
+(включая пустое произведение, которое считается равным пустому слову 1);
+\item[в)] вместе с любыми двумя языками содержит их объединение и
+их произведение.
+\end{itemize}
+Мы будем считать известным задание рациональных языков \emph{регулярными выражениями} и будем пользоваться такими заданиями.
+
+\section{Беззвездные языки}
+Среди операций, используемых в определении рациональных языков, итерация является наиболее <<сложной>>, так как фактически описывает
+некоторый бесконечный процесс:
+$$L*=\{1\}\cup L\cup L^2\cup L^3\cup\dots\cup L^n\cup\dotsc.$$
+Действительно ли она необходима? Ясно, что просто удалить итерацию из определения рациональных языков нельзя, поскольку все остальные
+операции не могут произвести бесконечный язык из конечных языков. Но, может быть, можно заменить итерацию более какой-нибудь более простой
+операцией, которая тем не менее может произвести бесконечный язык из конечных? Например, таким свойством обладает операция взятия
+\emph{дополнения}. Напомним, что из теоремы Клини вытекает, что класс рациональных языков замкнут относительно взятия дополнений. Дадим
+соответствующее определение.
+\begin{definition}
+Класс \emph{беззвездных} (star-free) языков над данным конечным
+алфавитом $\Sigma$ -- это наименьший класс языков, который
+\begin{itemize}
+\item[а)] содержит пустой язык и все языки вида $\{a\}$, где $a\in\Sigma$;
+\item[б')] вместе с любым языком $L$ содержит его дополнение $L^C$;
+\item[в)] вместе с любыми двумя языками содержит их объединение и
+их произведение.
+\end{itemize}
+\end{definition}
+
+Вопрос, который мы обсуждали выше, можно теперь сформулировать так: верно ли, что любой рациональных язык является беззвездным? Ответ на
+этот вопрос отрицателен -- есть языки, которые не являются беззвездными. В качестве примера можно привести языки $(a^2)^*$ и $\{aba,
+b\}^*$. Мы докажем это позже, после того, как разовьем соответствующую технику.
+
+Естественным образом возникает \emph{проблема беззвездности}: как по данному языку над конечным алфавитом узнать, является ли он
+беззвездным. Эту проблему решил в 1966 г.\ Шютценберже\footnote{M.\,P.\,Sch\"{u}tzenberger}. Отметим, что проблема беззвездности далеко не
+тривиальна: если язык задан каким-то регулярным выражением, явно использующим итерацию $^*$, это еще не означает, что язык не является
+беззвездным.
+\begin{example}
+\label{star}
+Рациональный язык $(ab)^*$ над алфавитом $\Sigma = \{a,b\}$ на самом деле
+является беззвездным. Действительно, несложно проверить, что
+$$(ab)^* = (\varnothing^{C} a \cup b\,\varnothing^{C} \cup \varnothing^{C} a^2 \varnothing^{C}\cup \varnothing^{C}b^2 \varnothing^{C})^C.$$
+В самом деле, с учетом того, что $\varnothing^{C}=\Sigma^*$, выражение в правой части описывает в точности множество всех слов, которые
+\begin{itemize}
+\item не оканчиваются на $a$;
+\item не начинаются с $b$;
+\item не содержат двух вхождений буквы $a$ подряд;
+\item не содержат двух вхождений буквы $b$ подряд.
+\end{itemize}
+Ясно, что это множество состоит из пустого слова и всевозможных слов, которые начинаются с $a$, оканчиваются на $b$ и в которых вхождения
+букв $a$ и $b$ чередуются. Но это в точности описание множества $(ab)^*$.
+\end{example}
+
+\begin{exercise}
+Доказать, что языки $\{ab,ba\}^*$ и $(a(ab)^*b)^*$ являются беззвездными.
+\end{exercise}
+
+\section{Кусочно тестируемые языки}
+\begin{definition}
+Язык называется \emph{кусочно тестируемым}, если он является булевой
+комбинацией языков вида $\Sigma^* a_1 \Sigma^* a_2 \Sigma^* \ldots
+\Sigma^* a_k \Sigma^*$, где $a_i \in \Sigma$.
+\end{definition}
+
+Можно определить класс кусочно тестируемых языков и с помощью
+соответствующих распознавателей -- так называемых \emph{автоматов-гидр}.
+(Напомним, что гидрой в греческой мифологии называлось многоглавое
+чудовище, см.\ рис.~\ref{hydra}.)
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=6cm,width=5.5cm]{hydra.eps}
+\caption{Девятиглавая гидра}\label{hydra}
+\end{center}
+\end{figure}
+
+
+\emph{Автомат-гидра с $h$ головками} -- это устройство, в состав которого входят:
+\begin{itemize}
+\item потенциально бесконечная лента, разделенная на ячейки,
+в которых могут быть вписаны буквы некоторого конечного алфавита
+$\Sigma$;
+\item $h$ читающих головок, которые могут передвигаться вдоль ленты
+независимо друг от друга, но с сохранением взаимного порядка (первая головка
+всегда остается самой левой и т.\,д.), причем каждая головка может считывать
+символ из обозреваемой ей ячейки;
+\item конечной read-only памяти, которая содержит два списка
+слов длины $\le h$ над $\Sigma$: список паролей и список запретов.
+\end{itemize}
+
+
+\begin{figure}
+\begin{center}
+\begin{picture}(194,160)(70,30)
+%
+% Tape
+%
+\multiput(45,175)(15,0){20}{\line(0,1){15}}
+\put(40,175){\line(1,0){300}}
+\put(40,190){\line(1,0){300}}
+%
+% Word on the tape
+%
+\put(50,177){a}
+\put(65,177){m}
+\put(80,177){p}
+\put(95,177){l}
+\put(110,177){e}
+\put(125,177){u}
+\put(140,177){g}
+\put(155,177){l}
+\put(170,177){y}
+\put(185,177){e}
+\put(200,177){l}
+\put(215,177){k}
+\put(230,177){b}
+\put(245,177){y}
+\put(260,177){r}
+\put(275,177){u}
+\put(290,177){m}
+\put(305,177){b}
+\put(320,177){a}
+%
+% Heads
+%
+\put(323,140){\oval(20,50)}
+\put(263,140){\oval(20,50)}
+\put(233,140){\oval(20,50)}
+\put(188,140){\oval(20,50)}
+\put(143,140){\oval(20,50)}
+\put(98,140){\oval(20,50)}
+\put(53,140){\oval(20,50)}
+%
+% Memory
+%
+\put(144,40){\framebox{{algebra}
+             \rule[-5pt]{0.4pt}{20pt} {erotica}}}
+\put(145,59){\line(-3,2){86}}
+\put(160,59){\line(-1,1){57}}
+\put(170,59){\line(-1,2){28}}
+\put(188,59){\line(0,1){56}}
+\put(199,59){\line(1,2){29}}
+\put(207,59){\line(1,1){55}}
+\put(228,59){\line(3,2){87}}
+\end{picture}
+\caption{Aвтомат-гидра с семью головками}
+\end{center}
+\end{figure}
+
+Автомат-гидра \emph{принимает}  слово $w\in\Sigma^*$, если он находит в $w$ один из паролей и при этом не обнаруживает в $w$ ни одного из
+запретов. В противном случае он  \emph{отвергает} $w$. Например, автомат, изображенный на рис.~1.2, принимает слово, написанное на ленте
+(AmpleUglyElkByRumba), поскольку находит в этом слове пароль (algebra),  но не находит в нем запрещенного слова (erotica). Язык
+$L\subseteq\Sigma^*$ \emph{распознается} автоматом-гидрой $\mathrsfs{H}$, если $\mathrsfs{H}$ принимает в точности те слова, которые
+принадлежат $L$. Несложно понять, что класс языков, распознаваемых автоматами-гидрами, совпадает с классом кусочно тестируемых языков.
+
+
+\begin{example}
+  Язык $\Sigma^* ab \Sigma^*$ является кусочно тестируемым тогда и только тогда,
+  когда $\Sigma = \{a,b\}$.
+\end{example}
+
+
+Утверждение <<тогда>> понятно, так как $\Sigma^* ab \Sigma^*=\Sigma^* a\Sigma^*b \Sigma^*$ -- если в слове от букв $a$ и $b$ есть вхождение
+$a$, предшествующее вхождению $b$, то есть и вхождение $a$, непосредственно предшествующее вхождению $b$. А вот утверждение <<только
+тогда>> мы пока доказать не можем.
+
+Возникает \emph{проблема кусочной тестируемости}: как по данному языку над конечным алфавитом узнать, является ли он кусочно тестируемым.
+Эту проблему решил в 1972 г.\ Саймон (I.\,Simon).
+
+\chapter[Сведения из теории полугрупп]{Необходимые сведения из теории полугрупп}
+
+\section{Отношения Грина}
+
+Для полугруппы $S$ через $S^1$ будем обозначать полугруппу $S$ с единицей,
+возможно присоединенной.
+
+Отношениями Грина называются следующие бинарные отношения:
+
+\begin{enumerate}
+  \item $a \mathrsfs{R} b \Leftrightarrow aS^1 = bS^1$. Это означает, что
+  $\exists \ u,v \in S^1: a=bu, b=av$, т.е. элементы $a$ и $b$ делят друг друга
+  справа ($aS^1$ -- главный правый идеал, порожденный элементом $a$).
+
+  \item $a \mathrsfs{L} b \Leftrightarrow S^1a = S^1b$.
+
+  \item $a \mathrsfs{H} b \Leftrightarrow aS^1 = bS^1, S^1a = S^1b$, т.е.
+  $\mathrsfs{H} = \mathrsfs{R} \cap \mathrsfs{L}$.
+
+  \item $a \mathrsfs{J} b \Leftrightarrow S^1aS^1 = S^1bS^1$. Это означает, что
+  $\exists \ u,v,x,y \in S^1: a=ubv, b=xay$ ($S^1aS^1$ -- главный идеал, порожденный
+  элементом $a$).
+\end{enumerate}
+
+\begin{exercise}
+Отношения Грина являются отношениями эквивалентности.
+\end{exercise}
+
+Также можно рассмотреть связанные с отношениями Грина отношения предпорядка:
+\begin{enumerate}
+  \item $a \le_\mathrsfs{R} b \Leftrightarrow aS^1 \subseteq bS^1$.
+
+  \item $a \le_\mathrsfs{L} b \Leftrightarrow S^1a \subseteq S^1b$.
+
+  \item $a \le_\mathrsfs{H} b \Leftrightarrow aS^1 \subseteq bS^1, S^1a \subseteq S^1b$.
+
+  \item $a \le_\mathrsfs{J} b \Leftrightarrow S^1aS^1 \subseteq S^1bS^1$.
+\end{enumerate}
+
+\begin{proposition}
+  Отношения $\le_\mathrsfs{L}$ и $\mathrsfs{L}$ стабильны справа,
+  а $\le_\mathrsfs{R}$ и $\mathrsfs{R}$ -- слева.
+\end{proposition}
+\begin{proof}
+  $a \le_\mathrsfs{L} b \Leftrightarrow a = ub$ для некоторого $u \in S^1$.
+  Умножим на $c$ справа: $ac = ubc \Leftrightarrow ac \le_\mathrsfs{L} bc$.
+\end{proof}
+
+Если $\alpha$ и $\beta$ бинарные отношения, то
+$$
+  \alpha \beta = \{ (x,y) \  | \  \exists z: (x,z) \in \alpha, (z,y) \in \beta \}.
+$$
+
+\begin{proposition}
+  $\mathrsfs{L}\mathrsfs{R} = \mathrsfs{R}\mathrsfs{L}$ и потому отношение
+  $\mathrsfs{D} = \mathrsfs{L}\mathrsfs{R}$ является наименьшим отношением
+  эквивалентности, содержащим $\mathrsfs{L}$ и $\mathrsfs{R}$ одновременно.
+\end{proposition}
+\begin{proof}
+  Пусть $a \mathrsfs{L} \mathrsfs{R} b$: $\exists c \in S$ такое, что
+  $a \mathrsfs{L} c$ и $c \mathrsfs{R} b$, т.е. $\exists \ u,v \in S^1,
+  \exists \ x,y \in S^1 : a=uc, c=va, c=bx, b=cy$. Через $d$ обозначим
+  $ay = ucy = ub$. Покажем, что $a \mathrsfs{R} d$ и $d \mathrsfs{L} b$.
+  $a \mathrsfs{L} c \Rightarrow ay \mathrsfs{L} cy \Rightarrow d \mathrsfs{L} b$.
+  $c \mathrsfs{R} b \Rightarrow uc \mathrsfs{R} ub \Rightarrow a \mathrsfs{R} d$.
+  Получили, что $a \mathrsfs{R} \mathrsfs{L} b$, т.е.
+  $\mathrsfs{L} \mathrsfs{R} \subseteq \mathrsfs{R} \mathrsfs{L}$. Аналогично
+  получаем обратное включение. Таким образом,
+  $\mathrsfs{L} \mathrsfs{R} = \mathrsfs{R} \mathrsfs{L}$.
+\end{proof}
+
+  Ясно, что $\mathrsfs{L} \subset \mathrsfs{D}$ и $\mathrsfs{R} \subset \mathrsfs{D}$.
+  Покажем, что $\mathrsfs{D}$ является отношением эквивалентности:
+  \begin{enumerate}
+    \item Рефлексивность -- очевидно.
+    \item Симметричность -- сразу следует из того, что
+      $\mathrsfs{L} \mathrsfs{R} = \mathrsfs{R} \mathrsfs{L}$.
+    \item Транзитивность -- пусть $a \mathrsfs{D} b$, $b \mathrsfs{D} c$, тогда
+      $a \mathrsfs{L} x \mathrsfs{R} b \mathrsfs{L} y \mathrsfs{R} c$,
+      $x \mathrsfs{R} \mathrsfs{L} y \Rightarrow x \mathrsfs{L} \mathrsfs{R} y$,
+      т.е. $x \mathrsfs{L} z \mathrsfs{R} y$; $a \mathrsfs{L} z$, $z \mathrsfs{R} c$,
+      тогда $a \mathrsfs{L} \mathrsfs{R} c$.
+  \end{enumerate}
+
+  Таким образом, имеет место следующая диаграмма:
+
+  \begin{figure}[hb]
+  \begin{center}
+  \begin{picture}(80,100)
+    \put(40,70){\circle*{3}}
+    \put(42,72){$\mathrsfs{J}$}
+
+    \put(40,50){\circle*{3}}
+    \put(42,52){$\mathrsfs{D}$}
+
+    \put(20,30){\circle*{3}}
+    \put(10,32){$\mathrsfs{L}$}
+
+    \put(60,30){\circle*{3}}
+    \put(62,32){$\mathrsfs{R}$}
+
+    \put(40,10){\circle*{3}}
+    \put(40, 0){$\mathrsfs{H}$}
+
+    \put(40,70){\line(0,-1){20}}
+    \put(40,50){\line(-1,-1){20}}
+    \put(40,50){\line(1,-1){20}}
+    \put(20,30){\line(1,-1){20}}
+    \put(60,30){\line(-1,-1){20}}
+  \end{picture}
+ \caption{Включения между отношениями Грина}
+\end{center}
+\end{figure}
+
+\section{Пример: отношения Грина в моноиде преобразований}
+\label{green relations in Tn}
+
+ Пусть $X$ -- множество. Через $T_X$ обозначим моноид всех
+  преобразований множества $X$. Для $\alpha\in T_X$ через $\Img\alpha$
+  обозначается \emph{образ} $\alpha$, т.\,е.\ множество
+$$\{y\in X\mid (\exists x\in X)\,y=x\alpha\},$$
+ а через $\Ker\alpha$ обозначается \emph{ядро} $\alpha$, т.\,е.\ разбиение
+ множества $X$, при котором элементы $x,y\in X$ принадлежат одному классу
+ тогда и только тогда, когда $x\alpha=y\alpha$. Заметим, что мощность множества
+ классов разбиения $\Ker\alpha$ (обозначаемая $|\Ker\alpha|$) равно мощности
+$|\Img\alpha|$ множества $\Img\alpha$.
+
+ \begin{proposition}
+   Для любых $\alpha,\beta\in T_X$ имеем:
+    \begin{enumerate}
+     \item $\alpha\le_{\mathrsfs{L}}\beta \Longleftrightarrow \Img \alpha\subseteq \Img
+     \beta$;
+     \item $\alpha\le_{\mathrsfs{R}}\beta \Longleftrightarrow \Ker \alpha\supseteq \Ker
+     \beta$;
+     \item $\alpha\le_{\mathrsfs{J}}\beta \Longleftrightarrow |\Img \alpha|\leq |\Img
+     \beta|$.
+    \end{enumerate}
+\end{proposition}
+
+ \begin{proof}
+     (1) Если $\alpha\le_{\mathrsfs{L}}\beta$, то существует
+     такое преобразование $\gamma\in T_X$, что $\alpha=\gamma\beta$.
+     Тогда $\Img \alpha=\Img \gamma\beta=(\Img \gamma)\beta\subseteq \Img \beta.$
+
+     Обратно, если $\Img \alpha\subseteq \Img\beta$, то для каждого $x\in
+     X$ существует такой $y\in X$, что $x\alpha=y\beta$.
+     Рассмотрим отображение $\gamma$, сопоставляющее каждому $x$
+     один из таких $y$. Тогда $\alpha=\gamma\beta$.
+
+\smallskip
+
+     (2) Если $\alpha\le_{\mathrsfs{R}}\beta$, то существует
+     такое преобразование $\gamma\in T_X$, что $\alpha=\beta\gamma$.
+
+     Пусть $(x,y)\in \Ker\beta$, т.\,е.\ $x\beta=y\beta$.
+     Тогда $x\alpha=x\beta\gamma=y\beta\gamma=y\alpha$.
+     Это значит, что $(x,y)\in \Ker\alpha$.
+
+     Обратно, если $\Ker \alpha\supseteq \Ker \beta$, то соответствие
+     $\gamma=\beta^{-1}\alpha$ является однозначным отображением и потому
+     принадлежит $T_X$. Ясно, что $\alpha=\beta\gamma$.
+
+
+\smallskip
+
+     (3) Если $\alpha\le_{\mathrsfs{J}}\beta$, то существуют
+     такие преобразования $\gamma,\delta\in T_X$, что
+     $\alpha=\gamma\beta\delta$. Отсюда немедленно получаем, что
+     $|\Img \alpha|\le|\Img \beta|$.
+
+     Обратно, рассмотрим отображение $\varepsilon: X\rightarrow
+     X$, которое каждому классу $\Ker \alpha$ сопоставляет элемент из
+     $\Img \beta$  так, что разным классам соответствуют разные элементы.
+     Поскольку $|\Ker \alpha|=|\Img \alpha|\le|\Img \beta|$, то организовать
+     такое отображение  возможно.
+
+     Так как $\Ker \varepsilon=\Ker \alpha$, по пункту (2) имеем
+     $\varepsilon\,\mathrsfs{R}\,\alpha$. Далее, $\Img \varepsilon\subseteq \Img
+     \beta$, поэтому по пункту (1) имеем $\varepsilon\le_{\mathrsfs{L}}\beta$.
+     Отсюда $\alpha\le_{\mathrsfs{D}}\beta$ и потому
+     $\alpha\le_{\mathrsfs{J}}\beta$.
+    \end{proof}
+
+Отметим, что из доказательства пункта (3) вытекает, что в моноиде  $T_X$ отношения $\mathrsfs{D}$ и $\mathrsfs{J}$ совпадают.
+
+\begin{corollary}
+Для любых $\alpha,\beta\in T_X$ имеем:
+    \begin{enumerate}
+     \item $\alpha\,\mathrsfs{L}\,\beta \Longleftrightarrow \Img \alpha=\Img\beta$;
+     \item $\alpha\,\mathrsfs{R}\,\beta \Longleftrightarrow \Ker \alpha=\Ker\beta$;
+     \item $\alpha\,\mathrsfs{J}\,\beta \Longleftrightarrow \alpha\,\mathrsfs{D}\,\beta \Longleftrightarrow
+     |\Img \alpha|=|\Img\beta|$.
+    \end{enumerate}
+\end{corollary}
+
+
+\section{Лемма Грина}
+
+Пусть $a\in S$, договоримся обозначать
+\begin{center}
+$\mathrsfs{R}$-класс, содержащий $a$, через $R_a$;\\
+$\mathrsfs{L}$-класс, содержащий $a$, через $L_a$;\\
+$\mathrsfs{H}$-класс, содержащий $a$, через $H_a$;\\
+$\mathrsfs{D}$-класс, содержащий $a$, через $D_a$.
+\end{center}
+Заметим, что  $H_a=L_a\cap R_a$ для любого $a$.
+
+\begin{lemma}
+\label{egg-box}
+  Пусть $L$ -- $\mathrsfs{L}$-класс, $R$ -- $\mathrsfs{R}$-класс. Тогда $R\cap L\neq\varnothing$ тогда и только тогда,
+  когда $L$ и $R$ содержатся  в одном $D$-классе.
+\end{lemma}
+\begin{proof}
+  Пусть $a \in L\cap R$. Тогда ясно, что $L$ и $R$ содержатся в $D_a$.
+
+  Обратно, пусть $L$ и $R$ содержатся в $\mathrsfs{D}$-классе $D$. Возьмем произвольные $x\in L$
+  и $y\in R$. Тогда $x\mathrsfs{D}y$, т.\,е.\ существует такой элемент $a$, что
+  $x\,\mathrsfs{L}\,a\,\mathrsfs{R}\,y$. Тогда $a\in L\cap R$, откуда $L\cap R \neq
+  \varnothing$.
+\end{proof}
+
+Лемма \ref{egg-box} подсказывает, что $\mathrsfs{D}$-классы удобно мыслить себе как прямоугольные таблицы (по традиции именуемые
+\emph{egg-box картинками}), в которых строки изображают $\mathrsfs{R}$-классы, столбцы -- $\mathrsfs{L}$-классы, а ячейки --
+$\mathrsfs{H}$-классы.
+
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=5cm,width=8cm]{eggbox.eps}
+\caption{egg-box картинка}\label{egg-box picture}
+\end{center}
+\end{figure}
+
+
+Следующий важный результат показывает, что элементы каждого $\mathrsfs{D}$-класса распределены по ячейкам соответствующей egg-box картинки
+равномерно.
+
+\begin{proposition} [Лемма Грина]
+Пусть $a\mathrsfs{R}b$, т.\,е.\ существуют $u,v\in S^1$, такие, что $au=b$ и $bv=a$. Рассмотрим отображения $\rho_u:S\rightarrow S$,
+задаваемое правилом $x\rho u=xu$, и $\rho_u:S\rightarrow S$, задаваемое правилом $x\rho v=xv$. Тогда ограничение $\rho_u$ на класс $L_a$ --
+это биекция $L_a$ на $L_b$, ограничение $\rho_v$ на класс $L_b$ -- обратная к ней биекция, и оба ограничения сохраняют
+$\mathrsfs{H}$-классы.
+\end{proposition}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=4cm,width=4cm]{green.eps}
+\caption{Иллюстрация к лемме Грина}\label{green picture}
+\end{center}
+\end{figure}
+
+\begin{proof}
+Возьмем произвольный элемент $x\in L_a$. Из $x\,\mathrsfs{L}\,a$ следует, что $xu\,\mathrsfs{L}\,au=b$, поскольку отношение $\mathrsfs{L}$
+стабильно справа. Следовательно, $L_a\rho_u\subseteq L_b$. Далее, существует элемент $t\in S^1$, такой, что $x=ta$. Имеем
+$$x\rho_u\rho_v=xuv=tauv=tbv=ta=x,$$ т.\,е.\ ограничение $\rho_v$ на класс $L_b$ --
+обратное отображение к ограничению $\rho_u$ на класс $L_a$.
+
+Получается, что ограничение $\rho_v$ на класс $L_b$ отображает $L_b$ на $L_a$, следовательно, ограничения $\rho_u$ и $\rho_v$ на
+соответственно  $L_a$ на $L_b$ -- взаимно обратные биекции. Поскольку $xuv=x$, имеем $x \mathrsfs{R} xu$, и если $x\,\mathrsfs{H}\,y$, то
+$xu\,\mathrsfs{H}\,yu$. Обратно, если $xu\,\mathrsfs{H}\,yu$, то $x\,\mathrsfs{H}\,y$
+\end{proof}
+
+В качестве примера рассмотрим $\mathrsfs{D}$-строение моноида $T_3$ всех преобразований 3-элемент\-ного множества $\{1,2,3\}$. Согласно
+доказанному в \S\ref{green relations in Tn}, у него ровно три $\mathrsfs{D}$-класса: класс $D_3$ всех преобразований с 3-элементным
+образом, класс $D_2$ всех преобразований с 2-элементным образом и класс $D_1$ всех преобразований с 1-элементным образом. Ясно, что
+преобразование 3-элементного множества, образ которого 3-элементен, есть не что иное как перестановка этого множества. Таким образом, класс
+$D_3$ состоит из 6 перестановок исходного множества. Класс $D_1$ состоит из трех константных преобразований. Интереснее всего устроен класс
+$D_2$. Его egg-box картинка показана ниже.
+
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{c|c|c|c|}
+
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{$\{1,2\}$} & \multicolumn{1}{c}{$\{2,3\}$} &
+\multicolumn{1}{c}{$\{1,3\}$}\\
+ \cline{2-4}
+$1\mid 23$\rule{0pt}{14pt} &$\left(\begin{smallmatrix} 1&2&3\\
+1&2&2\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+2&1&1\end{smallmatrix}\right)$&
+$\left(\begin{smallmatrix} 1&2&3\\
+1&3&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&1&1\end{smallmatrix}\right)$&
+$\left(\begin{smallmatrix} 1&2&3\\
+2&3&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&2&2\end{smallmatrix}\right)$
+\\
+\cline{2-4}
+$2\mid 13$\rule{0pt}{14pt} &$\left(\begin{smallmatrix} 1&2&3\\
+1&2&1\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+2&1&2\end{smallmatrix}\right)$&
+$\left(\begin{smallmatrix} 1&2&3\\
+1&3&1\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&1&3\end{smallmatrix}\right)$ &
+$\left(\begin{smallmatrix} 1&2&3\\
+2&3&2\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&2&3\end{smallmatrix}\right)$
+\\
+  \cline{2-4}
+$3\mid 12$\rule{0pt}{14pt} &$\left(\begin{smallmatrix} 1&2&3\\
+1&1&2\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+2&2&1\end{smallmatrix}\right)$ &
+$\left(\begin{smallmatrix} 1&2&3\\
+1&1&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&3&1\end{smallmatrix}\right)$&
+$\left(\begin{smallmatrix} 1&2&3\\
+2&2&3\end{smallmatrix}\right)$,
+$\left(\begin{smallmatrix} 1&2&3\\
+3&3&2\end{smallmatrix}\right)$
+\\
+  \cline{2-4}
+\end{tabular}
+\end{center}
+\caption{$\mathrsfs{D}$-класс моноида $T_3$, состоящий из всех преобразований с 2-элементным образом. Над каждым $\mathrsfs{L}$-классом
+показано параметризующее его 2-элементное подмножество, а левее каждого $\mathrsfs{R}$-класса -- параметризующее его разбиение.}
+\end{table}
+
+
+\section{Роль идемпотентов}
+
+Элемент $e$ называется \emph{идемпотентом}, если $e^2=e$.
+
+\begin{lemma}
+  В конечной полугруппе для любого элемента, найдется его степень,
+  которая является идемпотентом.
+\end{lemma}
+\begin{proof}
+  Пусть $S$ -- конечная полугруппа, $a\in S$, рассмотрим элементы $a, a^2, a^3,
+\dotsc$. Найдутся такие $n$ и $k$, что $a^n=a^{n+k}$. Рассмотрим
+  $a^{nk}$. Имеем $(a^{nk})^2=a^{2nk}=a^{nk+nk}=a^{nk}$. Следовательно,
+  $nk$ -- искомая степень.
+\end{proof}
+
+\begin{exercise}
+Для данного элемента полугруппы найти наименьшую степень, в которой он является идемпотентом.
+\end{exercise}
+
+\begin{exercise}
+Пусть полугруппа $S$ имеет порядок $n$. Доказать, что для любого $a\in S$ элемент $a^{n!}$ является идемпотентом.
+\end{exercise}
+
+\begin{proposition}
+В конечной полугруппе $\mathrsfs{D}=\mathrsfs{J}$.
+\end{proposition}
+\begin{proof}
+Включение $\mathrsfs{D}\subseteq\mathrsfs{J}$ выполняется в любой полугруппе в силу того, что $\mathrsfs{D}$ -- наименьшее отношение
+эквивалентности, содержащее отношения  $\mathrsfs{R}$ и $\mathrsfs{L}$.
+
+Пусть $a\mathrsfs{J} b$. Найдутся такие $u,v,x,y \in S^1:uav=b,xby=a$, отсюда $xuavy=a$. Следовательно для любого $k$ получим
+$(xu)^ka(vy)^k=a)$. Отсюда по лемме найдется такое $k$, что $(xu)^k=e,(vy)^k=f$, следовательно $eaf=a$, откуда $ea=a$ и $af=a$.
+
+Покажем, что $ua\mathrsfs{L}a$. Ясно, что $ua\in S^1a$. Обратно, $a=ea=(xu)^ka=(xu)^{k-1}x\cdot ua\in S^1ua$. Аналогично $a\mathrsfs{R}av$.
+Получаем $ua\mathrsfs{R}uav=b$ и $a\mathrsfs{L}ua\mathrsfs{R}b$, т.\,е. $a\mathrsfs{L}\mathrsfs{R}b$ и $a\mathrsfs{D}b$
+\end{proof}
+
+Теперь мы снова рассматриваем произвольные полугруппы.
+
+\begin{proposition}[Теорема Миллера-Клиффорда]
+Пусть $a,b\in S$, тогда $ab\in R_a\cap L_b$ тогда и только тогда, когда пересечение $R_b \cap L_a$ содержит идемпотент.
+\end{proposition}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=4cm,width=6cm]{millcliff.eps}
+\caption{Иллюстрация к теореме Миллера--Клиффорда}\label{millcliff picture}
+\end{center}
+\end{figure}
+
+
+
+\begin{proof}
+$\Rightarrow$ Если $ab\in R_a\cap L_b$, то по лемме Грина $\rho_b|_{L_a}$ -- биекция $L_a$ на $L_b$. Пусть $e\in R_b\cap L_a$ -- такой
+элемент, что $e\rho_b=eb=b$. Тогда $e\mathrsfs{R}b$, в частности, $e=bu$ для некоторого $u\in S^1$. Имеем $e^2=e(bu)=(eb)u=bu=e$, т.\,е.
+$e$ -- идемпотент.
+
+\noindent $\Leftarrow$ Пусть $e$ -- идемпотент из $R_b\cap L_a$. Из  $e \mathrsfs{R} b$ следует, что $eb=b$, а из  $e \mathrsfs{L} a$
+следует, что $ae=a$. Умножив соотношение $e \mathrsfs{R} b$ слева на $a$, получим $a=ae\mathrsfs{R} ab$. Аналогично, умножив соотношение $e
+\mathrsfs{L} a$ справа на $b$, получим $b=eb\mathrsfs{R} ab$. Следовательно $ab\in R_a \cap L_b$.
+\end{proof}
+
+\renewcommand{\labelenumi}{(\theenumi)}
+\begin{corollary}
+Пусть $H$ -- $\mathrsfs{H}$-класс, тогда следующие условия эквивалентны:
+\begin{enumerate}
+\item $H$ содержит идемпотент;
+\item существуют $a,b\in H$, такие, что $ab\in H$;
+\item $H$ -- группа.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  Импликации $(1)\Rightarrow (2)$ и $(3) \Rightarrow (1)$ очевидны.
+
+\noindent  $(2) \Rightarrow (3)$  Имеем $H=R_a\cap L_b=R_b\cap L_a$. По теореме Миллера--Клиффорда
+  в $H$ найдется идемпотент $e$. Применяя ту же теорему в обратную сторону, заключаем, что
+  для любых $g,h\in H$ произведение $gh$ принадлежит $H$, т.\,е.\ $H$ -- полугруппа.
+  Для любого $h\in H$ отображение $\rho_h|_H$ --
+  биекция $H$ на $H$. Отсюда, в частности, следует, что $ge=g$ для любого $g\in H$.
+  В силу симметричных рассуждений $eg=g$ для любого $g\in H$,  т.\,е.\ $e$ -- единица
+  в $H$. Наконец, из того, что $\rho_h|_H$ --
+  биекция $H$ на $H$, следует, что для любого $h\in H$ существует элемент $h'$,
+  такой,  что $h'h=e$. Следовательно $H$ -- группа.
+\end{proof}
+
+
+Заметим, что если $H$ -- группа, то $H$ -- максимальная подгруппа. Действительно, если $G$ -- какая-то подгруппа полугруппы $S$, то любые
+два элемента $g,h\in G$ делят друг друга и справа, и слева: $g=h\cdot h^{-1}g$, $h=g\cdot g^{-1}h$ и аналогично слева. Поэтому $G$
+содержится в некотором $\mathrsfs{H}$-классе $H$. Поскольку $H$ содержит идемпотент (а именно, единицу подгруппы $G$), по только что
+доказанному следствию $H$ есть подгруппа. Итак, каждая подгруппа полугруппы содержится ровно в одной максимальной подгруппе, а именно, в
+$\mathrsfs{H}$-классе единицы этой подгруппы.
+
+ \begin{proposition}
+  Любые две максимальные подгруппы внутри одного
+  $\mathrsfs{D}$-класса изоморфны.
+ \end{proposition}
+ \begin{proof} Пусть $H_1$ и $H_2$ -- две такие подгруппы. По следствию
+ из теоремы Миллера-Клиффорда существуют идемпотенты $e$ и $f$ такие, что
+ $H_1=H_e$ и $H_2=H_f$. Поскольку все происходит внутри одного $\mathrsfs{D}$-класса, имеем
+ $e\,\mathrsfs{D}\,f$. Таким образом, $e\,\mathrsfs{R}\,a\,\mathrsfs{L}\,f$
+ для некоторого $a\in S$. Из того, что $a\,\mathrsfs{L}\,f$, получаем, что существует элемент $a'\in
+ S^1$, для которого $f=a'a$.
+
+ На $H_e$ рассмотрим отображение, определенное правилом $x\mapsto a'xa$. Из леммы Грина и
+ утверждения, двойственного к ней, следует, что это отображение
+ есть биекция $H_e$ на $H_f$. Осталось проверить, что это отображение является гомоморфизмом.
+
+ Заметим, что $aa'a=af=a$. Отсюда $(aa')(aa')=(aa'a)a'=aa'$, т.\,е.\
+ $aa'$ --- идемпотент из $R_a$.
+
+ Для произвольных $x,y\in H_e$, поскольку $(aa')y=y$, получаем
+ $$(a'xa)(a'ya)=a'x(aa'y)a=a'xya,$$
+что и показывает, что отображение $x\mapsto a'xa$ есть гомоморфизм.
+\end{proof}
+
+ Элемент $a\in S$ называется \emph{регулярным}, если существует
+ такой $x\in S$, что $axa=a$. Класс отношения Грина
+ называется \emph{регулярным}, если все его элементы регулярны.
+
+
+ \begin{proposition}
+  Пусть $D$ -- некоторый $\mathrsfs{D}$-класс. Следующие
+  условия эквивалентны:
+   \begin{enumerate}
+    \item $D$ -- регулярный $\mathrsfs{D}$-класс;
+    \item в $D$ есть регулярный элемент;
+    \item каждый $\mathrsfs{R}$-класс внутри $D$ содержит
+    идемпотент;
+    \item каждый $\mathrsfs{L}$-класс внутри $D$ содержит
+    идемпотент;
+    \item в $D$ есть идемпотент;
+    \item существуют такие $x,y\in D$, что $xy\in D$.
+   \end{enumerate}
+    \end{proposition}
+
+ \begin{proof}
+Эквивалентность  условий (1)--(5) вытекает из следующей леммы и двойственного ей утверждения:
+
+\begin{lemma}
+  $\mathrsfs{R}$-класс регулярен тогда и только тогда, когда он
+  содержит идемпотент.
+\end{lemma}
+ \begin{proof}
+  Пусть $a\,\mathrsfs{R}\,e$, где $e$ --- идемпотент. Тогда
+ существует такой элемент $u\in S^1$, что $e=au$. Имеем
+ следующую цепочку равенств: $a=ea=e^2a=(au)ea=a(ue)a$. Поскольку
+  $ue\in S$, видим, что элемент $a$ регулярен.
+
+  Обратно, если $axa=a$ для  некоторого $x\in S$, то $ax$ --- идемпотент,
+  лежащий в $R_a$.
+ \end{proof}
+ Очевидно, что $(5)\Rightarrow (6)$, а импликация $(6)\Rightarrow(5)$ следует из теоремы
+ Миллера-Клиффорда.
+ \end{proof}
+
+
+\end{document}
