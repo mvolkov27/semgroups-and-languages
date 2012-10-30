@@ -1,0 +1,202 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4}
+
+\mathsurround 1pt
+
+
+\DeclareSymbolFont{rsfscript}{OMS}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfscript}
+%для отношений Грина - например, $\mathrsfs{R}$
+
+\newtheorem{exercise}{Упражнение}
+\newtheorem{example}{Пример}
+\newtheorem{proposition}{Предложение}
+\renewcommand{\proofname}{Доказательство}
+
+\begin{document}
+\begin{center}
+\large\bf Лекция 1, 16.09.2011
+\end{center}
+
+\section{Постановка задачи}
+
+\subsection{Беззвездные языки}
+
+Класс \emph{беззвездных языков} -- это наименьший класс языков
+(над данным конечным алфавитом $\Sigma$), который
+\begin{enumerate}
+  \item содержит все конечные языки,
+  \item вместе с любым языком $L$ содержит его дополнение $L^c$,
+  \item вместе с любыми двумя языками $L,K$ содержит их объединение $L+K$ и их произведение $LK$.
+\end{enumerate}
+
+Хотим по данному регулярному выражению уметь определять, является
+ли задаваемый этим выражением язык беззвездным.
+
+Присутствие итерации в записи регулярного выражения не всегда
+означает, что задаваемый им язык не является беззвездным. Пример:
+$$
+  (ab)^* = \Sigma^* \setminus (\Sigma^*a + b\Sigma^* + \Sigma^*a^2\Sigma^* +
+  \Sigma^*b^2\Sigma^*,\ \text{ здесь }\
+  \Sigma^* = (\emptyset)^c.
+$$
+
+\begin{exercise}
+Доказать, что языки $\{ab+ba\}^*$ и $(a(ab)^*b)^*$ являются
+беззвездными.
+\end{exercise}
+
+\begin{example}
+Языки $(a^2)^*$ и $\{aba+b\}^*$ не беззвездные.
+\end{example}
+(Пока мы это не можем доказать.)
+
+\subsection{Кусочно тестируемые языки}
+
+Язык называется \emph{кусочно тестируемым}, если он является
+булевой комбинацией языков вида $\Sigma^* a_1 \Sigma^* a_2
+\Sigma^* \ldots \Sigma^* a_k \Sigma^*$, где $a_i \in \Sigma$.
+
+Хотим по данному регулярному выражению уметь определять, является
+ли задаваемый им язык кусочно тестируемым.
+
+\begin{example}
+  Язык $\Sigma^* ab \Sigma^*$ является кусочно тестируемым тогда и только тогда,
+  когда $\Sigma = \{a,b\}$.
+\end{example}
+
+
+
+\section{Отношения Грина}
+
+Для полугруппы $S$ через $S^1$ будем обозначать наименьший моноид,
+содержащий $S$. Таким образом, $S^1=S$, если в $S$ есть единица, и
+$S^1=S\cup\{1\}$, если в $S$ нет единицы.
+
+\emph{Отношениями Грина} называются следующие бинарные отношения:
+
+\begin{enumerate}
+  \item $a \mathrsfs{R} b \Leftrightarrow aS^1 = bS^1$. Это означает, что
+  $\exists s,t \in S^1 \ (a=bs\mathrel{\&}b=at)$, т.е.\ элементы $a$ и $b$ делят друг друга
+  справа.
+
+  \item $a \mathrsfs{L} b \Leftrightarrow S^1a = S^1b$. Это означает, что
+  $\exists s,t \in S^1 \ (a=sb\mathrel{\&}b=ta)$, т.е.\ элементы $a$ и $b$ делят друг друга
+  слева.
+
+  \item $a \mathrsfs{H} b \Leftrightarrow aS^1 = bS^1, S^1a = S^1b$,
+  т.е.\   $\mathrsfs{H} = \mathrsfs{R} \cap \mathrsfs{L}$.
+
+  \item $a \mathrsfs{J} b \Leftrightarrow S^1aS^1 = S^1bS^1$. Это означает, что
+  $\exists s,t,x,y \in S^1 \ (a=sbt\mathrel{\&}b=xay)$.
+\end{enumerate}
+
+\begin{exercise}
+Отношения Грина являются отношениями эквивалентности.
+\end{exercise}
+
+Также можно рассмотреть связанные с отношениями Грина отношения предпорядка:
+\begin{enumerate}
+  \item $a \le_\mathrsfs{R} b \Leftrightarrow aS^1 \subseteq bS^1$.
+
+  \item $a \le_\mathrsfs{L} b \Leftrightarrow S^1a \subseteq S^1b$.
+
+  \item $a \le_\mathrsfs{H} b \Leftrightarrow aS^1 \subseteq bS^1, S^1a \subseteq S^1b$.
+
+  \item $a \le_\mathrsfs{J} b \Leftrightarrow S^1aS^1 \subseteq S^1bS^1$.
+\end{enumerate}
+
+\begin{proposition}
+  Отношения $\le_\mathrsfs{L}$ и $\mathrsfs{L}$ стабильны справа,
+  а $\le_\mathrsfs{R}$ и $\mathrsfs{R}$ -- слева.
+\end{proposition}
+\begin{proof}
+  $a \le_\mathrsfs{L} b \Leftrightarrow a = ub$ для некоторого $u \in S^1$.
+  Умножим на $c$ справа: $ac = ubc \Leftrightarrow ac \le_\mathrsfs{L} bc$.
+\end{proof}
+
+Если $\alpha$ и $\beta$ бинарные отношения, то
+$$
+  \alpha \beta = \{ (x,y) \mid  \exists z \ ((x,z) \in \alpha\mathrel{\&} (z,y) \in \beta) \}.
+$$
+
+\begin{proposition}
+  $\mathrsfs{L}\mathrsfs{R} = \mathrsfs{R}\mathrsfs{L}$ и потому отношение
+  $\mathrsfs{D} = \mathrsfs{L}\mathrsfs{R}$ является наименьшим отношением
+  эквивалентности, содержащим $\mathrsfs{L}$ и $\mathrsfs{R}$ одновременно.
+\end{proposition}
+\begin{proof}
+  Пусть $a \mathrsfs{L} \mathrsfs{R} b$: $\exists c \in S$ такое, что
+  $a \mathrsfs{L} c$ и $c \mathrsfs{R} b$, т.е. $\exists \ u,v \in S^1,
+  \exists \ x,y \in S^1 : a=uc, c=va, c=bx, b=cy$. Через $d$ обозначим
+  $ay = ucy = ub$. Покажем, что $a \mathrsfs{R} d$ и $d \mathrsfs{L} b$.
+  $a \mathrsfs{L} c \Rightarrow ay \mathrsfs{L} cy \Rightarrow d \mathrsfs{L} b$.
+  $c \mathrsfs{R} b \Rightarrow uc \mathrsfs{R} ub \Rightarrow a \mathrsfs{R} d$.
+  Получили, что $a \mathrsfs{R} \mathrsfs{L} b$, т.е.
+  $\mathrsfs{L} \mathrsfs{R} \subseteq \mathrsfs{R} \mathrsfs{L}$. Аналогично
+  получаем обратное включение. Таким образом,
+  $\mathrsfs{L} \mathrsfs{R} = \mathrsfs{R} \mathrsfs{L}$. Обозначим
+  $\mathrsfs{L} \mathrsfs{R}$ через $\mathrsfs{D}$.
+
+  Ясно, что $\mathrsfs{L} \subseteq \mathrsfs{D}$ и $\mathrsfs{R} \subseteq \mathrsfs{D}$.
+  Покажем, что $\mathrsfs{D}$ является отношением эквивалентности:
+  \begin{enumerate}
+    \item Рефлексивность -- очевидно.
+    \item Симметричность -- сразу следует из того, что
+      $\mathrsfs{L} \mathrsfs{R} = \mathrsfs{R} \mathrsfs{L}$.
+    \item Транзитивность -- пусть $a \mathrsfs{D} b$ и $b \mathrsfs{D} c$. Имеем
+      $a \mathrsfs{L} x \mathrsfs{R} b \mathrsfs{L} y \mathrsfs{R} c$ для некоторых $x$ и $y$. Отсюда
+      $x \mathrsfs{R} \mathrsfs{L} y$, а тогда по доказанному выше $x \mathrsfs{L} \mathrsfs{R}
+      y$. Поэтому\ $x \mathrsfs{L} z \mathrsfs{R} y$ для некоторого $z$ и $a \mathrsfs{L} z$, $z \mathrsfs{R} c$,
+      откуда $a \mathrsfs{L} \mathrsfs{R} c$.
+  \end{enumerate}
+\end{proof}
+
+  Таким образом, имеет место следующая диаграмма включений.
+  \begin{center}
+  \begin{picture}(80,100)
+    \put(40,70){\circle*{3}}
+    \put(42,72){$\mathrsfs{J}$}
+
+    \put(40,50){\circle*{3}}
+    \put(42,52){$\mathrsfs{D}$}
+
+    \put(20,30){\circle*{3}}
+    \put(10,32){$\mathrsfs{L}$}
+
+    \put(60,30){\circle*{3}}
+    \put(62,32){$\mathrsfs{R}$}
+
+    \put(40,10){\circle*{3}}
+    \put(40, 0){$\mathrsfs{H}$}
+
+    \put(40,70){\line(0,-1){20}}
+    \put(40,50){\line(-1,-1){20}}
+    \put(40,50){\line(1,-1){20}}
+    \put(20,30){\line(1,-1){20}}
+    \put(60,30){\line(-1,-1){20}}
+  \end{picture}
+  \end{center}
+
+Теперь уже можно сформулировать ответы на поставленные в
+предыдущем разделе вопросы.
+
+1. Регулярный язык является беззвездным тогда и только тогда,
+когда его синтаксический моноид является
+$\mathrsfs{H}$-\emph{тривиальным}, т.е. из $a \mathrsfs{H} b$
+следует, что $a=b$  (Шютценберже, 1966).
+
+2. Регулярный язык является кусочно тестируемым тогда и только
+тогда, когда его синтаксический моноид является
+$\mathrsfs{J}$-\emph{тривиальным}, т.е. из $a \mathrsfs{J} b$
+следует, что $a=b$  (Саймон, 1972).
+
+
+
+\end{document}

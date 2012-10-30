@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4}
+
+\mathsurround 1pt
+
+  \theoremstyle{plain}
+  \newtheorem{prop}{Предложение}
+ \ifx\proof\undefined\
+   \newenvironment{proof}[1][Доказательство]{\par
+     \normalfont\topsep6\p@\@plus6\p@\relax
+     \trivlist
+     \itemindent\parindent
+     \item[\hskip\labelsep
+           \scshape
+       #1]\ignorespaces
+   }{%
+     \endtrivlist\@endpefalse
+   }
+ \fi
+  \theoremstyle{plain}
+  \newtheorem{cor}{Следствие}
+  \theoremstyle{definition}
+  \newtheorem{example}{Пример}
+
+\DeclareSymbolFont{rsfscript}{OMS}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfscript}
+
+\begin{document}
+\begin{center}\large\bf Лекция 7, 18.11.11\end{center}
+\begin{prop}
+Пусть $a\in\Sigma$, $u,v\in\Sigma^{*}$. Если $uav\sim_{2n-1}uv$,
+то либо $ua\sim_{n}u$, либо $av\sim_{n}v$.\end{prop}
+\begin{proof}
+Пусть $ua\nsim_{n}u$ и $av\nsim_{n}v$. Тогда в $ua$ есть подслово
+$xa$ длины $\le n$, которого нет в $u$, и аналогично, в $av$ есть
+подслово $ay$ длины $\le n$, которого нет в $v$. Рассмотрим $xay$,
+его длина $\le2n-1$. Оно есть в $uav$, но его нет в $uv$. Противоречие.
+\end{proof}
+Обозначим через $c(w)$ содержание слова $w$, т.е. множество букв
+слова $w$.
+\begin{prop}
+Пусть $uv\in\Sigma^{*}$ и $n>0$. Тогда $u\sim_{n}vu$ в том и только
+в том случае, когда найдутся такие слова $u_{1},\ldots,u_{n}\in\Sigma^{*},$
+что $u=u_{1}\ldots u_{n}$ и $c(v)\subseteq c(u_{1})\subseteq c(u_{2})\subseteq\ldots\subseteq c(u_{n})$.\end{prop}
+\begin{proof}
+Необходимость. Индукция по $n$. База индукции. $n=1$. Если $u\sim_{1}vu$,
+то $c(v)\subseteq c(u)$ и $u_{1}=u$.
+
+Шаг индукции. Пусть $u\sim_{n+1}vu$. Обозначим через $u_{n+1}$ наикратчайший
+суффикс слова $u$ такой, что $c(u_{n+1})=c(u)$. Если записать $u_{n+1}=au'$,
+где $a\in\Sigma$, то ясно по построению, что $a$ не встречается
+в $u'$. Если $w$ таково, что $u=wu_{n+1}$, то для доказательства
+достаточно доказать, что $w\sim_{n}vw$, так как тогда к слову $w$
+можно будет применить предположение индукции. Пусть $x$ -- какое-то
+подслово длины $\le n$ в $vw$. Тогда $xa$ подслово длины $\le n+1$
+в $vu=vwau'.$ Из условия $u\sim_{n+1}vu$ следует, что $xa$ есть
+подслово в $u$, но $u=wau'$ и $a$ не появляется в $u'$. Поэтому
+$x$ является подсловом в $w$. 
+
+Достаточность. База индукции. $u=u_{1}$ и $c(v)\subseteq c(u_{1})$.
+Тогда понятно, что $c(vu)=c(u)$, т.е. $vu\sim_{1}u$.
+
+Шаг индукции. Допустим, что $u=u_{1}\ldots u_{n+1}$ и при этом $c(v)\subseteq c(u_{1})\subseteq c(u_{2})\subseteq\ldots\subseteq c(u_{n+1})$.
+Надо доказать, что тогда $u\sim_{n+1}vu$. По предположению индукции
+$u_{1}u_{2}\ldots u_{n}\sim_{n}vu_{1}u_{2}\ldots u_{n}$. Теперь возьмем
+произвольное подслово $x$ длины $\le n+1$ в слове $vu$. Обозначим
+через $x'$ наидлиннейший суффикс слова $x$, который является подсловом
+в $u_{n+1}$ и пусть $x=x''x'$. Поскольку $c(u_{n+1})=c(vu)$, по
+крайней мере последняя буква слова $x$ попадает в $x'$. Тогда $x''$
+имеет длину $\le n$ и является подсловом в $vu_{1}\ldots u_{n}$.
+По предположению индукции $x''$ является подсловом в $u_{1}\ldots u_{n}$.
+А тогда $x$ является подсловом в $u_{1}\ldots u_{n+1}=u$.\end{proof}
+\begin{cor}
+Для любых слов $u,v\in\Sigma^{*}$ имеем $(uv)^{n}\sim_{n}v(uv)^{n}\sim_{n}(uv)^{n}u$.\end{cor}
+\begin{proof}
+Достаточно представить $(uv)^{n}$ как $\underset{n\,\text{раз}}{\underbrace{(uv)(uv)\ldots(uv)}}$.
+\end{proof}
+Раз, $\sim_{n}$ -- конгруэнция конечного индекса, то $\Sigma^{*}/\sim_{n}$
+-- конечный моноид. Из следствия вытекает, что это $\mathrsfs{J}$-тривиальный
+моноид. Допустим, что $\bar{a}\mathrsfs{R}\bar{b}$ (через $\bar{a}$
+обозначаем образ слова $a$ в $\Sigma^{*}/\sim_{n}$), $\bar{a}=\bar{b}p$
+и $\bar{b}=\bar{a}q$. Тогда $\bar{a}=\bar{a}qp=\bar{a}(qp)^{n}$.
+Пусть $q=\bar{u},\, p=\bar{v}$, имеем
+\[
+(\bar{u}\bar{v})^{n}=\overline{(uv)^{n}}=\overline{(uv)^{n}u}=(\bar{u}\bar{v})^{n}\bar{u}=(qp)^{n}q.
+\]
+Значит, \foreignlanguage{english}{$\bar{a}(qp)^{n}=\bar{a}(qp)^{n}q=\bar{a}q=\bar{b}.$}
+
+Аналогично, если $\bar{a}\mathrsfs{L}\bar{b}$, то $\bar{a}=\bar{b}$.
+
+Пусть $M$ -- конечный моноид. Говорят, что язык $L\subseteq\Sigma^{*}$
+распознается моноидом $M$, если существуют гомоморфизм $\varphi\colon\Sigma^{*}\rightarrow M$
+и подмножество $P\subseteq M$ такие, что $u\in L\iff\varphi(u)\in P$.
+\begin{prop}
+Если $f\sim_{n}g$, то существует такое слово $h$, что и $f$ и $g$
+являются подсловами в $h$ и $f\sim_{n}h\sim_{n}g$.\end{prop}
+\begin{example}
+$f=bcaca\, cadca\, babab\, dacba$
+
+$g=bacca\, dcabb\, cbcab\, cdabc$
+
+$f\sim_{3}g$ (Различающее слово $dccc$)
+
+В качестве $h$ можно взять слово $bcacc\, acadc\, abbcb\, cabab\, dacbca$.\end{example}
+
+\end{document}
+

@@ -1,0 +1,1345 @@
+\documentclass[oneside,russian]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage{amsthm}
+\usepackage{amstext}
+\usepackage{amssymb}
+
+\makeatletter
+
+\DeclareRobustCommand{\cyrtext}{%
+  \fontencoding{T2A}\selectfont\def\encodingdefault{T2A}}
+\DeclareRobustCommand{\textcyr}[1]{\leavevmode{\cyrtext #1}}
+\AtBeginDocument{\DeclareFontEncoding{T2A}{}{}}
+
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+  \theoremstyle{definition}
+  \newtheorem*{example*}{\protect\examplename}
+  \theoremstyle{plain}
+  \newtheorem*{thm*}{\protect\theoremname}
+ \theoremstyle{definition}
+ \newtheorem*{defn*}{\protect\definitionname}
+  \theoremstyle{remark}
+  \newtheorem*{claim*}{\protect\claimname}
+  \theoremstyle{plain}
+  \newtheorem*{prop*}{\protect\propositionname}
+  \theoremstyle{plain}
+  \newtheorem{lem}{\protect\lemmaname}
+  \theoremstyle{plain}
+  \newtheorem{cor}{\protect\corollaryname}
+  \theoremstyle{plain}
+  \newtheorem*{cor*}{\protect\corollaryname}
+  \theoremstyle{plain}
+  \newtheorem*{lem*}{\protect\lemmaname}
+
+\usepackage{tikz}
+\usepackage{cmap}
+\usetikzlibrary{arrows,automata}
+\usepackage{fp}
+\usepackage{ifthen} 
+\newcommand{\amp}[1]{\mathop{\raisebox{-3.5pt}{\LARGE\&}}\limits_{{#1}}}
+
+\makeatother
+
+\usepackage{babel}
+  \providecommand{\claimname}{Утверждение}
+  \providecommand{\corollaryname}{Следствие}
+  \providecommand{\definitionname}{Определение}
+  \providecommand{\examplename}{Пример}
+  \providecommand{\lemmaname}{Лемма}
+  \providecommand{\propositionname}{Предложение}
+  \providecommand{\theoremname}{Теорема}
+
+\begin{document}
+Howard Straubing <<Finite Automata, Formal Logic, and Circuit Complexity>> 
+
+
+\part*{Лекция 1(01.03.2012).}
+
+
+\section{Логика для слов.}
+
+$\Sigma=\left\{ a,\, b,...\right\} $;
+
+$|\Sigma|<+\infty$;
+
+$x,y,z$ позиции в слове;
+
+$x<y$ позиция $x$ стоит перед позицией $y$;
+
+$Q_{a}x$ предикат в позиции $x$ стоит буква $a$.
+\begin{example*}
+$\exists x($$Q_{a}x\ \&\ \forall y\ (x\leq y))$ определяет язык
+$a\Sigma^{*}$ .
+\end{example*}
+$(a^{*})^{2}$ записать нельзя;
+
+$X,Y,Z$ --- множества позиций;
+\begin{example*}
+$\forall x\ Q_{a}x\ \&\ \exists X\ \forall x\ (x\in X\ \longleftrightarrow x+1\notin X)\ \&\ (x\notin X\leftrightarrow x+1\in X)$
+
+$\&\ \forall x(\forall y\ (x\leq y)\rightarrow x\in X)\ \&\ \forall x(\forall y\ (y\leq x)\rightarrow x\notin X)$
+описывает язык $(a^{2})^{*}$.
+\end{example*}
+
+\subsection*{Логика 1-го порядка.}
+
+Переменные $x,y,z,...$
+
+числовые предикаты ($<$, следует за, делит и т.п.);
+
+специальные предикаты для каждой буквы алфавита ($Q_{a}$, $Q_{b}$,...);
+
+логические связки ($\&,\vee,\neg,\rightarrow,\leftrightarrow$);
+
+кванторы($\forall,\exists$);
+
+формулы, свободные и связанные переменные.
+
+Если $P$ $n$-местный предикат, то выражение $P(x_{1},x_{2},...,x_{n})$
+--- это формула (атомарная), в которой все переменные свободны.
+
+Если $\Phi$ и $\Psi$ формулы, в которых переменные $x_{1},...,x_{n}$
+свободны, а переменные $y_{1},...,y_{n}$ связаны, то $\Phi\&\Psi,\Phi\vee\Psi,\Phi\rightarrow\Psi,\Phi\leftrightarrow\Psi,\neg\Phi$
+--- формулы в которых$x_{1},...,x_{n}$ --- свободные, $y_{1},...,y_{n}$
+--- связанные.
+
+Если $\Phi$ --- формула, в которой $x$ - свободная переменная, то
+$\forall x(\Phi)$ и $\exists x(\Phi)$ --- формулы, в которых $x$
+--- связанная, а остальные переменные свободны, если они были свободны
+в$\Phi$ и связаны, если они были связаны в $\Phi$.
+
+
+\subsection*{Логика 2-го порядка.}
+
+Переменные $x,y,z,...,X,Y,Z,\ldots$
+
+числовые предикаты ($<$, следует за, делит и т.п.);
+
+специальные предикаты для каждой буквы алфавита ($Q_{a}$, $Q_{b}$,...);
+
+предикат ($\in$);
+
+логические связки ($\&,\vee,\neg,\rightarrow,\leftrightarrow$);
+
+кванторы($\forall,\exists$);
+
+формулы, свободные и связанные переменные.
+
+Если $P$ $n$-местный предикат, то выражение $P(x_{1},x_{2},...,x_{n})$
+---это формула (атомарная), в которой все переменные свободны, кроме
+того, атомарная формула может иметь вид $x\in Y$.
+
+Если $\Phi$ и $\Psi$ формулы, в которых переменные $x_{1},...,x_{n},X_{1},\ldots X_{m}$
+свободны, а переменные $y_{1},...,y_{n},Y_{1},\ldots Y_{m}$ связаны,
+то $\Phi\&\Psi,\Phi\vee\Psi,\Phi\rightarrow\Psi,\Phi\leftrightarrow\Psi,\neg\Phi$
+--- формулы, в которых$x_{1},...,x_{n},X_{1},\ldots X_{m}$ --- свободные,
+$y_{1},...,y_{n},Y_{1},\ldots Y_{m}$ --- связанные.
+
+Если $\Phi$ --- формула, в которой $X$ --- свободная монадическая
+переменная, то $\forall X(\Phi)$ и $\exists X(\Phi)$ --- формулы,
+в которых $X$ --- связанная, а остальные переменные свободны, если
+они были свободны в $\Phi$ и связаны, если они были связаны в $\Phi$.
+
+
+\section{Теорема Бюхи.}
+\begin{thm*}
+[Бюхи(1960)] Язык $L\subseteq\sum^{*}$распознается конечным недетерминированным
+автоматом тогда и только тогда, когда он задается некоторой замкнутой
+формулой монадической теории 2-го порядка с отношением $=$ и единственным
+числовым предикатом <<следует за>>.\end{thm*}
+\begin{proof}
+Необходимость. Пусть $\mathcal{A}$ --- конечный автомат, который
+распознает $L$:
+
+$Q$ --- $\{q_{0},q_{1},...,q_{k-1}\}$;
+
+$q_{0}$ --- начальное состояние;
+
+$F\subseteq Q$ --- множество заключительных состояний;
+
+$E\subseteq Q\times\Sigma\times Q$ --- множество переходов $(q,a,q')$.
+
+$w\in L\iff$ существует путь из $q_{0}$ в $F$ такой, что метки
+ребер из этого пути составляют слово $w$.
+
+$w\in L\iff$ существуют множества $X_{0},X_{1},...,X_{k-1}\subseteq\{1,2,...,|w|\}$,
+такие что выполняются условия:
+
+(1) $\bigcup\limits _{i=0}^{k-1}X_{i}=\{1,2,...,|w|\}$;
+
+(2) $i\ne j\Rightarrow X_{i}\cap X_{j}=\varnothing$;
+
+(3) $1\in X_{0}$;
+
+(4) $i\in X_{j},i+1\in X_{l}$ и $a$ --- $i$-ая буква в слове $w$,
+то $(q_{j},a,q_{l})\in E$;
+
+(5) Если $|w|\in X_{j}$ и $a$ --- последняя буква в $w$, то есть
+такое $q\in F,$ что $(q_{j},a,q)\in E$.
+
+Возьмем путь, помеченный $w$, и положим $i\in X_{j}\iff$ прочтя
+вдоль этого пути первые $i-1$ букву, мы окажемся в состоянии $q_{j}$. \end{proof}
+\begin{example*}
+Рассмотрим язык, задаваемый автоматом:
+
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm,semithick]
+	\tikzstyle{everystate}=[draw=black,text=black]
+	\node[initial,state] (0) 			   {$0$};
+	\node[state]         (1) [right of = 0] {$1$};
+	\node[state]		 (2) [right of = 1] {$2$};
+	\node[state]         (3) [above of = 2] {$3$};
+	\node[state]         (4) [above of = 0] {$4$};
+	\node[state]         (5) [right of = 4] {$5$};
+	\node				(6) [right of =3] {};			
+	\node				(7) [right of =2] {};
+	\path (0) edge 			 node {$a$} (1)
+		  (0) edge 			 node {$b$} (4)
+		  (1) edge [bend left]			 node {$b$} (2)
+		  (1) edge [bend right]			 node {$a$} (2)
+		  (1) edge [bend right]			 node {$a$} (5)
+		  (2) edge 			 node {$a,b$} (3)
+		  (4) edge [loop above] node {$b$}  (4)
+		  (4) edge [bend left]  node {$a$} (5)
+		  (4) edge [bend right] node {$b$} (5)
+		  (5) edge [bend right] node {$a$} (1)
+		  (2) edge 			  		  (7)
+		  (3) edge 			            (6);
+\end{tikzpicture}
+\end{center}
+
+и слово $w=b^{3}a^{2}b$. Тогда:
+
+$1\in X_{0},\ 2\in X_{4},\ 3\in X_{4},\ 4\in X_{4},\ 5\in X_{5},\ 6\in X_{1}$; 
+
+$X_{0}=\{1\},\ X_{2}=X_{3}=\varnothing,\ X_{1}=\{6\},\ X_{4}=\{2,3,4\},\ X_{5}=\{5\}$.
+\end{example*}
+
+\part*{Лекция 2(08.03.2012).}
+\begin{proof}
+Необходимость. Более подробно. Пусть $L$ регулярен. Возьмем НКА,
+который распознает $L$ $(Q,\Sigma,q_{0},F,E)$:
+
+$E\subseteq Q\times\Sigma\times Q$;
+
+$Q=\{q_{0},q_{1},...,q_{k-1}\}$.
+
+({*}) $w\in L\iff$ существуют множества $X_{0},X_{1},...,X_{k-1}\subseteq\{1,2,...,|w|\}$,
+такие что:
+
+(1) $\bigcup\limits _{i=0}^{k-1}X_{i}=\{1,2,...,|w|\}$,
+
+на логическом языке$\Phi_{1}:\ (\forall x)(\bigvee\limits _{i=0}^{k-1}(x\in X_{i}))$;
+
+(2)$i\ne j\Rightarrow X_{i}\cap X_{j}=\varnothing$,
+
+$\Phi_{2}:\,(\forall x)[\amp{0\leq i<j<k}\neg(x\in X_{i}\,\&\, x\in X_{j})]$;
+
+(3) $1\in X_{0}$,
+
+$\Phi_{3}:\,(\forall x)[\forall y\,(x\neq y+1)\rightarrow x\in X_{0}]$;
+
+(4) $i\in X_{j},i+1\in X_{l}$ и $a$ --- $i$-ая буква в слове $w$,
+то $(q_{j},a,q_{l})\in E$,
+
+$\Phi_{4}:\,(\forall x)[\forall y\,(y=x+1\rightarrow\amp{0\leqslant i,l<k}(x\in X_{i}\,\&\, y\in X_{l}\rightarrow\bigvee\limits _{S_{i,l}}Q_{a}x))]$,
+
+где $S_{i,l}=\{a\mid(q_{i},a,q_{l})\in E\}$;
+
+(5) Если $|w|\in X_{j}$ и $a$ --- последняя буква в $w$, то есть
+такое $q\in F,$ что $(q_{j},a,q)\in E$
+
+$\Phi_{5}:\,(\forall x)[\forall y\,(y\neq x+1)\rightarrow\amp{1\leqslant j\leqslant k-1}(x\in X_{j}\rightarrow\bigvee\limits _{T_{j}}Q_{a}x)]$,
+
+где $T_{j}=\{a\mid\exists a\in E\ (q_{j},a,q)\in E\}$.
+
+Если обосновать ({*}), то получится, что язык задаётся формулой
+
+\[
+\exists X_{0},\exists X_{1},...,\exists X_{k-1}\quad\Phi_{1}\,\&\,\Phi_{2}\,\&\,\Phi_{3}\,\&\,\Phi_{4}\,\&\,\Phi_{5}.
+\]
+
+
+Если $w\in L$, то существует путь из $q_{0}$ в $q\in F$, метки
+которого образуют слово $w.$Тогда положим $i\in X_{j}$ тогда и только
+тогда, когда прочтя приставку слова $w$ длины $i-1$, мы оказываемся
+в состоянии $q_{j}$.
+
+Обратно, пусть множества $X_{0},X_{1},...,X_{k-1}$ со свойствами
+(1)-(5) существуют. По индукции по длине приставке $w'$ слова $w$
+построим такой путь из $q_{0}$ в $q_{j}$, вдоль которого читается
+$w'$. Взяв приставку длины $|w|-1$, получим путь в $q_{0}$, из
+которой есть стрелка $j$ в состояние $F$, помеченное последней буквой
+$w$.\end{proof}
+\begin{defn*}
+Пусть $\Phi$ --- формула первого порядка, в которой есть свободные
+переменные.
+
+Пусть $V$ --- некоторое множество переменных, содержащее все свободные
+переменные из $\Phi$.
+
+Будем рассматривать <<слова>> над алфавитом $\Sigma\times2^{V}$,
+т.е. <<буквы>> --- это пары $(a,U)$, где $U\subseteq V$. 
+
+$V$-слово --- это последовательность букв из $\Sigma\times2^{V}$:
+
+$(a_{1},U_{1})(a_{2},U_{2})...(a_{n},U_{n})$ такая, что $\bigcup\limits _{i=1}^{n}U_{i}=V$
+и $U_{i}\cap U_{j}=\varnothing$, при $i\neq j$.
+\end{defn*}
+Будем рассматривать такие формулы $\Phi$, что каждая связанная переменная
+связывается ровно одним квантором.
+\begin{defn*}
+Скажем, что формула $\Phi$ выполнена на $V$-слове 
+
+$w=(a_{1},U_{1})(a_{2},U_{2})...(a_{n},U_{n})$ (или $V$-слово $w$
+служит моделью для $\Phi$), при некоторой интерпретации $I$. Обозначение:
+$w\models_{I}\Phi$. Если:
+
+$w\models_{I}Q_{a}x\iff$в $w$ есть буква вида $(a,S)$, где $x\in S$
+;
+
+$w\models_{I}R(x_{1},...,x_{k})\iff\bar{R}(j_{1},...,j_{k})$, где
+$\bar{R}$ --- это то отношение на множестве $1,...,|w|$, которым
+интерпретируется $R$, а $j_{1},...,j_{k}$ --- это позиции, которые
+занимают переменные $x_{1},...,x_{k}$;
+
+$w\models_{I}\Phi\&\Psi\iff w\models_{I}\Phi$ и $w\models_{I}\Psi$;
+
+$w\models_{I}\neg\Phi\iff$ $w$ не служит моделью для $\Phi$ при
+$I$;
+
+$w\models(\exists x)\Phi\iff$существует такое $i\quad1\leq i\leq n$,
+что 
+
+$(a_{1},U_{1})...(a_{i-1},U_{i-1})(a_{i},U_{i}\cup\{x\})(a_{i+1},U_{i+1})...(a_{n},U_{n})\models\Phi$.
+\end{defn*}
+$\forall x\,\Phi(x)\sim\neg\exists x\,\neg\Phi(x)$
+\begin{example*}
+$\Theta(x)\overset{I}{\rightleftharpoons}$ позиция $x$ четна
+
+$\exists x\forall y\ \neg(x<y)\,\&\,\Theta(x)$
+
+Для формулы $\neg(x<y)\,\&\,\Theta(x)$
+
+$V=\{x,y\},\ (a,\{y\})(b,\{x\})$ -- пример $V$-слова.
+
+Для формулы $\forall y\,\neg(x<y)\,\&\,\Theta(x)$ ---множество четной
+длины, $x$ в последней позиции 
+
+$V=\{x\},\ (a,\varnothing)(b,\{x\})$ --- $V$-слово, удовлетворяющее
+этому множеству.
+\end{example*}
+
+\part*{Лекция 3(15.03.2012).}
+
+$\Phi$ --- формула монадической теории 2-го порядка (MSO), в которой
+есть свободные переменные как 1-го так и 2-го порядка.
+
+Рассмотрим множества $V_{1},V_{2}$.
+
+$V_{i}$ --- множество переменных $i$-го порядка, содержащее все
+свободные переменные $i$-го порядка из $\Phi$.
+
+Будем рассматривать $(V_{1},V_{2})$-слова над алфавитом $\Sigma\times2^{V_{1}}\times2^{V_{2}}$;
+
+типичная буква $(a,S,T)$, где $a\in\Sigma,\ S\subseteq V_{1},\ T\subseteq V_{2}$;
+
+типичное $(V_{1},V_{2})$-слово $(a_{1},S_{1},T_{1})(a_{2},S_{2},T_{2})\ldots(a_{k},S_{k},T_{k})$;
+
+$w\models_{I}\Phi$.
+
+К атомарным формулам 1-го порядка относятся: $Q_{a}x,\ P(x_{1},\ldots,x_{n})$,
+
+к атомарным формулам 2-го порядка относится ещё $x\in X$.
+
+$w\models_{I}(x\in X)$ --- означает, что в $w$ есть такая буква
+$(a_{i},S_{i},T_{i})$, что $x\in S_{i},\ X\in T_{i}$.
+
+Говорят, что $w\models_{I}(\exists X)\Psi$, если существует (возможно
+пустое) множество позиций $\mathcal{Y}\subseteq\{1,2,\ldots,k\}$,
+такое что слово $w$, полученное заменой каждой буквы $(a_{i},S_{i},T_{i})$,
+где $i\in\mathcal{Y}$, на букву $(a_{i},S_{i},T_{i}\cup\{x\})$,
+удовлетворяет $\Psi$.
+\begin{thm*}
+[Бюхи(1960)] Язык $L\subseteq\sum^{*}$распознается конечным недетерминированным
+автоматом тогда и только тогда, когда он задается некоторой замкнутой
+формулой монадической теории 2-го порядка с отношением $=$ и единственным
+числовым предикатом <<следует за>>.\end{thm*}
+\begin{proof}
+Достаточность. Пусть $\Phi$ --- любая MSO формула. Докажем, что язык
+$L_{\Phi}$ всех $(V_{1},V_{2})$-слов, удовлетворяющих $\Phi$, является
+регулярным (при любых $V_{1},V_{2}$). Тогда теорема Бюхи --- частный
+случай этого утверждения при $V_{1}=V_{2}=\varnothing$. Индукция
+по построению формулы.
+
+Пусть $L$ --- множество всех $(V_{1},V_{2})$-слов. Легко проверить
+с помощью конечного автомата над алфавитом $\Sigma\times2^{V_{1}}\times2^{V_{2}}$,
+что каждая переменная первого порядка в $V_{1}$ встречается в точности
+один раз во входной строке, таким образом $L$ -- регулярный язык.
+Надо проверить, что если $\Phi$ -- это атомарная формула, то то что
+ею задается -- это регулярный язык.
+
+$w\models Q_{a}x\iff$в $w$ есть буква $(a,S,T)$, где $x\in S$.
+Легко проверить с помощью конечного автомата встречается ли конкретная
+переменная первого порядка в букве, чья первая компонента $a$. Пересечение
+множества всех таких слов с языком $L$ -- множество всех слов, удовлетворяющих
+$Q_{a}x$. Участвуют только предикаты $x=y,\ y=x+1$ ($w\models(y=x+1)\iff$в
+$w$ есть фактор $(a_{1},S_{1},T_{1})(a_{2},S_{2},T_{2})$ такой,
+что $x\in S_{1},y\in S_{2}$). Эти условия задаются конечными автоматами,
+упражнение построить автомат. С помощью конечного автомата можно проверить
+имеет ли любая буква $x$ во второй компоненте и $X$ в третьей, поэтому
+$x\in X$ -- регулярный язык. Таким образом, утверждение доказано
+для атомарных формул.
+
+Если утверждение верно для формул $\Phi$ и $\Psi$, то оно верно
+и для $\Phi\&\Psi$ и$\neg\Phi$. В самом деле, т.к. регулярные языки
+замкнуты относительно пересечения и дополнения: $L_{\Phi\cap\Psi}=L_{\Phi}\cap L_{\Psi}\cap L$
+и $L_{\neg\Phi}=L\setminus L_{\Phi}$ --- регулярны.
+
+Напомним, что $w\models(\exists x)\Phi\iff$есть такое $i$, что 
+
+$(a_{1},S_{1},T_{1})(a_{2},S_{2},T_{2})\ldots(a_{i},S_{i}\cup\{x\},T_{i})\ldots(a_{k},S_{k},T_{k})\models\Phi$.
+
+Пусть $\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$ --- это тот автомат,
+который распознает язык $L_{\Phi}$.
+
+Построим новый автомат $\mathcal{M}=(Q\times\{0,1\},\Sigma,\delta',(q_{0},0),F\times\{1\})$.
+
+Пусть $q\in Q,u\in\{0,\,1\}$, переходы
+
+$((q,u),(a,S,T),(q',u))\in\delta'$, если $(q,(a,S,T),q')\in\delta$
+и $x\notin S$;
+
+$((q,0),(a,S\setminus\{x\},T),(q',1))\in\delta'$, если $(q',(a,S,T),q')\in\delta$
+и $x\in S$.
+
+\begin{center}
+\begin{tikzpicture}
+	\draw(0,0) node [above left] {$0$} --(4,0)  --(5,1.5)--(1,1.5)--(0,0);
+	\draw(0,2) node [above left] {$1$} --(4,2)--(5,3.5)--(1,3.5)--(0,02);
+	\draw[->](1,0.5)--(4,3);
+	\draw[->](1,1.65) node[above right] {$\tiny{\text{если }x\in S}$}--(2.5,1.65);
+	\path (0.3,0.3) node {$\mathcal A$};
+		\tikzstyle{dash_line} = [dashed]
+		\draw[dash_line](1,0.5)node[right] {$\tiny{\text{если }x\notin S}$} 
+		node [below] {$q$}--(4,1)node [below]  {$q'$};
+		\draw[dash_line](1,2.5)node[above right] {$\tiny{\text{если }x\notin S}$}
+		node [below] {$q$}--(4,3)node [below]  {$q'$};
+\end{tikzpicture}
+\end{center}
+
+Легко видеть, что $w$ принимается автоматом $\mathcal{M}$ тогда
+и только тогда, когда существует путь, соединяющий $x$ со средней
+компонентой буквы слова $w$, так чтобы получилось слово, принимаемое
+автоматом $\mathcal{A}.$ Таким образом, $\mathcal{M}$ распознает
+язык $L_{(\exists x)\Phi}$.
+
+Напомним, что $w\models(\exists X)\Phi\iff$есть такое $\mathcal{Y}$,
+что слово
+
+$(a_{1},\, S_{1},\, T_{1})(a_{2},\, S_{2},\, T_{2})\ldots(a_{i},\, S_{i},\, T_{i}\cup\{x\})\ldots(a_{k},\, S_{k},\, T_{k})\models\Phi$,
+где $i\in\mathcal{Y}$.
+
+Пусть $\mathcal{A}=(Q,\Sigma,\delta,\, q_{0},\, F)$ --- это тот автомат,
+который распознает язык $L_{\Phi}$.
+
+Построим новый автомат $\mathcal{N}=(Q,\Sigma,\delta',\, q_{0},\, F)$,
+
+$\delta'=\{(q,\,(a,\, S,\, T\setminus\{x\}),\, q')|\ (q,\,(a,\, S,\, T),\, q')\in\delta\}$.
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[->] (0,0)node [below] {$q_0$}--(2,0) node [below] {$q$};
+	
+	\path[->] (2,0) edge[bend left=35] (4,0);
+	\tikzstyle{dash_line} = [dashed]
+	\path[->,dash_line] (2,0) edge[bend right=35] (4,0);
+	\draw[->] (4,0)node [below] {$q'$} --(6,0) node [below] {$F$};
+\end{tikzpicture}
+\end{center}
+
+Автомат $\mathcal{N}$ распознает язык $L_{(\exists X)\Phi}$.
+\end{proof}
+
+\section{Регулярные предикаты.}
+
+Пусть $\Phi$ ---формула MSO$(y=x+1)$, в которой есть предметные
+переменные.
+
+Она определяет предикат на множестве позиций. А именно $(a_{1},\ldots,\, a_{k})\in P_{\Phi}$
+тогда и только тогда, когда $\Phi(a_{1},\ldots,\, a_{k})=\text{И}$.
+\begin{example*}
+$x<y$ -- регулярный предикат.
+
+$x<y\leftrightharpoons y=x+1\ \vee\exists X\,(\forall z\,(z=x+1\rightarrow z\in X)\,\&$
+
+$\forall t\,(y=t+1\rightarrow t\in X)\,\&\,\forall u\,(u\in X\,\&\: u+1\neq y\rightarrow\forall v\,(v=u+1\rightarrow v\in X)))$.
+\end{example*}
+
+\begin{example*}
+$x+y=z$ -- нерегулярный предикат.
+
+Докажем о/п. Пусть $\Phi(x,y,z)\leftrightharpoons x+y=z$. Тогда формула
+
+$\Psi(x)\leftrightharpoons(\exists z)\ ((\forall y)\,(y\leqslant z)\,\&\,\Phi(x,x,z)$)
+определяет предикат <<$x$ -- половина длины>>. Тогда $\exists x\ (\Psi(x)\,\&\,(\forall y)(y\leqslant x\rightarrow Q_{a}x)\,\&\,(y>x\rightarrow Q_{b}x))$
+определяет нерегулярный язык $\{a^{n}b^{n}:n>0\}$. Противоречие.
+\end{example*}
+Домашнее задание. предикат - номер позиции делится на 3. Попробовать
+доказать (придумать формулу).
+
+
+\part*{Лекция 4(22.03.2012).}
+
+Пусть $\Sigma=\{a\}$. Тогда предикат $Q_{a}x$ теряет свой смысл.
+
+$(a,S,\varnothing)=(a,S)$.
+
+Предикат регулярен, тогда и только тогда, когда он задается конечным
+автоматом.
+\begin{example*}
+Предикат $x<y$, тогда его распознает автомат:
+
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+  	\tikzstyle{everystate}=[draw=black,text=black]
+	\node[initial,state] (A) {};
+	\node[state]         (B) [right of=A] {};
+	\node[state]         (C) [right of=B] {};
+	\node				(D) [right of=C] {};
+	\path (A) edge [loop above] node {$(a,\varnothing)$} (A)
+            edge              node {$(a,\{x\})$} (B)
+        (B) edge [loop above] node {$(a,\varnothing)$} (B)
+            edge              node {$(a,\{y\})$} (C)
+        (C)	edge   [loop above]           node {$(a,\varnothing)$} (C)
+			   edge 						 (D);
+\end{tikzpicture}
+\end{center}
+\end{example*}
+
+\begin{example*}
+Предикат <<$x$ делится на $m$>>, при $m=3$ его распознает автомат:
+
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+  	\tikzstyle{everystate}=[draw=black,text=black]
+	\node[initial,state] (A) {};
+	\node[state]         (B) [right of=A] {};
+	\node[state]         (C) [below of=B] {};
+	\node[state]				(D) [below left of=C] {};
+	\node				(E) [left of=D]  {};
+	\path (A) edge		    node {$(a,\varnothing)$} (B)
+          (B)  edge              node {$(a,\varnothing)$} (C)
+        (C) edge 			 node {$(a,\varnothing)$} (A)
+        (C)   edge            node {$(a,\{x\})$} (D)
+        (D)	edge   [loop above]           node {$(a,\varnothing)$} (D)
+				edge						(E);	
+\end{tikzpicture}
+\end{center}
+
+Можно теперь применить алгоритм из доказательства теоремы Бюхи для
+нахождения формулы.\end{example*}
+\begin{defn*}
+Порядковый тип слова.
+
+Рассмотрим язык всех слов над алфавитом $\{(a,S)|S\subseteq\{x_{1},\ldots,x_{n}\}\}$,
+задаваемый $\Phi$. Обозначим через $L_{\Phi}$. Берём слово $w$,
+берём все его буквы $(a_{i},S_{i})$. Они образуют разбиение $\{x_{1},\ldots,x_{n}\}$:
+$\{S_{1},S_{2},\ldots,S_{h}\}\quad(h\leqslant n)$. Записываем все
+переменные из $S_{i}$ через знак $=$, а между ставим знак $<$.
+Такое выражение --- порядковый тип $w$.\end{defn*}
+\begin{example*}
+Пусть $n=3$, переменные $\{x,y,z\}$.
+
+Порядковый тип $x<y<z$, слово имеет вид 
+\[
+(a,\varnothing)\ldots(a,\varnothing)(a,\{x\})(a,\varnothing)\ldots(a,\varnothing)(a,\{y\})(a,\varnothing)\ldots(a,\varnothing)(a,\{z\})(a,\varnothing)\ldots(a,\varnothing).
+\]
+
+\end{example*}
+
+\begin{example*}
+Пусть $n=3$, переменные $\{x,y,z\}$.
+
+Порядковый тип $x=y<z$, слово имеет вид
+\[
+(a,\varnothing)\ldots(a,\varnothing)(a,\{x,y\})(a,\varnothing)\ldots(a,\varnothing)(a,\{z\})(a,\varnothing)\ldots(a,\varnothing).
+\]
+\end{example*}
+\begin{thm*}
+[Страубинг,1991] Предикат регулярен тогда и только тогда, когда он
+может быть задан формулой первого порядка, использующей предикаты
+<<$x<y$>> и <<$x$ делится на $m$>>.\end{thm*}
+\begin{proof}
+Достаточность очевидна. Подставляя формулы второго порядка в эти предикаты,
+получим, что задается с отношением <<следует за>>, значит регулярен.
+
+Необходимость. Пусть $P(x_{1},\ldots,x_{n})$ -- какой-то предикат
+и пусть он регулярен, т.е. задаётся какой-то формулой $\Phi$ MSO$(y=x+1)$.
+Пусть $\tau$ -- порядковый тип. Обозначим через $L_{\tau}$ -- множество
+всех слов типа $\tau$. Достаточно доказать теорему для $L_{\Phi}\cap L_{\tau}$.
+
+Итак, зафиксируем порядковый тип $\tau$. Для простоты будем вместо
+$(a,\,\varnothing)$ писать $a$. Слово $w\in L_{\Phi}\cap L_{\tau}$
+имеет вид $a^{m_{0}}(a,\, S_{1})a^{m_{1}}\ldots(a,\, S_{j})a^{m_{j}}$,
+где $S_{1},\ldots,S_{j}$ однозначно определены типом $\tau$. Пусть
+$\mathcal{A}$ -- автомат, который распознает язык $L_{\Phi}\cap L_{\tau}$.
+Cледом слова $w$ в $\mathcal{A}$ назовем последовательность состояний
+\[
+(p_{0},\, q_{0},\, p_{1},\, q_{1},\ldots,\, p_{j},\, q_{j}),
+\]
+такую что $a^{m_{i}}$ метит путь из $p_{i}$ в $q_{i}$, а буква
+$(a,\, S_{i})$ помечает ребро из $(q_{i-1},\, p_{i})$. 
+
+\begin{center}
+\begin{tikzpicture}
+	\draw (0,0) node [below] {$p_0$}--(0,1)--(1,1)--(1,0.3)--(0.5,0.5)--(0.5,0)--(2,0);
+	\draw[->] (2,0)--(2,1) --(2.75,0) node [below] {$q_0$};
+	\draw[->] (2.75,0)-- (3.1,0) node  [above] {$(a,\, S_1)$}--(3.5,0) node [below] {$p_1$};
+	\draw{[rounded corners] (3.5,0)--(4,0)--(3.8,0.8)--(5,1)--(5,0)--(6,0)
+	--(5.75,0.75)--(6,1)--(6.25,0.75)--(6,0.5)--(6.5,0)};
+	\draw[->] {[rounded corners] (6.5,0)--(6,-0.5)--(7,0) node [below] {$q_1$}}--(7.5,0) node [above] {$(a,\, S_2)$}--(8,0) node [right] {$...$};
+\end{tikzpicture}
+\end{center}
+
+Через $L_{q,q'}$ обозначим множество всех слов вида $a^{m}$, которые
+метят путь из $q$ в $q'$. Язык $L_{q,q'}$ -- регулярный и является
+конечным объединением слов вида $(a^{r})*a^{s},\ \text{где}\ r,s\geqslant0$
+.
+
+$L_{\Phi}\cap L_{\tau}$ -- это конечное объединение языков 
+\[
+L_{p_{0},\, q_{0}}(a,\, S_{1})L_{p_{1},\, q_{1}}(a,\, S_{2})\ldots(a,\, S_{j})L_{p_{j},\, q_{j}}\ (*),
+\]
+где объединение берётся по всевозможным следам.
+
+Итак, достаточно написать формулу для языков вида $(*)$. Язык описывается
+следующими условиями:
+
+(1) порядковый тип $\tau$,
+
+(2) $x_{i}=x_{l}+s+1$,
+
+(3) $x_{i}>x_{l}+s$,
+
+(4) $x_{i}\equiv x_{l}+s(\mathrm{mod}\; r)$.
+
+Расположение букв в слове выражается через булеву комбинаций условий
+(2),(3),(4).
+
+Соответствующие формулы.
+
+$x_{i}=x_{l}\rightleftharpoons\neg(x_{i}<x_{l})\,\&\,\neg(x_{l}<x_{i})$;
+
+(1) конъюнкция выражений вида $x_{i}=x_{l}$ и $x_{i}<x_{l}$.
+
+$x_{i}=x_{l}+1\rightleftharpoons(x_{l}<x_{i})\,\&\,(\forall y)((x_{l}<y)\rightarrow(x_{i}=y)\vee(x_{i}<y))$;
+
+(2) $(\exists y_{1},\ldots,y_{s})((y_{1}=x_{i}+1)\,\&\,(x_{l}=y_{s}+1)\,\&\amp{1\leqslant m\leqslant s-1}(y_{m+1}=y_{m}+1))$.
+
+(3) $(\exists y_{1},\ldots,y_{s})((y_{1}=x_{i}+1)\,\&\,(y_{s}<x_{l})\,\&\amp{1\leqslant m\leqslant s-1}(y_{m+1}=y_{m}+1))$.
+
+Если $0<m<r$, то $x_{i}\equiv m(\mathrm{mod}\; r)\rightleftharpoons\exists z((z\equiv0(\mathrm{mod}\; r))\wedge(x_{i}=z+m)$;
+
+(4) $z\equiv x_{i}+s(\mathrm{mod}\; r)\rightleftharpoons\bigvee\limits _{m\in Z_{r}}((x_{i}\equiv m(\mathrm{mod}\; r))\wedge(z=m+s(\mathrm{mod}\; r)))$.\end{proof}
+\begin{example*}
+$(a^{3})^{*}a^{2}(a,\{x_{1}\})(a^{3})^{*}a(a,\{x_{2}\})(a^{6})^{*}a^{3}$;
+
+$x_{2}>x_{1},\quad x_{2}=x_{1}+1(\mathrm{mod}\;3)$.
+\end{example*}
+
+\part*{Лекция 5(05.04.2012).}
+
+
+\section{Языки бесконечных слов.}
+
+В логическом языке на самом деле не важно, чтобы слова были конечными.
+Всё сохраняет смысл для бесконечных слов. Идея Бюхи: использовать
+этот подход, чтобы определить регулярный язык бесконечных слов. Бесконечные
+слова имеют осязаемое практическое применение. Слова - протоколы некоторых
+процессов. Когда работает компьютер, то это потенциально бесконечная
+последовательность операций. 
+
+MSO(+1)
+
+$\Sigma\quad Q_{a}$
+
+$\Sigma^{\omega}$ --- множество всех бесконечных вправо слов.
+\begin{defn*}
+Язык $L\subseteq\Sigma^{\omega}$ назовем регулярным, если он состоит
+из всех слов, удовлетворяющих некой системе $\Phi$ формул MSO(+1).
+\end{defn*}
+Пусть $\mathcal{A}$ -- конечный (недетерминированный) автомат.
+
+$\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$;
+
+$\delta:Q\times\Sigma\rightarrow2^{Q}$.
+\begin{defn*}
+Скажем, что такой автомат $\mathcal{A}$ принимает слово $w\in\Sigma^{\omega}$
+(в смысле Бюхи), если при чтении $w$ автомат оказывается в состояниях
+из $F$ бесконечное число раз.\end{defn*}
+\begin{example*}
+Недетерминированный автомат:
+
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+	\tikzstyle{everystate}=[draw=black,text=black]
+	\node[initial,state] (A) 			   {$0$};
+	\node[state]         (B) [right of = A] {$1$};
+	\node				(C) [right of = B] {}; 			
+	\path (A) edge [loop above] node {$a,\, b$} (A)
+			  edge 			 node {$a$}	  (B)
+		  (B) edge [loop above] node {$a$}	  (B)
+		      edge 			 				(C)  ;				
+\end{tikzpicture}
+\end{center}
+
+распознает язык $L(\mathcal{A})=\{a,b\}^{*}a^{\omega}$,
+
+$(\exists y)(\forall x)(x>y\rightarrow Q_{a}x)$.
+\end{example*}
+
+\begin{example*}
+Детерминированный автомат:
+
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+	\tikzstyle{everystate}=[draw=black,text=black]
+	\node[initial,state] (A) 			   {$0$};
+	\node[state]         (B) [right of = A] {$1$};
+	\node				(C) [right of = B] {}; 			
+	\path (A) edge [loop above] node {$a$} (A)
+			  edge 			 node {$b$}	  (B)
+		  (B) edge [loop above] node {$b$}	  (B)
+	  		edge  [bend left] node  {$a$}	 (A)
+		  (B) edge 			 				(C)  ;				
+\end{tikzpicture}
+\end{center}
+
+распознает дополнение языка $L(\mathcal{A})$.
+
+$L(\mathcal{B})=(a^{*}ba^{*})^{\omega}$,
+
+$(\forall y)(\exists x)(x>y\ \&\ Q_{b}x)$.\end{example*}
+\begin{defn*}
+Назовем таблицей некоторое множество множества состояний. Скажем,
+что автомат принимает слово в смысле Мюллера, если мы его читаем и
+выписываем те состояния, которые он посещает бесконечное число раз.
+Эти состояния должны быть в таблице.\end{defn*}
+\begin{claim*}
+[Ландвебер, 1969] Язык $\{a,b\}^{*}a^{\omega}$ не распознается по
+Бюхи никаким детерминированным автоматом.\end{claim*}
+\begin{proof}
+о/п. Пусть существует детерминированный автомат, который распознает
+язык $\{a,b\}^{*}a^{\omega}$. Он принимает слово $ba^{\omega}$.
+Значит, это слово метит какой-то путь, который бесконечно много раз
+проходит через состояния из $F$. В силу детерминированности этот
+путь единственный. Пусть $k_{1}$таково, что $ba^{k_{1}}$ метит путь
+из $q_{0}$ в состояния из $F$. Рассмотрим слово $ba^{k_{1}}ba^{\omega}\in L$.
+Значит, оно тоже метит какой-то путь, в котором бесконечно много раз
+встречаются состояния из $F$. Возьмем $k_{2}$ такое, что слово $ba^{k_{1}}ba^{k_{2}}$
+заканчивается в состоянии из $F$. Рассмотрим $ba^{k_{1}}ba^{k_{2}}ba^{\omega}\in L$.
+Отсюда $ba^{k_{1}}ba^{k_{2}}\ldots ba^{k_{n}}\ldots$ бесконечно много
+раз посещает состояния из $F$. Но это слово содержит бесконечное
+число букв $b$. Противоречие.\end{proof}
+\begin{thm*}
+[Бюхи] Пусть $L\subseteq\Sigma^{\omega}$, $L$ распознается (по
+Бюхи) конечным автоматом тогда и только тогда, когда $L$ задается
+некоторым набором формул MSO(+1).\end{thm*}
+\begin{proof}
+Доказательство необходимости повторяет доказательство в случае конечных
+слов, за исключением одной модификации. А именно, вместо условия (5)
+нужно такое условие: одно из множеств $X_{q}$ -- бесконечно, где
+$q\in F$. $(\forall x)(\exists y)(y>x\ \&\ y\in X)\rightleftharpoons X$
+бесконечно. 
+
+Доказательство достаточности повторяет доказательство в конечном случае
+для конечных слов, если принять на веру такой факт. Если $L_{1},L_{2}\subseteq\Sigma^{\omega}$
+распознаются, то $L_{1}\cup L_{2},\, L_{1}\cap L_{2},\,\Sigma^{\omega}\setminus L_{2}$
+распознаются.\end{proof}
+\begin{claim*}
+Если $L_{1},L_{2}\subseteq\Sigma^{\omega}$ -- распознаваемы, то и
+$L_{1}\cup L_{2}$ распознаваем.\end{claim*}
+\begin{proof}
+Пусть $\mathcal{A}_{i}=(Q_{i},\Sigma,q_{0}^{(i)},\delta_{i},F_{i}),\ i=1,2$
+-- автомат, который распознает $L_{i}$. Будем считать, что $Q_{1}\cap Q_{2}=\varnothing$.
+Определим $\mathcal{A}$ так:
+
+$Q=Q_{1}\cup Q_{2}\cup\{q_{0}\}$, $q_{0}$ -- новое начальное состояние, 
+
+$F=F_{1}\cup F_{2}$ -- множество заключительных состояний,
+
+$\delta=\delta_{1}\cup\delta_{2}\cup\{(q_{0},a,q)|(\exists q\in Q_{i}):(q_{0}^{(i)},a,q)\in\delta_{i}\}$.
+
+Тогда автомат $\mathcal{A}$ распознает язык $L_{1}\cup L_{2}$.\end{proof}
+\begin{prop*}
+$L\in\Sigma^{\omega}$ распознается конечным автоматом (по Бюхи) тогда
+и только тогда, когда $L$ можно представить в виде конечного объединения
+языков вида $JK^{\omega}$, где $J$ -- регулярный язык в $\Sigma^{*}$,
+а $K$ -- регулярный язык в $\Sigma^{+}$.\end{prop*}
+\begin{proof}
+Необходимость. Пусть автомат $\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$
+распознает язык $L$. Пусть $J$ -- это тот язык, который распознается
+этим автоматом в <<конечном смысле>>, а $K$ -- это моножество тех
+непустых слов, которые в $\mathcal{A}$ читаются на пути из $F$ в
+$F$. Через $L_{p,q}$ обозначим язык конечных слов, которые можно
+прочесть на пути из $p\in Q$ в $q\in Q$. Тогда $L=\bigcup\limits _{q\in F}L_{q_{0},q}L_{q,q}^{\omega}$.
+
+Достаточность. Чтобы доказать, достаточно (в силу предложения 1) проверить,
+что каждый язык вида $JK^{\omega}$ распознается по Бюхи конечным
+автоматом. Пусть $\mathcal{B}=(Q,q_{0},F,\delta)$ -- автомат, который
+распознает $K$. Возьмем новое состояние $q_{0}'$ и для каждой стрелки
+$q_{0}\xrightarrow{a}q$ нарисуем стрелку $q_{0}'\xrightarrow{a}q$,
+а для каждой стрелки $q\xrightarrow{a}f\in F$ нарисуем стрелку $q\xrightarrow{a}q_{0}^{'}$.
+Обозначим через $\delta'$ расширенное множество переходов. Тогда
+автомат $\mathcal{B}'=(Q\cup\{q_{0}'\},q_{0}',\{q_{0}'\},\delta')$
+распознает по Бюхи язык $K^{\omega}$. Пусть автомат $(P,p_{0},T,\varDelta)$
+-- автомат, который распознает язык $J$. Полагаем, что $P\cap(Q\cup\{q_{0}'\})=\varnothing$.
+Пусть $\varDelta'=\{(p,a,q_{0}'):\exists t\in T,\,(p,a,t)\in\varDelta\}.$
+Тогда автомат 
+\[
+(P\cup Q\cup\{q_{0}'\},p_{0},\{q_{0}'\},\varDelta'\cup\varDelta\cup\delta')
+\]
+ распознает язык $JK^{\omega}$.
+\end{proof}
+
+\part*{Лекция 6 (12.04.2012)}
+
+$\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$;
+
+$w\in\Sigma^{+}$;
+
+$s(q,q',w)\rightleftharpoons$ есть путь из $q$ в $q'$, помеченный
+словом $w$;
+
+$t(q,q',w)\rightleftharpoons-//-$ и проходящий через одно из состояний
+из $F$.
+
+Введем отношение эквивалентности:
+
+$u\sim v\rightleftharpoons$ для всех $q,q'\in Q,\; s(q,q',u)\longleftrightarrow s(q,q',v)\ \&\ t(q,q',u)\longleftrightarrow t(q,q',v)$.
+\begin{lem}
+У $\sim$ конечное число классов и каждый класс --- регулярный язык.\end{lem}
+\begin{proof}
+$\sim$-класс слова $w$ определяется набором таких пар $(q,q')$,
+что $s(q,q',w)\ \&\ t(q,q',w)$. Поэтому число классов не больше,
+чем число множеств таких пар. Введем множества слов $S(q,q')=\{u|\ s(q,q',u)$
+истинно $\}$ и $T(q,q')=\{u|\ t(q,q',u)$ истинно $\}$. Каждый класс
+-- это булева комбинация таких множеств. Для слова $w$ его $\sim$-
+класс:
+
+\[
+(
+  \bigcup\limits_{\substack{(q,q'),\\\text{где }s(q,q',w)\\\text{истинно}}}
+  S(q,q')
+  \cap
+  \bigcup\limits_{\substack{(q,q'),\\\text{где }t(q,q',w)\\\text{истинно}}}
+  T(q,q')
+)
+\setminus
+(
+  \bigcup\limits_{\substack{(p,p'),\\\text{где }s(p,p',w)\\\text{ложно}}}
+  S(p,p')
+  \cap
+  \bigcup\limits_{\substack{(p,p'),\\\text{где }t(p,p',w)\\\text{ложно}}}
+  T(p,p')
+).
+\]
+
+Поэтому осталось доказать, что регулярны $S(q,q')$ и $T(q,q')$.
+
+$S(q,q')=L(q,q')$,
+
+$T(q,q')=\bigcup\limits _{f\in F}L_{q,f}\cdot L_{f,q}$. 
+
+Так как множества вида $L(q,q')$ --- регулярные языки, все доказано.\end{proof}
+\begin{lem}
+Пусть $J,K$ -- $\sim$-классы, $L\subseteq\Sigma^{\omega}$ и $L=L(\mathcal{A})$.
+Если $JK^{\omega}\cap L\neq\varnothing$, то $JK^{\omega}\subseteq L$.\end{lem}
+\begin{proof}
+Пусть $\alpha\in JK^{\omega}\cap L$. Тогда $\alpha=\alpha_{0}\alpha_{1}\alpha_{2}\ldots$,
+где $\alpha_{0}\in J,\alpha_{i}\in K$. Значит, в $\mathcal{A}$ есть
+последовательность состояний $q_{0},q_{1},q_{2}\ldots$ такая, что
+$s(q_{l},q_{l+1},\alpha_{l})$ истинно для всех $l$ и $t(q_{j},q_{j+1},\alpha_{j})$
+истинно для бесконечного множества индексов $j$. Пусть $\beta$--
+любое слово из $JK^{\omega}$. Тогда $\beta=\beta_{0}\beta_{1}\beta_{2}\ldots$,
+где $\beta_{0}\in J,\beta_{i}\in K$ при $i>0$. Имеем $\alpha_{i}\sim\beta_{i}$
+для всех $i$, откуда $s(q_{l},q_{l+1},\beta_{l})$ истинно для всех
+$l$ и $t(q_{j},q_{j+1},\beta_{j})$ истинно для бесконечно многих
+$j$. Значит, $\beta\in L$. \end{proof}
+\begin{thm*}
+[Рамсей, конечный вариант] Пусть $k$ -- любое число. Найдется такое
+$R=R(k)$, что в любом графе с $R$ вершинами есть либо полный подграф
+с $k$ вершинами, либо пустой подграф с $k$ вершинами.\end{thm*}
+\begin{proof}
+Пусть $r(m,n)$ -- наименьший размер графа, у которого всегда есть
+либо полный подграф с $m$ вершинами либо пустой подграф с $n$ вершинами.
+Тогда $R(k)=r(k,k)$. Ясно, что $r(2,n)=n,\ r(m,2)=m$. Докажем, что
+$r(m,n)\leqslant r(m,n-1)+r(m-1,n)$. Возьмем граф с $N=r(m,n-1)+r(m-1,n)$
+вершинами и пусть $v$ -- любая вершина. Рассмотрим множество $G$
+всех вершин, смежных с $v$. Если в $G$ по крайней мере $r(m-1,n)$
+вершин, то все хорошо. В противном случае в исходном графе по крайней
+мере $r(m,n-1)$ вершин, не смежных с $v$ и опять все хорошо. \end{proof}
+\begin{example*}
+Задача про знакомства: $R(3)=6$.
+\end{example*}
+Обобщение. Пусть $k,c$ любые числа. Тогда $\exists R=R(k,c)$, что
+если ребра полного графа с $R$ вершинами покрасить в $c$ цветов,
+то найдется одноцветный полный граф с $k$ вершинами.
+\begin{example*}
+$R(3,3)=17$.
+\end{example*}
+Обобщение. Пусть $k,c,s$ -- любые числа. Тогда $\exists R=R(k,c,s)$,
+что в любом подмножестве из $R$ элементов покрасить все $s$-подмножеств
+в $c$ цветов, то найдется $k$- подмножество, у которого все $s$-подмножества
+будут покрашены в один цвет.
+\begin{lem}
+Пусть $\alpha\in\Sigma^{\omega}$. Тогда существуют $\sim$-классы
+$J,K$ такие, что $\alpha\in JK^{\omega}$.\end{lem}
+\begin{proof}
+Пусть $i<j$. Обозначим через $\alpha[i,j]$ кусок слова $\alpha$
+от $i$-ой позиции до $j-1$-й позиции. Покрасим все 2-х элементные
+подмножества в $\mathbb{N}$ красками, соответствующими $\sim$-классам
+так: $\{i,j\},$где $i<j$ -- это $\sim$-классы слова $\alpha[i,j]$.
+По теореме Рамсея в $\mathbb{N}$ есть бесконечное подмножество $\{i_{1}<i_{2}<i_{3}<\ldots\}$,
+у которого все 2-х элементные подмножества покрашены одним цветом.
+Пусть $K$ -- это $\sim$-класс, который отвечает этому цвету $\alpha[i_{1},i_{2}],\alpha[i_{2},i_{3}],\ldots\in K$.
+Пусть $Y$ - это класс слова $\alpha[1,i_{1}]$. Тогда $\alpha=\alpha[1,i_{1}]\alpha[1,i_{2}]\ldots\in JK^{\omega}$.\end{proof}
+\begin{claim*}
+Если $L\subseteq\Sigma^{\omega}$ --- распознаваемый язык, то $\Sigma^{\omega}\setminus L$
+--- распознаваемый язык.\end{claim*}
+\begin{proof}
+По лемме 3 для любого $\alpha\in\Sigma^{\omega}\setminus L$ существуют
+$\sim$-классы $J,K$, такие что $\alpha\in JK^{\omega}$. Значит,
+$\Sigma^{\omega}\setminus L$ лежит в объединении множеств $JK^{\omega}$.
+Если бы $JK^{\omega}\cap L\neq\varnothing$, то по лемме 2 множество
+$JK^{\omega}\subseteq L$, но $JK^{\omega}$ содержит слова из дополнения
+языка $L$. Получили, что $JK^{\omega}\cap L=\varnothing$. Отсюда
+имеем, что объединение множеств $JK^{\omega}$ лежит $\Sigma^{\omega}\setminus L$.
+Значит дополнение языка $L$ -- это объединение множеств $JK^{\omega}$.
+По лемме 1 объединение конечное и $J,K$ --- регулярные языки. По
+предложению $\Sigma^{\omega}\setminus L$ --- распознаваемо. 
+\end{proof}
+
+\part*{Лекция 7 (19.04.2012).}
+\begin{cor}
+Монадическая теория 2-го порядка множества $\mathbb{N}$ с отношением
+<<следует за>> разрешима.
+\end{cor}
+S2S - то же разрешима (деревья).
+
+Теперь под формулами понимаем формулы первого порядка.
+
+Любую формулу первого порядка можно заменить на эквивалентную ей префиксную
+формулу, т.е. формулу вида: 
+
+$\forall x\ \exists y\ \forall z\ \exists w\ \Phi(x,y,z,\ldots,w)\leftarrow\text{бескванторная часть}$.
+
+$\neg(\forall x\ \Phi(x))\sim\exists x\ \neg\Phi(x)$,
+
+$\neg(\exists x\ \Phi(x))\sim\forall x\ \neg\Phi(x)$,
+
+$\forall x\ \Phi(x)\,\&\,\forall x\ \Psi(x)\sim\forall x\ (\Phi(x)\,\&\,\Psi(x))$,
+
+$\exists x\ \Phi(x)\,\vee\,\exists x\ \Psi(x)\sim\exists x\ (\Phi(x)\,\vee\,\Psi(x))$,
+
+$\forall x\ \Phi(x)\,\vee\,\forall x\ \Psi(x)\nsim\forall x\ (\Phi(x)\,\vee\,\Psi(x))$,
+
+$\forall x\ \Phi(x)\,\vee\,\forall x\ \Psi(x)\sim\forall x\forall y\ (\Phi(x)\,\vee\,\Psi(y))$,
+
+$\exists x\ \Phi(x)\,\&\,\exists x\ \Psi(x)\nsim\exists x\ (\Phi(x)\,\&\,\Psi(x))$,
+
+$\exists x\ \Phi(x)\,\&\,\exists x\ \Psi(x)\sim\exists x\exists y\ (\Phi(x)\,\&\,\Psi(y))$.
+
+
+\section{Игры Эренфойхта-Фрессе.}
+\begin{defn*}
+Сложность формулы ($c$): 
+
+Если $\Phi$ -- атомарная формула, $c(\Phi)=0,$
+
+$c(\neg\Phi)=c(\Phi),$
+
+$c(\Phi\,\&\,\Psi)=\max\,\{c(\Phi),c(\Psi)\},$
+
+$c(\exists x\ \Phi)=c(\Phi)+1.$\end{defn*}
+\begin{prop*}
+Пусть $v$ -- конечный набор переменных. Тогда существует только конечное
+число формул первого порядка в префиксной форме, у которых сложность
+$<c$, а все переменные лежат в $v$.\end{prop*}
+\begin{proof}
+Число атомарных формул ограничено в терминах числа предикатных символов
+и числа подмножеств в $v$. Дальше можно применить индукцию по $c$. 
+\end{proof}
+Пусть $w_{1},w_{2}$ - $v$-слова
+
+$(a_{1},X_{1})(a_{2},X_{2})\ldots(a_{n},X_{n}),X_{i}\cap X_{j}=\varnothing,\text{ при }i\neq j,\bigcup\limits _{i=1}^{n}X_{i}=v$.
+
+$w_{1}\sim_{r}w_{2}\rightleftarrows w_{1}$ и $w_{2}$ удовлетворяют
+одному и тому же набору формул сложности $\leqslant r$.
+
+Из предложения следует, что $\sim_{r}$ эквивалентность конечного
+индекса.
+\begin{defn*}
+Определим $r$-раундовую игру на $(w_{1},w_{2})$. Алиса хочет доказать,
+что $w_{1}$ и $w_{2}$ различны, а Боб хочет доказать противоположное.
+У каждого игрока $r$ жетонов. На $i$-ом ходу Алиса кладет жетон
+$z_{i}$ на букву в одном из слов. В ответ Боб должен положить свой
+жетон $z$ с тем же номером на какую-то букву в другом слове. Когда
+игра заканчивается, у нас есть два $(v\cup\{z_{1,}\ldots z_{n}\})$-слова
+$w_{1}'$ и $w_{2}'$. Боб выигрывает, если для каждой атомарной формулы
+$\alpha$:
+\[
+\alpha\ \text{выполнена}\ \text{на\ }w_{1}'\iff\alpha\ \text{выполнена}\ \text{на}\ w_{2}'.
+\]
+В противном случае Алиса выигрывает.
+\end{defn*}
+
+\part*{Лекция 8 (26.04.2012).}
+
+$u\sim_{r}v\rightleftharpoons u\text{ и }v$ удовлетворяют одним и
+тем же формулам сложности $\leqslant r$.
+\begin{thm*}
+$u\sim_{r}v\iff$Боб имеет выигрышную стратегию в $r$-раундовой игре
+на $(u,v)$.\end{thm*}
+\begin{proof}
+Необходимость. Индукция по $r$. Если $r=0$, то Боб сразу выиграл,
+т.к. $w_{1}$ и $w_{2}$ удовлетворяют одним и тем же формулам. Пусть
+утверждение верно для $r-1$ и не верно для $r$. Это значит, что
+для какой-то пары слов $(u,v)$ со свойством $u\sim_{r}v$ у Алисы
+есть выигрышная стратегия. Позволим Алисе сделать первый ход этой
+стратегии. Можно считать, что она ставит жетон на букву из слова $u$.
+В результате получится такая структура $u'$, что при любом ответе
+Боба получится такая пара $(u',v')$, на которой Алиса имеет выигрышную
+стратегию в игре с $r-1$ раундом. По предположению индукции $u'\nsim_{r-1}v'$.
+Пусть $\Phi$ -- это конъюнкция нормальных форм всех формул сложности
+$<r$, которые выполнены в $u'$. Тогда $\Phi$ не выполнена в $v'$
+при любом способе получения $v'$. Это значит, что формула $\exists z_{1}\ \Phi$
+не выполнена на $v$, но она выолнена на $u$. Отсюда $u\nsim_{r}v$.
+Противоречие.
+
+Достаточность. Индукция по $r$. Если $r=0$, то $u\sim_{0}v$. Пусть
+утверждение верно для $r-1$ и предположим, что у Боба есть выигрышная
+стратегия на $(u,v)$, но $u\nsim_{r}v$. Последнее означает, что
+существует формула $\Phi$ сложности $\leqslant r$ такая, что она
+выполнена на $u$, но не выполнена на $v$. Можно считать, что $\Phi$
+имеет вид $\exists z\ \Psi$, где $\Psi$ -- формула сложности $\leqslant r-1$.
+Если Алиса положит свой жетон на то место, которое делает истинным
+формулу $\Psi$ на $u$, то Боб может отметить какое-то место в слове
+$v$. Получится новая пара слов $(u',v'),$ в которой у Боба есть
+выигрышная стратегия в $r-1$ ходов. По предположению индукции имеем,
+что $u'\text{ и }v'$ удовлетворяют одним и тем же формулам сложности
+$\leqslant r-1$. В частности, $v'$ удовлетворяет $\Psi$. Но тогда
+слово $v$ удовлетворяет формуле $\exists z\ \Psi=\Phi$. Противоречие.\end{proof}
+\begin{cor*}
+С помощью теоремы можно доказать, что
+
+$(\mathbb{R},<)\ \text{и}\ (\mathbb{Q},<)$ удовлетворяют одним и
+тем же формулам 1-го порядка.\end{cor*}
+\begin{example*}
+$V=\varnothing,w_{1}=ab,w_{2}=baa$. Отношение --- отношение $=$.
+
+В однораундовой игре выигрывает Боб.
+
+В двухраундовой игре выигрывает Алиса: 
+
+$\text{Алиса}\ w_{2}=b\underset{z_{1}}{a}\underset{z_{2}}{a},\text{Боб}\ w_{1}=\underset{z_{1}}{a}\underset{z_{2}}{b}$.
+
+Соответствующая формула $\exists x\ \exists y\ (\neg(x=y)\,\&\, Q_{a}x\,\&\, Q_{a}y)$.
+\end{example*}
+
+\begin{example*}
+2)$w_{1}$ -- слово, которое кончается на $a$,$w_{2}$ -- слово,
+которое кончается на $b$. Отношение $<$.
+
+Алиса выигрывает за два раунда. Первым ходом она ставит $z_{1}$ на
+последнюю букву в $w_{1}$. Если в $w_{2}$ нет буквы $a$, то Боб
+сразу проиграл. Если есть, он вынужден поставить $z_{1}$ на эту букву.
+Тогда Алиса ставит свой жетон на последнюю букву в $w_{2}$. Боб отвечает
+и проигрывает.
+
+$\text{В}\ w_{2}\ z_{1}<z_{2},\text{в}\ w_{1}\ z_{2}<z_{1}$.
+
+$\exists x\ (\forall y\,\neg(x<y)\,\&\, Q_{b}x)$.
+\end{example*}
+Reg = MSO($<$) = MSO($y=x+1$)
+
+Reg$\supsetneqq$FO($<$)$\supsetneqq$FO($y=x+1$)
+\begin{thm*}
+Множество слов четной длины не лежит в FO($<$).\end{thm*}
+\begin{proof}
+О/п. Допустим, что есть формула $\Phi$, которая определяет множество
+слов четной длины. Пусть $c(\Phi)=r$. Тогда $\Phi$ выполнена на
+$a^{k}\iff k\ \text{чётно}$. Покажем, что $a^{2^{r}}\sim_{r}a^{2^{r}-1}$.
+Мы построим выигрышную стратегию для Боба $r$-раундовой игры на паре
+$(a^{k},a^{k+1})$ при $k\geqslant2^{r}-1$. Это делается индукцией
+по $r$. При $r=1$ любой ответ Боба -- выигрышный. Пусть $r>1$ и
+утверждение верно при $r-1$. Допустим, что Алиса положила $z_{1}$
+на одно из двух слов, получив структуру $a^{s}(a,\{z_{1}\})a^{t}$.
+Тогда либо $s\leqslant\frac{k-1}{2}$, либо $t\leqslant\frac{k-1}{2}$.
+Считаем, что $s\leqslant\frac{k-1}{2}$, если иначе выполняем все
+симметрично. Боб ставит свой жетон на $(s+1)$-ую букву 2-го слова:
+$a^{s}(a,\{z_{1}\})a^{t'},\text{\ где}\ t'=t+1\ \text{или}\ t'=t-1$.
+Так как $2^{r-1}-1\leqslant k=min\{t,t'\}+s+1\leqslant min\{t,t'\}+\frac{k-1}{2}+1$,
+получаем, что $min\{t,t'\}\geqslant\frac{k-1}{2}\geqslant2^{r-1}-1$.
+По предположению индукции Боб имеет выигрышную стратегию в $(r-1)$
+раундовой игре на $(a^{t},a^{t'})$. Если теперь Алиса ставит жетон
+на $i$-ую букву с $i\leqslant s$, тогда Боб отвечает ходом на $i$-ую
+букву второго слова. Иначе Боб действует согласно своей выигрышной
+стратегии для пары $(a^{t},a^{t'})$. Докажем, что Боб выигрывает.
+В результате получается две $(z_{1},\ldots,z_{r})$ - структуры. Надо
+показать, что они удовлетворяют одинаковым атомарным формулам $z_{i}<z_{j}$.
+Пусть первая структура удовлетворяет этой формуле. Если $z_{i}\text{ и }z_{j}$
+появляются среди первых $(s+1)$ буквы. То они стоят на тех же позициях
+во второй структуре. Если они стоят среди последних $t(t')$ букв,
+то можно считать, что они появились в результате какой-то игры на
+паре $(a^{t},a^{t'})$, а поскольку Боб придерживался выигрышной стратегии,
+$z_{i}<z_{j}$ выполнено и во втором слове. Если $z_{i}$ - в голове,
+а $z_{j}$ - в хвосте, то и во втором слове это верно. 
+\end{proof}
+
+\part*{Лекция 9(03.05.2012).}
+
+$FO(x=y+1)\subseteq FO(<)\subset Reg=MSO(<)=MSO(x=y+1)$
+
+
+\section{Локально барьерно тестируемые языки.}
+
+Рассмотрим на множестве слов $\Sigma^{*}$ отношение $\thickapprox_{r}^{k}$.
+
+$w_{1}\thickapprox_{r}^{k}w_{2}\iff$ выполняются следующие три условия:
+
+1) у $w_{1}\text{ и }w_{2}$ одинаковые приставки длины $k-1$,
+
+2) у $w_{1}\text{ и }w_{2}$ одинаковые суффиксы длины $k-1$,
+
+3) если $w$ -- слово длины $k$, то число вхождений слова $w\text{ в }w_{1}$
+в качестве фактора равно числу вхождений слова $w\text{ в }w_{2}$
+в качестве фактора, если оба этих числа $<r$; либо оба этих числа
+$\geqslant r$.
+\begin{defn*}
+Если $w_{1}=uwv$, где $u,v\in\Sigma^{*}$, то $w$ --- фактор слова
+$w_{1}$.\end{defn*}
+\begin{example*}
+В слове $abbaabbba$ слово $bb$ входит 3 раза.
+\end{example*}
+Сканирующее устройство:
+
+\begin{center}
+\begin{tikzpicture}
+	\draw (8,0)--(0,0) node [above right] {$\$$}--(0,0.5) node [above] 
+    {$\substack{\text{начало}\\\text{слова}}$}--(8,0.5);
+	\draw (0.5,0)--(0.5,0.5);
+	\draw (1,0)--(1,0.5);
+	\draw (1.5,0)--(1.5,0.5);
+	\draw (2,0)--(2,0.5);
+	\draw (2.5,0)--(2.5,0.5);
+	\draw (3,0)--(3,0.5);
+	\draw (3.5,0)--(3.5,0.5);
+	\draw (4,0)--(4,0.5);
+	\draw (4.5,0)--(4.5,0.5);
+	\draw (6.5,0) node [above right] {$\$$}--(6.5,0.5) node [above] 
+    {$\substack{\text{конец}\\\text{слова}}$};
+	\draw (7,0) --(7,0.5);
+	\draw (1,-0.3)--(1,0.8)--(2,0.8) node [above] {$k$}--(3,0.8)--(3,-0.3)--(2,-0.3)
+	node [below] {$\text {конечная память}$} --(1,-0.3) ;
+\end{tikzpicture}
+\end{center}
+
+Два слова находятся в отношении $w_{1}\thickapprox_{r}^{k}w_{2}$,
+если сканирующее устройство не может их отличить.
+
+$w_{1}\thickapprox_{r}^{k}w_{2}$ -- это эквивалентность конечного
+индекса.
+\begin{defn*}
+Язык $L$ называется локально барьерно тестируемым, если он является
+объединением классов $\thickapprox_{r}^{k}$ для некоторых $r\ \text{и}\ k$.
+\end{defn*}
+Мы хотим доказать, что именно эти языки соответствуют $FO(x=y+1)$.
+\begin{lem*}
+Любой локально барьерно тестируемый язык задаётся формулой теории
+первого порядка с отношением $(x=y+1)$.\end{lem*}
+\begin{proof}
+Достаточно доказать, что для всех $k\ \text{и}\ r$ каждый $\thickapprox_{r}^{k}$
+класс задаётся $FO(x=y+1)$. Выпишем формулу соответствующую условиям
+1),2),3). 
+
+1) Пусть $u$ -- какое-то фиксированное слово длины $k-1,u=a_{1}a_{2}\ldots a_{k-1}$.
+
+$\exists x_{1}\exists x_{2}\ldots\exists x_{k-1}(First(x_{1})\,\&\, x_{2}=x_{1}+1\,\&\ldots\&\, x_{k-1}=x_{k-2}+1\,\&\,\amp{1\leqslant i\leqslant k-1}Q_{a_{i}}x_{i})$,
+где $First(x)$ -- сокращение для формулы $\neg\exists y(x=y+1)$.
+
+2) Аналогично.
+
+3) Пусть $v=a_{1}a_{2}\ldots a_{k}$ -- слово длины $k$ и $t$ --
+число меньше $r$.
+\[
+\exists x_{11}\exists x_{12}\ldots\exists x_{1k}\exists x_{21}\ldots\exists x_{tk}(\amp{1\leqslant i\leqslant t}\amp{1\leqslant j\leqslant k-1}(x_{ij+1}=x_{ij}+1)\,\&
+\]
+\[
+\amp{1\leqslant i<j\leqslant t}(x_{i1}\neq x_{j1})\,\&\,\amp{1\leqslant i\leqslant t}\amp{1\leqslant j\leqslant k-1}Q_{a_{j}}x_{ij}).
+\]
+\end{proof}
+\begin{thm*}
+Языки из $FO(x=y+1)$ -- это в точности локально барьерно тестируемые
+языки.\end{thm*}
+\begin{proof}
+Пусть $\sim_{r}$ -- это отношение, определяемое правилом
+
+$w_{1}\sim_{r}w_{2}\iff\text{на}\ w_{1}\ \text{и}\ w_{2}$ выполнены
+одни и те же FO$(x=y+1)$-формулы сложности $\leqslant r$. Докажем,
+что если $R=3^{r}$ и $w_{1}\thickapprox_{3R}^{r}w_{2}$, то $w_{1}\sim_{r}w_{2}$,
+т.е. у Боба есть выигрышная $r$-раундовая стратегия. 
+
+\begin{center}
+\begin{tikzpicture}
+	\draw (0,0)--(1,0) node {$[$} node [below] {$i$}--
+	(2.5,0) node [above] {$\text {фактор}$}--(4,0) node {$]$} node [below] {$j-1$}--
+	(4.1,0) node {$[$}--(6,0);
+\end{tikzpicture}
+\end{center}
+
+Множество $\{i,\,\ldots,\, j\}$ назовём носителем фактора. Два фактора
+разделены, если их носители не пересекаются. Все неразделенные факторы
+объединим -- это объединение множества исходных факторов. Допустим,
+что $i$ раундов уже сыграли. Это значит, что $z_{1},\ldots,z_{i}$
+уже поставлены в каждом слове. Для каждой позиции $m,$на $k$-ую
+поставлен жетон в слове $w_{j},(j=1\text{ или }2)$. Рассмотрим фактор
+$w_{j}[m-3^{r-i}+1,m+3^{r-i}]$. Если $m-3^{r-i}+1<1$ или $m+3^{r-i}>|w_{j}|+1$,
+то соответственно рассматриваем префикс $w_{j}[1,m+3^{r-i}]$ или
+суффикс $w_{j}[m-3^{r-i}+1,|w_{j}|]$. Рассмотрим объединение в каждом
+слове. Пусть это объединение состоит из $k_{i,j}$ факторов $u_{i,j,1},\ldots,u_{i,j,k_{i,j}}$.
+Объясним, как Боб должен играть, чтобы для каждого $p,1\leqslant p\leqslant j$
+фактор $u_{i,1,n}$, в котором стоит жетон $z_{p}$ в первом слове
+был равен фактору $u_{i,2,n}$, в котором этот же жетон стоит во втором
+слове, и при этом $z_{p}$ стоит в обоих факторах на той же позиции.
+Индукция по $i$. Если $i=0$, доказывать нечего. Допустим, что утверждение
+верно для $i$. Пусть есть выигрышная $r$-раундовая стратегия. Пусть
+Алиса поставила $z_{i+1}$ на какую-то позицию $m$ слова $w_{1}$.
+Если фактор $v=w_{1}[m-3^{r-i-1},m+3^{r-i-1}]$ целиком попал в один
+из факторов $u_{i,1,n}$, то Боб просто ставит свой жетон на соответствующую
+позицию в $u_{i,2,n}$. Если это не так, то $v$ разделен от факторов
+$u_{i+1,1,h}$, которые содержат жетоны $z_{1},\ldots,z_{i}$. В слове
+$w_{2}$ берем фактор нужной длины, отделенный от всех факторов вида
+$u_{i+1,2,h}$ и ставим $z_{i+1}$ в его середину. 
+\end{proof}
+
+\part*{Лекция 10 (10.05.2012).}
+\begin{cor*}
+FO($y=x+1$)$\subset$FO($<$).\end{cor*}
+\begin{proof}
+Пусть $\Sigma=\{a,b,c\}$ и $L=a^{*}ba^{*}ca^{*}$. Докажем, что $L\in FO(<)$.
+Просто напишем формулу:
+\[
+\exists x\ \exists y\ (x<y)\ Q_{b}x\,\&\, Q_{c}y\,\&\,\forall z\ (x\neq z\,\&\, y\neq z\rightarrow Q_{a}z).
+\]
+Для доказательства того, что $L\notin FO(y=x+1)$, воспользуемся теоремой.
+Допустим, что язык $L$ является объединением $\thickapprox_{r}^{k}$-классов
+для каких-то $r$ и $k$. Рассмотрим $a^{k}ba^{k}ca^{k}$ и $a^{k}ca^{k}ba^{k}$.
+Видно, что они находятся в одном $\thickapprox_{k}^{r}$-классе (при
+любом $r$). У них одинаковые слова длины $k$: $a^{l-1}ba^{k-l},a^{l-1}c^{k-l}$
+. Но $a^{k}ba^{k}ca^{k}\in L$, а $a^{k}ca^{k}ba^{k}\notin L$. Противоречие.
+\end{proof}
+
+\section{Алгебраическая характеризация $FO(<)$.}
+\begin{defn*}
+Если $L$ - язык в $\Sigma^{*}$, то $\sim_{L}$(синтаксическая конгруэнция)
+определяется так:
+
+$w_{1}\sim_{L}w_{2}\iff(\forall u,v\in\Sigma^{*}\ uw_{1}v\in L\iff uw_{2}v\in L)$.
+\end{defn*}
+Синтаксический моноид --- это $\Sigma^{*}/\sim_{L}$.
+
+Моноид апериодический, если все подгруппы тривиальны или, что эквивалентно,
+$\mathcal{H}$-тривиальны или, что эквивалетно, $x^{k}=x^{k+1}$ для
+любого $x$ и для некоторого $k$.
+\begin{thm*}
+[Макнотон] Язык задаётся формулой первого порядка с предикатом $<$
+тогда и только тогда, когда его синтаксический моноид -- апериодический.\end{thm*}
+\begin{proof}
+Необходимость. Индукция по построению формулы.
+
+База индукции. Формула атомарна. Если $uw^{2}v\models Q_{a}x$, то
+$x$ появляется либо в $u$, либо в $v$. Но тогда $uw^{3}v\models Q_{a}x$
+и обратно, если $uw^{3}v\models Q_{a}x$, то $uw^{2}v\models Q_{a}x$.
+Отсюда $uw^{2}v$ и $uw^{3}v$ одновременно принадлежат или не принадлежат
+$L$. Поэтому $w^{3}\sim w^{2}$ и в $\Sigma^{*}/\sim\ x^{3}=x^{2}$
+для любого $x$. Значит, моноид языка $L(Q_{a}x)$ апериодический.
+Если $uw^{2}v\models x<y$, то $x$ и $y$ появляются либо в $u$,
+либо в $v$. Но тогда $uw^{3}v\models x<y$ и обратно, если $uw^{3}v\models x<y$,
+то $uw^{2}v\models x<y$.
+
+Шаг индукции. Пусть $\Phi$ и $\Psi$ -- такие формулы, что $M(L(\Phi))$
+и $M(L(\Psi))$ -- апериодические. Докажем, что и $M(L(\Phi\,\&\,\Psi))$
+апериодический. Пусть $k$ такое, что $x^{k}=x^{k+1}$ для всех $x\in M(L(\Phi))$
+и всех $x\in M(L(\Psi))$. Возьмем любые слова $u,w,v$. Имеем $w^{k+1}\sim_{L(\Phi)}w^{k}$,
+откуда $uw^{k+1}v\models\Phi\iff uw^{k}v\models\Phi$ и $w^{k+1}\sim_{L(\Psi)}w^{k}$,
+откуда $uw^{k}v\models\Psi\iff uw^{k}v\models\Psi$. Поэтому $uw^{k+1}v\models\Phi\,\&\,\Psi\iff uw^{k}v\models\Phi\,\&\,\Psi$.
+Отсюда $w^{k}\sim_{L(\Phi\,\&\,\Psi)}w^{k+1}$ и $x^{k}=x^{k+1}$
+в $M(L(\Phi\,\&\,\Psi))$. С отрицанием тоже легко. Допустим, что
+$uw^{2k+1}v\models\exists x\Phi$. Можно $x$ куда-то <<положить>>
+так, что получится слово, удовлетворяющее $\Phi$: $(a,X)\rightarrow(a,X\cup\{x\})$.
+Это слово можно представить в виде $u'w^{k}v'\models\Phi$. Поэтому
+и $u'w^{k+1}v'\models\Phi$. Отсюда следует, что обратное тоже верно
+\[
+uw^{2k+1}v\in L(\exists x\Phi)\iff uw^{2k+2}v\in L(\exists x\Phi).
+\]
+Следовательно, $w^{2k+1}\sim_{L(\exists x\Phi)}w^{2k+2}$ , т.е. в
+$M(L(\exists x\Phi))$ выполнено равенство $x^{2k+1}=x^{2k+2}$.
+
+Достаточность. Нужно доказать, что если моноид языка $L$ апериодический,
+то $L\in FO(<)$. Мы воспользуемся теоремой Шютценберже, согласно
+которой, $L$ - беззвездный язык. Формула строится индукцией по построению
+беззвездного языка из одноэлементных и единственный сложный элемент
+-- произведение. Пусть $L_{1}=L(\Phi),L_{2}=L(\Psi)$ как построить
+формулу, задающую $L_{1},L_{2}$? Нужно научиться по данной формуле
+$\Phi$ строить новую формулу $\Phi'$, такую что $w\models\Phi'\iff$
+у $w$ есть приставка, удовлетворяющая $\Phi$. 
+\end{proof}
+
+\part*{Лекция 11 (17.05.2012).}
+
+$L_{1}L_{2}=\{w|\exists u\in L_{1}\ \exists v\in L_{2}\ w=uv\}$.
+
+Пусть $w$ -- слово. Скажем, что $\varphi$ выполнена на $w$ между
+$i$ и $j$, где $i<j$, если $w=a_{1}a_{2}\ldots a_{i}a_{i+1}\ldots a_{j-1}a_{j}\ldots a_{n}$
+и слово $a_{i}a_{i+1}\ldots a_{j-1}$ удовлетворяет формуле $\varphi$.
+\begin{prop*}
+[о регуляризации] Для любой формулы $\varphi$ теории 1-го порядка
+с отношением $<$ существует формула $\varphi(x,y)$ с двумя новыми
+свободными переменными $x\ \text{и}\ y$ такая, что для любого слова
+$w$ и для любых $i,j$ таких, что $1\leqslant i<j\leqslant|w|$,
+слово $w$ удовлетворяет $\varphi(i,j)\iff w$ удовлетворяет $\varphi$
+между $i$ и $j$. \end{prop*}
+\begin{proof}
+Для атомарной формулы $\varphi$ полагаем $\varphi(x,y)=\varphi$.
+
+Если $\varphi=\neg\psi$, то $\varphi(x,y)=\neg\psi(x,y)$.
+
+Если $\varphi=\psi_{1}\vee\psi_{2}$, то $\varphi(x,y)=\psi_{1}(x,y)\vee\psi_{2}(x,y)$.
+
+Если $\varphi=\exists z\psi$, то $\varphi(x,y)=\exists z((x\leqslant z)\&(z<y)\&\psi(x,y))$.
+\end{proof}
+$\exists x_{1}\exists x_{2}\ldots\exists x_{n}(x_{1}<x_{2}<x_{3}<\ldots<x_{n}\,\&\, Q_{a}x_{1}\,\&\, Q_{a}x_{2}\,\&\ldots\&Q_{a}x_{n})$.
+
+
+\specialsection*{Точечная иерархия.}
+
+Языки уровня 1 --- кусочно-тестируемые (нет перемен кванторов).
+
+Языки уровня $k$ --- это булева комбинация языков вида $L_{1}a_{1}L_{2}a_{2}\ldots L_{n}a_{n}L_{n+1}$,
+где $a_{1},a_{2},\ldots,a_{n}\in\Sigma$, а $L_{1},L,\ldots,L_{n+1}$
+-- языки уровня $\leqslant k-1$. Это в точности языки, задаваемые
+формулами первого порядка с $k-1$ переменой кванторов.
+
+$FO(x=y+1)\subsetneq FO(<)$.
+\begin{thm*}
+[Боке, Пэн] Язык принадлежит к классу $FO(x=y+1)$ тогда и только
+тогда, когда его синтаксический моноид $M$ апериодический и для любых
+$e,e',s,s',s''$ из образа языка в синтаксическом моноиде, где $e$
+и $e'$ -- идемпотенты $ese's'es''=es''e's'ese'$.\end{thm*}
+
+\end{document}

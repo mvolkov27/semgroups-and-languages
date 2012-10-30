@@ -1,0 +1,212 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{a4}
+
+\mathsurround 1pt
+
+
+\DeclareSymbolFont{rsfscript}{OMS}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfscript}
+
+\newtheorem{exercise}{Упражнение}
+\newtheorem{example}{Пример}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\renewcommand{\proofname}{Доказательство}
+
+\DeclareMathOperator{\im}{\mathrm{Im}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+
+
+\begin{document}
+\begin{center}
+\large\bf Лекция 4, 14.10.11
+\end{center}
+
+\begin{proposition}
+Пусть $S$ -- подполугруппа в $T_X$ и $\alpha,\, \beta\in S$. Тогда:
+
+\begin{enumerate}
+\item Если $\alpha\le_\mathrsfs{R}\beta$, то $\Ker\alpha\supseteq\Ker\beta$
+и если $\alpha\,\mathrsfs{R}\,\beta$, то $\Ker\alpha=\Ker\beta$.
+
+\item Если $\alpha\le_\mathrsfs{L}\beta$, то $\im\alpha\subseteq\im\beta$ и если
+$\alpha\,\mathrsfs{L}\,\beta$, то $\im\alpha=\im\beta$.
+
+\item Если $\alpha\le_\mathrsfs{J}\beta$, то $|\im\alpha|\le|\im\beta|$ и если
+$\alpha\,\mathrsfs{J}\,\beta$, то $|\im\alpha|=|\im\beta|$.
+\end{enumerate}
+\end{proposition}
+
+Это предложение является простым следствием описания отношений Грина в $T_X$.
+Отметим, что обратные импликации в общем случае (т.\,е. для произвольной
+подполугруппы $S$) неверны, хотя они верны для $T_X$.
+
+Пусть $Y$ -- подмножество множества $X$, а $\pi$ -- разбиение $X$. Говорят, что
+$Y$ -- \emph{трансверсаль} разбиения $\pi$, если каждый $\pi$-класс содержит
+ровно один элемент из $Y$.
+
+\begin{proposition}
+Пусть $X$ -- конечное множество и $S$ -- подполугруппа в $T_X$. Элемент
+$\alpha\in S$ принадлежит некоторой подгруппе в $S$ тогда и только тогда, когда
+$\im\alpha$ есть трансверсаль разбиения $\Ker\alpha$.
+\end{proposition}
+
+\begin{proof}  Необходимость. Пусть $\alpha\in S$ лежит в
+некоторой подгруппе, тогда $\alpha^n=\alpha$ для некоторого $n$. Поэтому
+$\alpha|_{\im\alpha}$ -- биекция (перестановка).
+
+Пусть $K$ -- произвольный класс разбиения $\Ker\alpha$. Если $|K\cap
+\im\alpha|\ge 2$, то по крайней мере два элемента из $\im\alpha$ склеиваются
+под действием $\alpha$, что невозможно, поскольку $\alpha$ -- биекция. Значит,
+$|K\cap\im\alpha|\le 1$ для любого $K$. Если предположить, что для некоторого
+$K$ выполняется $K\cap\im\alpha= \varnothing$, то
+$$|\im\alpha|=\sum\limits_{K\in \Ker\alpha}|K\cap
+\im\alpha|<|\Ker\alpha|,$$ что также невозможно, поскольку
+$|\im\alpha|=|\Ker\alpha|$.
+
+\smallskip
+
+Достаточность. Если $\im\alpha$ -- трансверсаль в $\Ker\alpha$, то
+$\alpha|_{\im\alpha}$ -- перестановка, тогда существует $n$ такое, что
+$\alpha^n=\alpha$. Отсюда следует, в частности, что
+$\alpha^2\mathrsfs{H}\alpha$, а значит, $\mathrsfs{H}$-класс элемента $\alpha$
+является подгруппой, поскольку содержит идемпотент.
+\end{proof}
+
+
+\subsubsection*{Алгоритм построения регулярных $\mathrsfs{D}$-классов конечной
+полугруппы преобразований.}
+
+
+\hspace{\parindent}0. Находим групповой элемент $x\in S$.
+
+1. Вычисляем образы $\im xr$ для всех $r\in S^1$ такие, что $|\im xr|=|\im x|$.
+Для каждого такого образа $I$ сохраним такое $r$, что $I=\im xr$.
+
+2. Параллельно вычисляем все такие преобразования $xr$ ($r\in S^1$), что $\im
+xr=\im x$. \emph{Из этих преобразований состоит $\mathrsfs{H}$-класс $H_x$.}
+
+3. Вычисляем все разбиения вида $\Ker sx$ $(s\in S^1)$, такие, что $|\Ker
+sx|=|\Ker x|$. Для каждого такого разбиения сохраняем значение $s$, при котором
+оно получается.
+
+4. Среди образов, построенных на шаге 1, сохраняем только те, которые служат
+трансверсалями для каких-то из разбиений, построенных на шаге 3, а среди
+разбиений, построенных на шаге 3, сохраняем только те, для которых хотя бы одно
+из множеств, построенных на шаге 1, является трансверсалью. Получим набор
+множеств $I_1({=}\im x), \dots, I_k$ c соответствующими элементами
+$r_1({=}1),\dots r_k\in S^1$ и набор разбиений $\pi_1({=}\Ker x),\dots,
+\pi_\ell$ c соответствующими элементами $s_1({=}1),\dots s_\ell\in S^1$.
+\emph{Тогда $\mathrsfs{D}$-класс элемента $x$ состоит в точности из элементов
+вида $s_ihr_j$, где $h$ пробегает $H_x$.}
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{$\im x$} & \multicolumn{1}{c}{\dots}
+& \multicolumn{1}{c}{$\im xr_j$} & \multicolumn{1}{c}{\dots} &
+\multicolumn{1}{c}{$\im xr_k$}\\
+\cline{2-6}
+ $\Ker x$ & $H_x$ &  &  &  &  \\
+\cline{2-6}
+\dots&  &  &  &  &  \\
+\cline{2-6}
+$\Ker s_ix$ &  &  & $H_{ij}$ &  &  \\
+\cline{2-6}
+\ldots&  &  &  &  &  \\
+\cline{2-6} $\Ker s_\ell x$ & &  &  &  &  \\
+\cline{2-6}
+\end{tabular}
+\end{center}
+
+
+Для обоснования алгоритма нужна следующая лемма. В ее формулировке участвуют
+отношения Грина $\mathrsfs{R}$ и $\mathrsfs{L}$в полугруппе $T$ и ее
+подполугруппе $S$. Будем с помощью верхних индексов ${}^T$ или ${}^S$
+указывать, в какой полугруппе рассматривается соответствующее отношение.
+Аналогичное соглашение используется для классов отношений Грина.
+
+\begin{lemma}[о четвертом угле] Пусть $S$ -- подполугруппа конечной полугруппы
+$T$, $x\in S$, $a,b\in S^1$, $e=e^2\in T$. Если
+$$e\,\mathrsfs{R}^T\,bx\,\mathrsfs{L}^T\,x\,\mathrsfs{R}^T\,xa\,\mathrsfs{L}^T\,e,$$
+то $e\in S$ и
+$$e\,\mathrsfs{R}^S\,bx\,\mathrsfs{L}^S\,x\,\mathrsfs{R}^S\,xa\,\mathrsfs{L}^S\,e.$$
+\end{lemma}
+
+\begin{proof}
+Пересечение $L^T_{xa}\cap R^T_{bx}$ содержит идемпотент (а именно, $e$). По
+теореме Миллера-Клиффорда имеем
+$$xabx\in L^T_{bx}\cap R^T_{xa}=H^T_x,$$
+следовательно, по лемме Грина $\rho_{abx}|_{H^T_x}$ -- биекция, а значит,
+существует $k$ такое, что $\rho_{abx}^k$ -- тождественная перестановка. Отсюда
+$x(abx)^k=x$, а потому $xa\,\mathrsfs{R}^S\,x\,\mathrsfs{L}^S\,bx$. Так как
+$xabx\in  L^S_{bx}\cap R^S_{xa}$, пересечение $L^S_{xa}\cap R^S_{bx}$ содержит
+идемпотент по теореме Миллера-Клиффорда. Ясно, что $L^S_{xa}\cap
+R^S_{bx}\subseteq L^T_{xa}\cap R^T_{bx}$, а $e$ -- единственный идемпотент в
+$L^T_{xa}\cap R^T_{bx}$. Итак, $e\in L^S_{xa}\cap R^S_{bx}$.
+\end{proof}
+
+
+Займемся обоснованием алгоритма, т.\,е.\ докажем утверждения, сформулированные
+в его описании (они выделены курсивом).
+
+Пусть  $h$ -- произвольный элемент из $H_x$. Рассмотрим элемент $hr$ такой, что
+$\im hr\in\{I_1({=}\im x), \dots, I_k\}$. Тогда среди разбиений $\pi_1({=}\Ker
+x),\dots, \pi_\ell$ найдется такое разбиение $\pi=\Ker sh$, для которого $\im
+hr$ является трансверсалью. Рассмотрим преобразование $e\in T_X$, которое
+переводит каждый класс $K$ разбиения $\pi=\Ker sh$ в единственный элемент
+множества $K\cap\im hr$. Тогда $e$ -- идемпотент в $T=T_X$ такой, что $\Ker
+e=\Ker sh$ и $\im e=\im hr$, откуда $e\,\mathrsfs{R}^T\,hr$ и
+$e\,\mathrsfs{L}^T\,sh$. Тогда по лемме о четвертом угле $e\in S$ и
+\begin{equation}
+\label{4th angle}
+e\,\mathrsfs{R}^S\,sh\,\mathrsfs{L}^S\,h\,\mathrsfs{R}^S\,hr\,\mathrsfs{L}^S\,e.
+\end{equation}
+
+Возьмем сначала в качестве $h$ исходный элемент $x$ и пусть $r\in S^1$ таково,
+что $\im xr=\im x$. Тогда в роли $s$ можно взять 1, а идемпотент $e$ -- это не
+то иное как единица подгруппы $H_x$. Из \eqref{4th angle} заключаем, что $xr\in
+H_x$. Так как очевидно, что любой элемент из $H_x$ можно представить в виде
+$xr$ для некоторого $r\in S^1$ такого, что $\im xr=\im x$, мы доказали
+утверждение, сформулированное на шаге 2 алгоритма.
+
+Теперь снова возьмем произвольный элемент $h\in H_x$ и рассмотрим произвольный
+элемент вида $s_ihr_j$. По построению, существуют такое $p$, что $\im hr_j$
+является трансверсалью для $\Ker s_ph$, и такое $q$, что $\im hr_q$ является
+трансверсалью для $\Ker s_ih$. Применяя \eqref{4th angle} с $r=r_j$ и $s=s_p$
+заключаем, что $h\,\mathrsfs{R}^S\,hr_j$, а тот же аргумент, примененный к
+$r=r_p$ и $s=s_i$, дает $h\,\mathrsfs{L}^S\,s_ih$, откуда
+$hr_j\,\mathrsfs{L}^S\,s_ihr_j$ (напомним, что отношение $\mathrsfs{L}$
+стабильно справа). Итак,  $h\,\mathrsfs{R}^S\,hr_j\,\mathrsfs{L}^S\,s_ihr_j$,
+т.\,е.\ $s_ihr_j$ принадлежит $\mathrsfs{D}$-классу элемента $x$. Обратно,
+очевидно, что любой элемент из этого $\mathrsfs{D}$-класса  можно представить в
+виде $s_ihr_j$ для подходящего $h\in H_x$. Мы доказали утверждение,
+сформулированное на шаге 4 алгоритма.
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{$\im x$} & \multicolumn{1}{c}{\dots}
+& \multicolumn{1}{c}{$\im xr_j$} & \multicolumn{1}{c}{\dots} &
+\multicolumn{1}{c}{$\im xr_q$}\\
+\cline{2-6}
+ $\Ker x$ & $h$ &  & $hr_j$  &  &  \\
+\cline{2-6}
+\dots&  &  &  &  &  \\
+\cline{2-6}
+$\Ker s_ix$ & $s_ih$ &  & $s_ihr_j$ &  & $*$ \\
+\cline{2-6}
+\ldots&  &  &  &  &  \\
+\cline{2-6} $\Ker s_p x$ & &  & $*$  &  &  \\
+\cline{2-6}
+\end{tabular}
+\end{center}
+\end{document}

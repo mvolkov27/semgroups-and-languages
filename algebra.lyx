@@ -1,0 +1,6982 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+\usepackage{tikz}
+\usepackage{cmap}
+\usetikzlibrary{arrows,automata}
+\usepackage{fp}
+\usepackage{ifthen} 
+\newcommand{\amp}[1]{\mathop{\raisebox{-3.5pt}{\LARGE\&}}\limits_{{#1}}}
+\end_preamble
+\use_default_options true
+\begin_removed_modules
+theorems-ams
+\end_removed_modules
+\begin_modules
+eqs-within-sections
+figs-within-sections
+theorems-ams-bytype
+\end_modules
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding cp1251
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Howard Straubing 
+\begin_inset Quotes fld
+\end_inset
+
+Finite Automata, Formal Logic, and Circuit Complexity
+\begin_inset Quotes frd
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Part*
+Лекция 1(01.03.2012).
+\end_layout
+
+\begin_layout Section
+Логика для слов.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma=\left\{ a,\, b,...\right\} $
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $|\Sigma|<+\infty$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $x,y,z$
+\end_inset
+
+ позиции в слове;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $x<y$
+\end_inset
+
+ позиция 
+\begin_inset Formula $x$
+\end_inset
+
+ стоит перед позицией 
+\begin_inset Formula $y$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{a}x$
+\end_inset
+
+ предикат в позиции 
+\begin_inset Formula $x$
+\end_inset
+
+ стоит буква 
+\begin_inset Formula $a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\exists x($
+\end_inset
+
+
+\begin_inset Formula $Q_{a}x\ \&\ \forall y\ (x\leq y))$
+\end_inset
+
+ определяет язык 
+\begin_inset Formula $a\Sigma^{*}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(a^{*})^{2}$
+\end_inset
+
+ записать нельзя;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $X,Y,Z$
+\end_inset
+
+ --- множества позиций;
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\forall x\ Q_{a}x\ \&\ \exists X\ \forall x\ (x\in X\ \longleftrightarrow x+1\notin X)\ \&\ (x\notin X\leftrightarrow x+1\in X)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\&\ \forall x(\forall y\ (x\leq y)\rightarrow x\in X)\ \&\ \forall x(\forall y\ (y\leq x)\rightarrow x\notin X)$
+\end_inset
+
+ описывает язык 
+\begin_inset Formula $(a^{2})^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Логика 1-го порядка.
+\end_layout
+
+\begin_layout Standard
+Переменные 
+\begin_inset Formula $x,y,z,...$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+числовые предикаты (
+\begin_inset Formula $<$
+\end_inset
+
+, следует за, делит и т.п.);
+\end_layout
+
+\begin_layout Standard
+специальные предикаты для каждой буквы алфавита (
+\begin_inset Formula $Q_{a}$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{b}$
+\end_inset
+
+,...);
+\end_layout
+
+\begin_layout Standard
+логические связки (
+\begin_inset Formula $\&,\vee,\neg,\rightarrow,\leftrightarrow$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Standard
+кванторы(
+\begin_inset Formula $\forall,\exists$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Standard
+формулы, свободные и связанные переменные.
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $P$
+\end_inset
+
+ 
+\begin_inset Formula $n$
+\end_inset
+
+-местный предикат, то выражение 
+\begin_inset Formula $P(x_{1},x_{2},...,x_{n})$
+\end_inset
+
+ --- это формула (атомарная), в которой все переменные свободны.
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ и 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ формулы, в которых переменные 
+\begin_inset Formula $x_{1},...,x_{n}$
+\end_inset
+
+ свободны, а переменные 
+\begin_inset Formula $y_{1},...,y_{n}$
+\end_inset
+
+ связаны, то 
+\begin_inset Formula $\Phi\&\Psi,\Phi\vee\Psi,\Phi\rightarrow\Psi,\Phi\leftrightarrow\Psi,\neg\Phi$
+\end_inset
+
+ --- формулы в которых
+\begin_inset Formula $x_{1},...,x_{n}$
+\end_inset
+
+ --- свободные, 
+\begin_inset Formula $y_{1},...,y_{n}$
+\end_inset
+
+ --- связанные.
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ --- формула, в которой 
+\begin_inset Formula $x$
+\end_inset
+
+ - свободная переменная, то 
+\begin_inset Formula $\forall x(\Phi)$
+\end_inset
+
+ и 
+\begin_inset Formula $\exists x(\Phi)$
+\end_inset
+
+ --- формулы, в которых 
+\begin_inset Formula $x$
+\end_inset
+
+ --- связанная, а остальные переменные свободны, если они были свободны
+ в
+\begin_inset Formula $\Phi$
+\end_inset
+
+ и связаны, если они были связаны в 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Логика 2-го порядка.
+\end_layout
+
+\begin_layout Standard
+Переменные 
+\begin_inset Formula $x,y,z,...,X,Y,Z,\ldots$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+числовые предикаты (
+\begin_inset Formula $<$
+\end_inset
+
+, следует за, делит и т.п.);
+\end_layout
+
+\begin_layout Standard
+специальные предикаты для каждой буквы алфавита (
+\begin_inset Formula $Q_{a}$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{b}$
+\end_inset
+
+,...);
+\end_layout
+
+\begin_layout Standard
+предикат (
+\begin_inset Formula $\in$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Standard
+логические связки (
+\begin_inset Formula $\&,\vee,\neg,\rightarrow,\leftrightarrow$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Standard
+кванторы(
+\begin_inset Formula $\forall,\exists$
+\end_inset
+
+);
+\end_layout
+
+\begin_layout Standard
+формулы, свободные и связанные переменные.
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $P$
+\end_inset
+
+ 
+\begin_inset Formula $n$
+\end_inset
+
+-местный предикат, то выражение 
+\begin_inset Formula $P(x_{1},x_{2},...,x_{n})$
+\end_inset
+
+ ---это формула (атомарная), в которой все переменные свободны, кроме того,
+ атомарная формула может иметь вид 
+\begin_inset Formula $x\in Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ и 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ формулы, в которых переменные 
+\begin_inset Formula $x_{1},...,x_{n},X_{1},\ldots X_{m}$
+\end_inset
+
+ свободны, а переменные 
+\begin_inset Formula $y_{1},...,y_{n},Y_{1},\ldots Y_{m}$
+\end_inset
+
+ связаны, то 
+\begin_inset Formula $\Phi\&\Psi,\Phi\vee\Psi,\Phi\rightarrow\Psi,\Phi\leftrightarrow\Psi,\neg\Phi$
+\end_inset
+
+ --- формулы, в которых
+\begin_inset Formula $x_{1},...,x_{n},X_{1},\ldots X_{m}$
+\end_inset
+
+ --- свободные, 
+\begin_inset Formula $y_{1},...,y_{n},Y_{1},\ldots Y_{m}$
+\end_inset
+
+ --- связанные.
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ --- формула, в которой 
+\begin_inset Formula $X$
+\end_inset
+
+ --- свободная монадическая переменная, то 
+\begin_inset Formula $\forall X(\Phi)$
+\end_inset
+
+ и 
+\begin_inset Formula $\exists X(\Phi)$
+\end_inset
+
+ --- формулы, в которых 
+\begin_inset Formula $X$
+\end_inset
+
+ --- связанная, а остальные переменные свободны, если они были свободны
+ в 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ и связаны, если они были связаны в 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Теорема Бюхи.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Бюхи(1960)]
+\end_layout
+
+\end_inset
+
+ Язык 
+\begin_inset Formula $L\subseteq\sum^{*}$
+\end_inset
+
+распознается конечным недетерминированным автоматом тогда и только тогда,
+ когда он задается некоторой замкнутой формулой монадической теории 2-го
+ порядка с отношением 
+\begin_inset Formula $=$
+\end_inset
+
+ и единственным числовым предикатом 
+\begin_inset Quotes fld
+\end_inset
+
+следует за
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Необходимость.
+ Пусть 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ --- конечный автомат, который распознает 
+\begin_inset Formula $L$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $Q$
+\end_inset
+
+ --- 
+\begin_inset Formula $\{q_{0},q_{1},...,q_{k-1}\}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $q_{0}$
+\end_inset
+
+ --- начальное состояние;
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $F\subseteq Q$
+\end_inset
+
+ --- множество заключительных состояний;
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $E\subseteq Q\times\Sigma\times Q$
+\end_inset
+
+ --- множество переходов 
+\begin_inset Formula $(q,a,q')$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $w\in L\iff$
+\end_inset
+
+ существует путь из 
+\begin_inset Formula $q_{0}$
+\end_inset
+
+ в 
+\begin_inset Formula $F$
+\end_inset
+
+ такой, что метки ребер из этого пути составляют слово 
+\begin_inset Formula $w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $w\in L\iff$
+\end_inset
+
+ существуют множества 
+\begin_inset Formula $X_{0},X_{1},...,X_{k-1}\subseteq\{1,2,...,|w|\}$
+\end_inset
+
+, такие что выполняются условия:
+\end_layout
+
+\begin_layout Proof
+(1) 
+\begin_inset Formula $\bigcup\limits _{i=0}^{k-1}X_{i}=\{1,2,...,|w|\}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(2) 
+\begin_inset Formula $i\ne j\Rightarrow X_{i}\cap X_{j}=\varnothing$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(3) 
+\begin_inset Formula $1\in X_{0}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(4) 
+\begin_inset Formula $i\in X_{j},i+1\in X_{l}$
+\end_inset
+
+ и 
+\begin_inset Formula $a$
+\end_inset
+
+ --- 
+\begin_inset Formula $i$
+\end_inset
+
+-ая буква в слове 
+\begin_inset Formula $w$
+\end_inset
+
+, то 
+\begin_inset Formula $(q_{j},a,q_{l})\in E$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(5) Если 
+\begin_inset Formula $|w|\in X_{j}$
+\end_inset
+
+ и 
+\begin_inset Formula $a$
+\end_inset
+
+ --- последняя буква в 
+\begin_inset Formula $w$
+\end_inset
+
+, то есть такое 
+\begin_inset Formula $q\in F,$
+\end_inset
+
+ что 
+\begin_inset Formula $(q_{j},a,q)\in E$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Возьмем путь, помеченный 
+\begin_inset Formula $w$
+\end_inset
+
+, и положим 
+\begin_inset Formula $i\in X_{j}\iff$
+\end_inset
+
+ прочтя вдоль этого пути первые 
+\begin_inset Formula $i-1$
+\end_inset
+
+ букву, мы окажемся в состоянии 
+\begin_inset Formula $q_{j}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example*
+Рассмотрим язык, задаваемый автоматом:
+\end_layout
+
+\begin_layout Example*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2cm,semithick]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+tikzstyle{everystate}=[draw=black,text=black]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[initial,state] (0) 			   {$0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (1) [right of = 0] {$1$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]		 (2) [right of = 1] {$2$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (3) [above of = 2] {$3$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (4) [above of = 0] {$4$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (5) [right of = 4] {$5$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node				(6) [right of =3] {};			
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node				(7) [right of =2] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (0) edge 			 node {$a$} (1)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (0) edge 			 node {$b$} (4)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (1) edge [bend left]			 node {$b$} (2)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (1) edge [bend right]			 node {$a$} (2)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (1) edge [bend right]			 node {$a$} (5)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (2) edge 			 node {$a,b$} (3)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (4) edge [loop above] node {$b$}  (4)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (4) edge [bend left]  node {$a$} (5)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (4) edge [bend right] node {$b$} (5)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (5) edge [bend right] node {$a$} (1)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (2) edge 			  		  (7)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (3) edge 			            (6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+и слово 
+\begin_inset Formula $w=b^{3}a^{2}b$
+\end_inset
+
+.
+ Тогда:
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $1\in X_{0},\ 2\in X_{4},\ 3\in X_{4},\ 4\in X_{4},\ 5\in X_{5},\ 6\in X_{1}$
+\end_inset
+
+; 
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $X_{0}=\{1\},\ X_{2}=X_{3}=\varnothing,\ X_{1}=\{6\},\ X_{4}=\{2,3,4\},\ X_{5}=\{5\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part*
+\align center
+Лекция 2(08.03.2012).
+\end_layout
+
+\begin_layout Proof
+Необходимость.
+ Более подробно.
+ Пусть 
+\begin_inset Formula $L$
+\end_inset
+
+ регулярен.
+ Возьмем НКА, который распознает 
+\begin_inset Formula $L$
+\end_inset
+
+ 
+\begin_inset Formula $(Q,\Sigma,q_{0},F,E)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $E\subseteq Q\times\Sigma\times Q$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $Q=\{q_{0},q_{1},...,q_{k-1}\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+(*) 
+\begin_inset Formula $w\in L\iff$
+\end_inset
+
+ существуют множества 
+\begin_inset Formula $X_{0},X_{1},...,X_{k-1}\subseteq\{1,2,...,|w|\}$
+\end_inset
+
+, такие что:
+\end_layout
+
+\begin_layout Proof
+(1) 
+\begin_inset Formula $\bigcup\limits _{i=0}^{k-1}X_{i}=\{1,2,...,|w|\}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+на логическом языке
+\begin_inset Formula $\Phi_{1}:\ (\forall x)(\bigvee\limits _{i=0}^{k-1}(x\in X_{i}))$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(2)
+\begin_inset Formula $i\ne j\Rightarrow X_{i}\cap X_{j}=\varnothing$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Phi_{2}:\,(\forall x)[\amp{0\leq i<j<k}\neg(x\in X_{i}\,\&\, x\in X_{j})]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(3) 
+\begin_inset Formula $1\in X_{0}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Phi_{3}:\,(\forall x)[\forall y\,(x\neq y+1)\rightarrow x\in X_{0}]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(4) 
+\begin_inset Formula $i\in X_{j},i+1\in X_{l}$
+\end_inset
+
+ и 
+\begin_inset Formula $a$
+\end_inset
+
+ --- 
+\begin_inset Formula $i$
+\end_inset
+
+-ая буква в слове 
+\begin_inset Formula $w$
+\end_inset
+
+, то 
+\begin_inset Formula $(q_{j},a,q_{l})\in E$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Phi_{4}:\,(\forall x)[\forall y\,(y=x+1\rightarrow\amp{0\leqslant i,l<k}(x\in X_{i}\,\&\, y\in X_{l}\rightarrow\bigvee\limits _{S_{i,l}}Q_{a}x))]$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+где 
+\begin_inset Formula $S_{i,l}=\{a\mid(q_{i},a,q_{l})\in E\}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(5) Если 
+\begin_inset Formula $|w|\in X_{j}$
+\end_inset
+
+ и 
+\begin_inset Formula $a$
+\end_inset
+
+ --- последняя буква в 
+\begin_inset Formula $w$
+\end_inset
+
+, то есть такое 
+\begin_inset Formula $q\in F,$
+\end_inset
+
+ что 
+\begin_inset Formula $(q_{j},a,q)\in E$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Phi_{5}:\,(\forall x)[\forall y\,(y\neq x+1)\rightarrow\amp{1\leqslant j\leqslant k-1}(x\in X_{j}\rightarrow\bigvee\limits _{T_{j}}Q_{a}x)]$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+где 
+\begin_inset Formula $T_{j}=\{a\mid\exists a\in E\ (q_{j},a,q)\in E\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Если обосновать (*), то получится, что язык задаётся формулой
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\exists X_{0},\exists X_{1},...,\exists X_{k-1}\quad\Phi_{1}\,\&\,\Phi_{2}\,\&\,\Phi_{3}\,\&\,\Phi_{4}\,\&\,\Phi_{5}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Если 
+\begin_inset Formula $w\in L$
+\end_inset
+
+, то существует путь из 
+\begin_inset Formula $q_{0}$
+\end_inset
+
+ в 
+\begin_inset Formula $q\in F$
+\end_inset
+
+, метки которого образуют слово 
+\begin_inset Formula $w.$
+\end_inset
+
+Тогда положим 
+\begin_inset Formula $i\in X_{j}$
+\end_inset
+
+ тогда и только тогда, когда прочтя приставку слова 
+\begin_inset Formula $w$
+\end_inset
+
+ длины 
+\begin_inset Formula $i-1$
+\end_inset
+
+, мы оказываемся в состоянии 
+\begin_inset Formula $q_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Обратно, пусть множества 
+\begin_inset Formula $X_{0},X_{1},...,X_{k-1}$
+\end_inset
+
+ со свойствами (1)-(5) существуют.
+ По индукции по длине приставке 
+\begin_inset Formula $w'$
+\end_inset
+
+ слова 
+\begin_inset Formula $w$
+\end_inset
+
+ построим такой путь из 
+\begin_inset Formula $q_{0}$
+\end_inset
+
+ в 
+\begin_inset Formula $q_{j}$
+\end_inset
+
+, вдоль которого читается 
+\begin_inset Formula $w'$
+\end_inset
+
+.
+ Взяв приставку длины 
+\begin_inset Formula $|w|-1$
+\end_inset
+
+, получим путь в 
+\begin_inset Formula $q_{0}$
+\end_inset
+
+, из которой есть стрелка 
+\begin_inset Formula $j$
+\end_inset
+
+ в состояние 
+\begin_inset Formula $F$
+\end_inset
+
+, помеченное последней буквой 
+\begin_inset Formula $w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Пусть 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ --- формула первого порядка, в которой есть свободные переменные.
+\end_layout
+
+\begin_layout Definition*
+Пусть 
+\begin_inset Formula $V$
+\end_inset
+
+ --- некоторое множество переменных, содержащее все свободные переменные
+ из 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Будем рассматривать 
+\begin_inset Quotes fld
+\end_inset
+
+слова
+\begin_inset Quotes frd
+\end_inset
+
+ над алфавитом 
+\begin_inset Formula $\Sigma\times2^{V}$
+\end_inset
+
+, т.е.
+ 
+\begin_inset Quotes fld
+\end_inset
+
+буквы
+\begin_inset Quotes frd
+\end_inset
+
+ --- это пары 
+\begin_inset Formula $(a,U)$
+\end_inset
+
+, где 
+\begin_inset Formula $U\subseteq V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $V$
+\end_inset
+
+-слово --- это последовательность букв из 
+\begin_inset Formula $\Sigma\times2^{V}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $(a_{1},U_{1})(a_{2},U_{2})...(a_{n},U_{n})$
+\end_inset
+
+ такая, что 
+\begin_inset Formula $\bigcup\limits _{i=1}^{n}U_{i}=V$
+\end_inset
+
+ и 
+\begin_inset Formula $U_{i}\cap U_{j}=\varnothing$
+\end_inset
+
+, при 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Будем рассматривать такие формулы 
+\begin_inset Formula $\Phi$
+\end_inset
+
+, что каждая связанная переменная связывается ровно одним квантором.
+\end_layout
+
+\begin_layout Definition*
+Скажем, что формула 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ выполнена на 
+\begin_inset Formula $V$
+\end_inset
+
+-слове 
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w=(a_{1},U_{1})(a_{2},U_{2})...(a_{n},U_{n})$
+\end_inset
+
+ (или 
+\begin_inset Formula $V$
+\end_inset
+
+-слово 
+\begin_inset Formula $w$
+\end_inset
+
+ служит моделью для 
+\begin_inset Formula $\Phi$
+\end_inset
+
+), при некоторой интерпретации 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Обозначение: 
+\begin_inset Formula $w\models_{I}\Phi$
+\end_inset
+
+.
+ Если:
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w\models_{I}Q_{a}x\iff$
+\end_inset
+
+в 
+\begin_inset Formula $w$
+\end_inset
+
+ есть буква вида 
+\begin_inset Formula $(a,S)$
+\end_inset
+
+, где 
+\begin_inset Formula $x\in S$
+\end_inset
+
+ ;
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w\models_{I}R(x_{1},...,x_{k})\iff\bar{R}(j_{1},...,j_{k})$
+\end_inset
+
+, где 
+\begin_inset Formula $\bar{R}$
+\end_inset
+
+ --- это то отношение на множестве 
+\begin_inset Formula $1,...,|w|$
+\end_inset
+
+, которым интерпретируется 
+\begin_inset Formula $R$
+\end_inset
+
+, а 
+\begin_inset Formula $j_{1},...,j_{k}$
+\end_inset
+
+ --- это позиции, которые занимают переменные 
+\begin_inset Formula $x_{1},...,x_{k}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w\models_{I}\Phi\&\Psi\iff w\models_{I}\Phi$
+\end_inset
+
+ и 
+\begin_inset Formula $w\models_{I}\Psi$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w\models_{I}\neg\Phi\iff$
+\end_inset
+
+ 
+\begin_inset Formula $w$
+\end_inset
+
+ не служит моделью для 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ при 
+\begin_inset Formula $I$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w\models(\exists x)\Phi\iff$
+\end_inset
+
+существует такое 
+\begin_inset Formula $i\quad1\leq i\leq n$
+\end_inset
+
+, что 
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $(a_{1},U_{1})...(a_{i-1},U_{i-1})(a_{i},U_{i}\cup\{x\})(a_{i+1},U_{i+1})...(a_{n},U_{n})\models\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\forall x\,\Phi(x)\sim\neg\exists x\,\neg\Phi(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\Theta(x)\overset{I}{\rightleftharpoons}$
+\end_inset
+
+ позиция 
+\begin_inset Formula $x$
+\end_inset
+
+ четна
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\exists x\forall y\ \neg(x<y)\,\&\,\Theta(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+Для формулы 
+\begin_inset Formula $\neg(x<y)\,\&\,\Theta(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $V=\{x,y\},\ (a,\{y\})(b,\{x\})$
+\end_inset
+
+ -- пример 
+\begin_inset Formula $V$
+\end_inset
+
+-слова.
+\end_layout
+
+\begin_layout Example*
+Для формулы 
+\begin_inset Formula $\forall y\,\neg(x<y)\,\&\,\Theta(x)$
+\end_inset
+
+ ---множество четной длины, 
+\begin_inset Formula $x$
+\end_inset
+
+ в последней позиции 
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $V=\{x\},\ (a,\varnothing)(b,\{x\})$
+\end_inset
+
+ --- 
+\begin_inset Formula $V$
+\end_inset
+
+-слово, удовлетворяющее этому множеству.
+\end_layout
+
+\begin_layout Part*
+Лекция 3(15.03.2012).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Phi$
+\end_inset
+
+ --- формула монадической теории 2-го порядка (MSO), в которой есть свободные
+ переменные как 1-го так и 2-го порядка.
+\end_layout
+
+\begin_layout Standard
+Рассмотрим множества 
+\begin_inset Formula $V_{1},V_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ --- множество переменных 
+\begin_inset Formula $i$
+\end_inset
+
+-го порядка, содержащее все свободные переменные 
+\begin_inset Formula $i$
+\end_inset
+
+-го порядка из 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Будем рассматривать 
+\begin_inset Formula $(V_{1},V_{2})$
+\end_inset
+
+-слова над алфавитом 
+\begin_inset Formula $\Sigma\times2^{V_{1}}\times2^{V_{2}}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+типичная буква 
+\begin_inset Formula $(a,S,T)$
+\end_inset
+
+, где 
+\begin_inset Formula $a\in\Sigma,\ S\subseteq V_{1},\ T\subseteq V_{2}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+типичное 
+\begin_inset Formula $(V_{1},V_{2})$
+\end_inset
+
+-слово 
+\begin_inset Formula $(a_{1},S_{1},T_{1})(a_{2},S_{2},T_{2})\ldots(a_{k},S_{k},T_{k})$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w\models_{I}\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+К атомарным формулам 1-го порядка относятся: 
+\begin_inset Formula $Q_{a}x,\ P(x_{1},\ldots,x_{n})$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+к атомарным формулам 2-го порядка относится ещё 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w\models_{I}(x\in X)$
+\end_inset
+
+ --- означает, что в 
+\begin_inset Formula $w$
+\end_inset
+
+ есть такая буква 
+\begin_inset Formula $(a_{i},S_{i},T_{i})$
+\end_inset
+
+, что 
+\begin_inset Formula $x\in S_{i},\ X\in T_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Говорят, что 
+\begin_inset Formula $w\models_{I}(\exists X)\Psi$
+\end_inset
+
+, если существует (возможно пустое) множество позиций 
+\begin_inset Formula $\mathcal{Y}\subseteq\{1,2,\ldots,k\}$
+\end_inset
+
+, такое что слово 
+\begin_inset Formula $w$
+\end_inset
+
+, полученное заменой каждой буквы 
+\begin_inset Formula $(a_{i},S_{i},T_{i})$
+\end_inset
+
+, где 
+\begin_inset Formula $i\in\mathcal{Y}$
+\end_inset
+
+, на букву 
+\begin_inset Formula $(a_{i},S_{i},T_{i}\cup\{x\})$
+\end_inset
+
+, удовлетворяет 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Бюхи(1960)]
+\end_layout
+
+\end_inset
+
+ Язык 
+\begin_inset Formula $L\subseteq\sum^{*}$
+\end_inset
+
+распознается конечным недетерминированным автоматом тогда и только тогда,
+ когда он задается некоторой замкнутой формулой монадической теории 2-го
+ порядка с отношением 
+\begin_inset Formula $=$
+\end_inset
+
+ и единственным числовым предикатом 
+\begin_inset Quotes fld
+\end_inset
+
+следует за
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Достаточность.
+ Пусть 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ --- любая MSO формула.
+ Докажем, что язык 
+\begin_inset Formula $L_{\Phi}$
+\end_inset
+
+ всех 
+\begin_inset Formula $(V_{1},V_{2})$
+\end_inset
+
+-слов, удовлетворяющих 
+\begin_inset Formula $\Phi$
+\end_inset
+
+, является регулярным (при любых 
+\begin_inset Formula $V_{1},V_{2}$
+\end_inset
+
+).
+ Тогда теорема Бюхи --- частный случай этого утверждения при 
+\begin_inset Formula $V_{1}=V_{2}=\varnothing$
+\end_inset
+
+.
+ Индукция по построению формулы.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $L$
+\end_inset
+
+ --- множество всех 
+\begin_inset Formula $(V_{1},V_{2})$
+\end_inset
+
+-слов.
+ Легко проверить с помощью конечного автомата над алфавитом 
+\begin_inset Formula $\Sigma\times2^{V_{1}}\times2^{V_{2}}$
+\end_inset
+
+, что каждая переменная первого порядка в 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ встречается в точности один раз во входной строке, таким образом 
+\begin_inset Formula $L$
+\end_inset
+
+ -- регулярный язык.
+ Надо проверить, что если 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ -- это атомарная формула, то то что ею задается -- это регулярный язык.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $w\models Q_{a}x\iff$
+\end_inset
+
+в 
+\begin_inset Formula $w$
+\end_inset
+
+ есть буква 
+\begin_inset Formula $(a,S,T)$
+\end_inset
+
+, где 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+ Легко проверить с помощью конечного автомата встречается ли конкретная
+ переменная первого порядка в букве, чья первая компонента 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ Пересечение множества всех таких слов с языком 
+\begin_inset Formula $L$
+\end_inset
+
+ -- множество всех слов, удовлетворяющих 
+\begin_inset Formula $Q_{a}x$
+\end_inset
+
+.
+ Участвуют только предикаты 
+\begin_inset Formula $x=y,\ y=x+1$
+\end_inset
+
+ (
+\begin_inset Formula $w\models(y=x+1)\iff$
+\end_inset
+
+в 
+\begin_inset Formula $w$
+\end_inset
+
+ есть фактор 
+\begin_inset Formula $(a_{1},S_{1},T_{1})(a_{2},S_{2},T_{2})$
+\end_inset
+
+ такой, что 
+\begin_inset Formula $x\in S_{1},y\in S_{2}$
+\end_inset
+
+).
+ Эти условия задаются конечными автоматами, упражнение построить автомат.
+ С помощью конечного автомата можно проверить имеет ли любая буква 
+\begin_inset Formula $x$
+\end_inset
+
+ во второй компоненте и 
+\begin_inset Formula $X$
+\end_inset
+
+ в третьей, поэтому 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ -- регулярный язык.
+ Таким образом, утверждение доказано для атомарных формул.
+\end_layout
+
+\begin_layout Proof
+Если утверждение верно для формул 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ и 
+\begin_inset Formula $\Psi$
+\end_inset
+
+, то оно верно и для 
+\begin_inset Formula $\Phi\&\Psi$
+\end_inset
+
+ и
+\begin_inset Formula $\neg\Phi$
+\end_inset
+
+.
+ В самом деле, т.к.
+ регулярные языки замкнуты относительно пересечения и дополнения: 
+\begin_inset Formula $L_{\Phi\cap\Psi}=L_{\Phi}\cap L_{\Psi}\cap L$
+\end_inset
+
+ и 
+\begin_inset Formula $L_{\neg\Phi}=L\setminus L_{\Phi}$
+\end_inset
+
+ --- регулярны.
+\end_layout
+
+\begin_layout Proof
+Напомним, что 
+\begin_inset Formula $w\models(\exists x)\Phi\iff$
+\end_inset
+
+есть такое 
+\begin_inset Formula $i$
+\end_inset
+
+, что 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $(a_{1},S_{1},T_{1})(a_{2},S_{2},T_{2})\ldots(a_{i},S_{i}\cup\{x\},T_{i})\ldots(a_{k},S_{k},T_{k})\models\Phi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+ --- это тот автомат, который распознает язык 
+\begin_inset Formula $L_{\Phi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Построим новый автомат 
+\begin_inset Formula $\mathcal{M}=(Q\times\{0,1\},\Sigma,\delta',(q_{0},0),F\times\{1\})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $q\in Q,u\in\{0,\,1\}$
+\end_inset
+
+, переходы
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $((q,u),(a,S,T),(q',u))\in\delta'$
+\end_inset
+
+, если 
+\begin_inset Formula $(q,(a,S,T),q')\in\delta$
+\end_inset
+
+ и 
+\begin_inset Formula $x\notin S$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $((q,0),(a,S\setminus\{x\},T),(q',1))\in\delta'$
+\end_inset
+
+, если 
+\begin_inset Formula $(q',(a,S,T),q')\in\delta$
+\end_inset
+
+ и 
+\begin_inset Formula $x\in S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw(0,0) node [above left] {$0$} --(4,0)  --(5,1.5)--(1,1.5)--(0,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw(0,2) node [above left] {$1$} --(4,2)--(5,3.5)--(1,3.5)--(0,02);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->](1,0.5)--(4,3);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->](1,1.65) node[above right] {$
+\backslash
+tiny{
+\backslash
+text{если }x
+\backslash
+in S}$}--(2.5,1.65);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (0.3,0.3) node {$
+\backslash
+mathcal A$};
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+tikzstyle{dash_line} = [dashed]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[dash_line](1,0.5)node[right] {$
+\backslash
+tiny{
+\backslash
+text{если }x
+\backslash
+notin S}$} 
+\end_layout
+
+\begin_layout Plain Layout
+
+		node [below] {$q$}--(4,1)node [below]  {$q'$};
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[dash_line](1,2.5)node[above right] {$
+\backslash
+tiny{
+\backslash
+text{если }x
+\backslash
+notin S}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+		node [below] {$q$}--(4,3)node [below]  {$q'$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Легко видеть, что 
+\begin_inset Formula $w$
+\end_inset
+
+ принимается автоматом 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ тогда и только тогда, когда существует путь, соединяющий 
+\begin_inset Formula $x$
+\end_inset
+
+ со средней компонентой буквы слова 
+\begin_inset Formula $w$
+\end_inset
+
+, так чтобы получилось слово, принимаемое автоматом 
+\begin_inset Formula $\mathcal{A}.$
+\end_inset
+
+ Таким образом, 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ распознает язык 
+\begin_inset Formula $L_{(\exists x)\Phi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Напомним, что 
+\begin_inset Formula $w\models(\exists X)\Phi\iff$
+\end_inset
+
+есть такое 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+, что слово
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $(a_{1},\, S_{1},\, T_{1})(a_{2},\, S_{2},\, T_{2})\ldots(a_{i},\, S_{i},\, T_{i}\cup\{x\})\ldots(a_{k},\, S_{k},\, T_{k})\models\Phi$
+\end_inset
+
+, где 
+\begin_inset Formula $i\in\mathcal{Y}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $\mathcal{A}=(Q,\Sigma,\delta,\, q_{0},\, F)$
+\end_inset
+
+ --- это тот автомат, который распознает язык 
+\begin_inset Formula $L_{\Phi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Построим новый автомат 
+\begin_inset Formula $\mathcal{N}=(Q,\Sigma,\delta',\, q_{0},\, F)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\delta'=\{(q,\,(a,\, S,\, T\setminus\{x\}),\, q')|\ (q,\,(a,\, S,\, T),\, q')\in\delta\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->] (0,0)node [below] {$q_0$}--(2,0) node [below] {$q$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path[->] (2,0) edge[bend left=35] (4,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+tikzstyle{dash_line} = [dashed]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path[->,dash_line] (2,0) edge[bend right=35] (4,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->] (4,0)node [below] {$q'$} --(6,0) node [below] {$F$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Автомат 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ распознает язык 
+\begin_inset Formula $L_{(\exists X)\Phi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Регулярные предикаты.
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ ---формула MSO
+\begin_inset Formula $(y=x+1)$
+\end_inset
+
+, в которой есть предметные переменные.
+\end_layout
+
+\begin_layout Standard
+Она определяет предикат на множестве позиций.
+ А именно 
+\begin_inset Formula $(a_{1},\ldots,\, a_{k})\in P_{\Phi}$
+\end_inset
+
+ тогда и только тогда, когда 
+\begin_inset Formula $\Phi(a_{1},\ldots,\, a_{k})=\text{И}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $x<y$
+\end_inset
+
+ -- регулярный предикат.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $x<y\leftrightharpoons y=x+1\ \vee\exists X\,(\forall z\,(z=x+1\rightarrow z\in X)\,\&$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\forall t\,(y=t+1\rightarrow t\in X)\,\&\,\forall u\,(u\in X\,\&\: u+1\neq y\rightarrow\forall v\,(v=u+1\rightarrow v\in X)))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $x+y=z$
+\end_inset
+
+ -- нерегулярный предикат.
+\end_layout
+
+\begin_layout Example*
+Докажем о/п.
+ Пусть 
+\begin_inset Formula $\Phi(x,y,z)\leftrightharpoons x+y=z$
+\end_inset
+
+.
+ Тогда формула
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\Psi(x)\leftrightharpoons(\exists z)\ ((\forall y)\,(y\leqslant z)\,\&\,\Phi(x,x,z)$
+\end_inset
+
+) определяет предикат 
+\begin_inset Quotes fld
+\end_inset
+
+
+\begin_inset Formula $x$
+\end_inset
+
+ -- половина длины
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\exists x\ (\Psi(x)\,\&\,(\forall y)(y\leqslant x\rightarrow Q_{a}x)\,\&\,(y>x\rightarrow Q_{b}x))$
+\end_inset
+
+ определяет нерегулярный язык 
+\begin_inset Formula $\{a^{n}b^{n}:n>0\}$
+\end_inset
+
+.
+ Противоречие.
+\end_layout
+
+\begin_layout Standard
+Домашнее задание.
+ предикат - номер позиции делится на 3.
+ Попробовать доказать (придумать формулу).
+\end_layout
+
+\begin_layout Part*
+Лекция 4(22.03.2012).
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $\Sigma=\{a\}$
+\end_inset
+
+.
+ Тогда предикат 
+\begin_inset Formula $Q_{a}x$
+\end_inset
+
+ теряет свой смысл.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(a,S,\varnothing)=(a,S)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Предикат регулярен, тогда и только тогда, когда он задается конечным автоматом.
+\end_layout
+
+\begin_layout Example*
+Предикат 
+\begin_inset Formula $x<y$
+\end_inset
+
+, тогда его распознает автомат:
+\end_layout
+
+\begin_layout Example*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+\end_layout
+
+\begin_layout Plain Layout
+
+  	
+\backslash
+tikzstyle{everystate}=[draw=black,text=black]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[initial,state] (A) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (B) [right of=A] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (C) [right of=B] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node				(D) [right of=C] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (A) edge [loop above] node {$(a,
+\backslash
+varnothing)$} (A)
+\end_layout
+
+\begin_layout Plain Layout
+
+            edge              node {$(a,
+\backslash
+{x
+\backslash
+})$} (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (B) edge [loop above] node {$(a,
+\backslash
+varnothing)$} (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+            edge              node {$(a,
+\backslash
+{y
+\backslash
+})$} (C)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (C)	edge   [loop above]           node {$(a,
+\backslash
+varnothing)$} (C)
+\end_layout
+
+\begin_layout Plain Layout
+
+			   edge 						 (D);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example*
+Предикат 
+\begin_inset Quotes fld
+\end_inset
+
+
+\begin_inset Formula $x$
+\end_inset
+
+ делится на 
+\begin_inset Formula $m$
+\end_inset
+
+
+\begin_inset Quotes frd
+\end_inset
+
+, при 
+\begin_inset Formula $m=3$
+\end_inset
+
+ его распознает автомат:
+\end_layout
+
+\begin_layout Example*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+\end_layout
+
+\begin_layout Plain Layout
+
+  	
+\backslash
+tikzstyle{everystate}=[draw=black,text=black]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[initial,state] (A) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (B) [right of=A] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (C) [below of=B] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]				(D) [below left of=C] {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node				(E) [left of=D]  {};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (A) edge		    node {$(a,
+\backslash
+varnothing)$} (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+          (B)  edge              node {$(a,
+\backslash
+varnothing)$} (C)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (C) edge 			 node {$(a,
+\backslash
+varnothing)$} (A)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (C)   edge            node {$(a,
+\backslash
+{x
+\backslash
+})$} (D)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (D)	edge   [loop above]           node {$(a,
+\backslash
+varnothing)$} (D)
+\end_layout
+
+\begin_layout Plain Layout
+
+				edge						(E);	
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+Можно теперь применить алгоритм из доказательства теоремы Бюхи для нахождения
+ формулы.
+\end_layout
+
+\begin_layout Definition*
+Порядковый тип слова.
+\end_layout
+
+\begin_layout Definition*
+Рассмотрим язык всех слов над алфавитом 
+\begin_inset Formula $\{(a,S)|S\subseteq\{x_{1},\ldots,x_{n}\}\}$
+\end_inset
+
+, задаваемый 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+ Обозначим через 
+\begin_inset Formula $L_{\Phi}$
+\end_inset
+
+.
+ Берём слово 
+\begin_inset Formula $w$
+\end_inset
+
+, берём все его буквы 
+\begin_inset Formula $(a_{i},S_{i})$
+\end_inset
+
+.
+ Они образуют разбиение 
+\begin_inset Formula $\{x_{1},\ldots,x_{n}\}$
+\end_inset
+
+: 
+\begin_inset Formula $\{S_{1},S_{2},\ldots,S_{h}\}\quad(h\leqslant n)$
+\end_inset
+
+.
+ Записываем все переменные из 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ через знак 
+\begin_inset Formula $=$
+\end_inset
+
+, а между ставим знак 
+\begin_inset Formula $<$
+\end_inset
+
+.
+ Такое выражение --- порядковый тип 
+\begin_inset Formula $w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+Пусть 
+\begin_inset Formula $n=3$
+\end_inset
+
+, переменные 
+\begin_inset Formula $\{x,y,z\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+Порядковый тип 
+\begin_inset Formula $x<y<z$
+\end_inset
+
+, слово имеет вид 
+\begin_inset Formula 
+\[
+(a,\varnothing)\ldots(a,\varnothing)(a,\{x\})(a,\varnothing)\ldots(a,\varnothing)(a,\{y\})(a,\varnothing)\ldots(a,\varnothing)(a,\{z\})(a,\varnothing)\ldots(a,\varnothing).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example*
+Пусть 
+\begin_inset Formula $n=3$
+\end_inset
+
+, переменные 
+\begin_inset Formula $\{x,y,z\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+Порядковый тип 
+\begin_inset Formula $x=y<z$
+\end_inset
+
+, слово имеет вид
+\begin_inset Formula 
+\[
+(a,\varnothing)\ldots(a,\varnothing)(a,\{x,y\})(a,\varnothing)\ldots(a,\varnothing)(a,\{z\})(a,\varnothing)\ldots(a,\varnothing).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Страубинг,1991]
+\end_layout
+
+\end_inset
+
+ Предикат регулярен тогда и только тогда, когда он может быть задан формулой
+ первого порядка, использующей предикаты 
+\begin_inset Quotes fld
+\end_inset
+
+
+\begin_inset Formula $x<y$
+\end_inset
+
+
+\begin_inset Quotes frd
+\end_inset
+
+ и 
+\begin_inset Quotes fld
+\end_inset
+
+
+\begin_inset Formula $x$
+\end_inset
+
+ делится на 
+\begin_inset Formula $m$
+\end_inset
+
+
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Достаточность очевидна.
+ Подставляя формулы второго порядка в эти предикаты, получим, что задается
+ с отношением 
+\begin_inset Quotes fld
+\end_inset
+
+следует за
+\begin_inset Quotes frd
+\end_inset
+
+, значит регулярен.
+\end_layout
+
+\begin_layout Proof
+Необходимость.
+ Пусть 
+\begin_inset Formula $P(x_{1},\ldots,x_{n})$
+\end_inset
+
+ -- какой-то предикат и пусть он регулярен, т.е.
+ задаётся какой-то формулой 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ MSO
+\begin_inset Formula $(y=x+1)$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $\tau$
+\end_inset
+
+ -- порядковый тип.
+ Обозначим через 
+\begin_inset Formula $L_{\tau}$
+\end_inset
+
+ -- множество всех слов типа 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ Достаточно доказать теорему для 
+\begin_inset Formula $L_{\Phi}\cap L_{\tau}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Итак, зафиксируем порядковый тип 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ Для простоты будем вместо 
+\begin_inset Formula $(a,\,\varnothing)$
+\end_inset
+
+ писать 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ Слово 
+\begin_inset Formula $w\in L_{\Phi}\cap L_{\tau}$
+\end_inset
+
+ имеет вид 
+\begin_inset Formula $a^{m_{0}}(a,\, S_{1})a^{m_{1}}\ldots(a,\, S_{j})a^{m_{j}}$
+\end_inset
+
+, где 
+\begin_inset Formula $S_{1},\ldots,S_{j}$
+\end_inset
+
+ однозначно определены типом 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ -- автомат, который распознает язык 
+\begin_inset Formula $L_{\Phi}\cap L_{\tau}$
+\end_inset
+
+.
+ Cледом слова 
+\begin_inset Formula $w$
+\end_inset
+
+ в 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ назовем последовательность состояний 
+\begin_inset Formula 
+\[
+(p_{0},\, q_{0},\, p_{1},\, q_{1},\ldots,\, p_{j},\, q_{j}),
+\]
+
+\end_inset
+
+такую что 
+\begin_inset Formula $a^{m_{i}}$
+\end_inset
+
+ метит путь из 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ в 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+, а буква 
+\begin_inset Formula $(a,\, S_{i})$
+\end_inset
+
+ помечает ребро из 
+\begin_inset Formula $(q_{i-1},\, p_{i})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (0,0) node [below] {$p_0$}--(0,1)--(1,1)--(1,0.3)--(0.5,0.5)--(0.5,0)--(2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->] (2,0)--(2,1) --(2.75,0) node [below] {$q_0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->] (2.75,0)-- (3.1,0) node  [above] {$(a,
+\backslash
+, S_1)$}--(3.5,0) node [below] {$p_1$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw{[rounded corners] (3.5,0)--(4,0)--(3.8,0.8)--(5,1)--(5,0)--(6,0)
+\end_layout
+
+\begin_layout Plain Layout
+
+	--(5.75,0.75)--(6,1)--(6.25,0.75)--(6,0.5)--(6.5,0)};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[->] {[rounded corners] (6.5,0)--(6,-0.5)--(7,0) node [below] {$q_1$}}--(7.5,0)
+ node [above] {$(a,
+\backslash
+, S_2)$}--(8,0) node [right] {$...$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Через 
+\begin_inset Formula $L_{q,q'}$
+\end_inset
+
+ обозначим множество всех слов вида 
+\begin_inset Formula $a^{m}$
+\end_inset
+
+, которые метят путь из 
+\begin_inset Formula $q$
+\end_inset
+
+ в 
+\begin_inset Formula $q'$
+\end_inset
+
+.
+ Язык 
+\begin_inset Formula $L_{q,q'}$
+\end_inset
+
+ -- регулярный и является конечным объединением слов вида 
+\begin_inset Formula $(a^{r})*a^{s},\ \text{где}\ r,s\geqslant0$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $L_{\Phi}\cap L_{\tau}$
+\end_inset
+
+ -- это конечное объединение языков 
+\begin_inset Formula 
+\[
+L_{p_{0},\, q_{0}}(a,\, S_{1})L_{p_{1},\, q_{1}}(a,\, S_{2})\ldots(a,\, S_{j})L_{p_{j},\, q_{j}}\ (*),
+\]
+
+\end_inset
+
+где объединение берётся по всевозможным следам.
+\end_layout
+
+\begin_layout Proof
+Итак, достаточно написать формулу для языков вида 
+\begin_inset Formula $(*)$
+\end_inset
+
+.
+ Язык описывается следующими условиями:
+\end_layout
+
+\begin_layout Proof
+(1) порядковый тип 
+\begin_inset Formula $\tau$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+(2) 
+\begin_inset Formula $x_{i}=x_{l}+s+1$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+(3) 
+\begin_inset Formula $x_{i}>x_{l}+s$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+(4) 
+\begin_inset Formula $x_{i}\equiv x_{l}+s(\mathrm{mod}\; r)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Расположение букв в слове выражается через булеву комбинаций условий (2),(3),(4).
+\end_layout
+
+\begin_layout Proof
+Соответствующие формулы.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $x_{i}=x_{l}\rightleftharpoons\neg(x_{i}<x_{l})\,\&\,\neg(x_{l}<x_{i})$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(1) конъюнкция выражений вида 
+\begin_inset Formula $x_{i}=x_{l}$
+\end_inset
+
+ и 
+\begin_inset Formula $x_{i}<x_{l}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $x_{i}=x_{l}+1\rightleftharpoons(x_{l}<x_{i})\,\&\,(\forall y)((x_{l}<y)\rightarrow(x_{i}=y)\vee(x_{i}<y))$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(2) 
+\begin_inset Formula $(\exists y_{1},\ldots,y_{s})((y_{1}=x_{i}+1)\,\&\,(x_{l}=y_{s}+1)\,\&\amp{1\leqslant m\leqslant s-1}(y_{m+1}=y_{m}+1))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+(3) 
+\begin_inset Formula $(\exists y_{1},\ldots,y_{s})((y_{1}=x_{i}+1)\,\&\,(y_{s}<x_{l})\,\&\amp{1\leqslant m\leqslant s-1}(y_{m+1}=y_{m}+1))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Если 
+\begin_inset Formula $0<m<r$
+\end_inset
+
+, то 
+\begin_inset Formula $x_{i}\equiv m(\mathrm{mod}\; r)\rightleftharpoons\exists z((z\equiv0(\mathrm{mod}\; r))\wedge(x_{i}=z+m)$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Proof
+(4) 
+\begin_inset Formula $z\equiv x_{i}+s(\mathrm{mod}\; r)\rightleftharpoons\bigvee\limits _{m\in Z_{r}}((x_{i}\equiv m(\mathrm{mod}\; r))\wedge(z=m+s(\mathrm{mod}\; r)))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $(a^{3})^{*}a^{2}(a,\{x_{1}\})(a^{3})^{*}a(a,\{x_{2}\})(a^{6})^{*}a^{3}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $x_{2}>x_{1},\quad x_{2}=x_{1}+1(\mathrm{mod}\;3)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part*
+Лекция 5(05.04.2012).
+\end_layout
+
+\begin_layout Section
+Языки бесконечных слов.
+\end_layout
+
+\begin_layout Standard
+В логическом языке на самом деле не важно, чтобы слова были конечными.
+ Всё сохраняет смысл для бесконечных слов.
+ Идея Бюхи: использовать этот подход, чтобы определить регулярный язык бесконечн
+ых слов.
+ Бесконечные слова имеют осязаемое практическое применение.
+ Слова - протоколы некоторых процессов.
+ Когда работает компьютер, то это потенциально бесконечная последовательность
+ операций.
+ 
+\end_layout
+
+\begin_layout Standard
+MSO(+1)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma\quad Q_{a}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma^{\omega}$
+\end_inset
+
+ --- множество всех бесконечных вправо слов.
+\end_layout
+
+\begin_layout Definition*
+Язык 
+\begin_inset Formula $L\subseteq\Sigma^{\omega}$
+\end_inset
+
+ назовем регулярным, если он состоит из всех слов, удовлетворяющих некой
+ системе 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ формул MSO(+1).
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ -- конечный (недетерминированный) автомат.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\delta:Q\times\Sigma\rightarrow2^{Q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Скажем, что такой автомат 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ принимает слово 
+\begin_inset Formula $w\in\Sigma^{\omega}$
+\end_inset
+
+ (в смысле Бюхи), если при чтении 
+\begin_inset Formula $w$
+\end_inset
+
+ автомат оказывается в состояниях из 
+\begin_inset Formula $F$
+\end_inset
+
+ бесконечное число раз.
+\end_layout
+
+\begin_layout Example*
+Недетерминированный автомат:
+\end_layout
+
+\begin_layout Example*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+tikzstyle{everystate}=[draw=black,text=black]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[initial,state] (A) 			   {$0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (B) [right of = A] {$1$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node				(C) [right of = B] {}; 			
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (A) edge [loop above] node {$a,
+\backslash
+, b$} (A)
+\end_layout
+
+\begin_layout Plain Layout
+
+			  edge 			 node {$a$}	  (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (B) edge [loop above] node {$a$}	  (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+		      edge 			 				(C)  ;				
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+распознает язык 
+\begin_inset Formula $L(\mathcal{A})=\{a,b\}^{*}a^{\omega}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $(\exists y)(\forall x)(x>y\rightarrow Q_{a}x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example*
+Детерминированный автомат:
+\end_layout
+
+\begin_layout Example*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[->,shorten >=1pt,auto,node distance=2.0cm,semithick]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+tikzstyle{everystate}=[draw=black,text=black]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[initial,state] (A) 			   {$0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[state]         (B) [right of = A] {$1$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node				(C) [right of = B] {}; 			
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (A) edge [loop above] node {$a$} (A)
+\end_layout
+
+\begin_layout Plain Layout
+
+			  edge 			 node {$b$}	  (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (B) edge [loop above] node {$b$}	  (B)
+\end_layout
+
+\begin_layout Plain Layout
+
+	  		edge  [bend left] node  {$a$}	 (A)
+\end_layout
+
+\begin_layout Plain Layout
+
+		  (B) edge 			 				(C)  ;				
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+распознает дополнение языка 
+\begin_inset Formula $L(\mathcal{A})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $L(\mathcal{B})=(a^{*}ba^{*})^{\omega}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $(\forall y)(\exists x)(x>y\ \&\ Q_{b}x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Назовем таблицей некоторое множество множества состояний.
+ Скажем, что автомат принимает слово в смысле Мюллера, если мы его читаем
+ и выписываем те состояния, которые он посещает бесконечное число раз.
+ Эти состояния должны быть в таблице.
+\end_layout
+
+\begin_layout Claim*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Ландвебер, 1969]
+\end_layout
+
+\end_inset
+
+ Язык 
+\begin_inset Formula $\{a,b\}^{*}a^{\omega}$
+\end_inset
+
+ не распознается по Бюхи никаким детерминированным автоматом.
+\end_layout
+
+\begin_layout Proof
+о/п.
+ Пусть существует детерминированный автомат, который распознает язык 
+\begin_inset Formula $\{a,b\}^{*}a^{\omega}$
+\end_inset
+
+.
+ Он принимает слово 
+\begin_inset Formula $ba^{\omega}$
+\end_inset
+
+.
+ Значит, это слово метит какой-то путь, который бесконечно много раз проходит
+ через состояния из 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ В силу детерминированности этот путь единственный.
+ Пусть 
+\begin_inset Formula $k_{1}$
+\end_inset
+
+таково, что 
+\begin_inset Formula $ba^{k_{1}}$
+\end_inset
+
+ метит путь из 
+\begin_inset Formula $q_{0}$
+\end_inset
+
+ в состояния из 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Рассмотрим слово 
+\begin_inset Formula $ba^{k_{1}}ba^{\omega}\in L$
+\end_inset
+
+.
+ Значит, оно тоже метит какой-то путь, в котором бесконечно много раз встречаютс
+я состояния из 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Возьмем 
+\begin_inset Formula $k_{2}$
+\end_inset
+
+ такое, что слово 
+\begin_inset Formula $ba^{k_{1}}ba^{k_{2}}$
+\end_inset
+
+ заканчивается в состоянии из 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Рассмотрим 
+\begin_inset Formula $ba^{k_{1}}ba^{k_{2}}ba^{\omega}\in L$
+\end_inset
+
+.
+ Отсюда 
+\begin_inset Formula $ba^{k_{1}}ba^{k_{2}}\ldots ba^{k_{n}}\ldots$
+\end_inset
+
+ бесконечно много раз посещает состояния из 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Но это слово содержит бесконечное число букв 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Противоречие.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Бюхи]
+\end_layout
+
+\end_inset
+
+ Пусть 
+\begin_inset Formula $L\subseteq\Sigma^{\omega}$
+\end_inset
+
+, 
+\begin_inset Formula $L$
+\end_inset
+
+ распознается (по Бюхи) конечным автоматом тогда и только тогда, когда 
+\begin_inset Formula $L$
+\end_inset
+
+ задается некоторым набором формул MSO(+1).
+\end_layout
+
+\begin_layout Proof
+Доказательство необходимости повторяет доказательство в случае конечных
+ слов, за исключением одной модификации.
+ А именно, вместо условия (5) нужно такое условие: одно из множеств 
+\begin_inset Formula $X_{q}$
+\end_inset
+
+ -- бесконечно, где 
+\begin_inset Formula $q\in F$
+\end_inset
+
+.
+ 
+\begin_inset Formula $(\forall x)(\exists y)(y>x\ \&\ y\in X)\rightleftharpoons X$
+\end_inset
+
+ бесконечно.
+ 
+\end_layout
+
+\begin_layout Proof
+Доказательство достаточности повторяет доказательство в конечном случае
+ для конечных слов, если принять на веру такой факт.
+ Если 
+\begin_inset Formula $L_{1},L_{2}\subseteq\Sigma^{\omega}$
+\end_inset
+
+ распознаются, то 
+\begin_inset Formula $L_{1}\cup L_{2},\, L_{1}\cap L_{2},\,\Sigma^{\omega}\setminus L_{2}$
+\end_inset
+
+ распознаются.
+\end_layout
+
+\begin_layout Claim*
+Если 
+\begin_inset Formula $L_{1},L_{2}\subseteq\Sigma^{\omega}$
+\end_inset
+
+ -- распознаваемы, то и 
+\begin_inset Formula $L_{1}\cup L_{2}$
+\end_inset
+
+ распознаваем.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $\mathcal{A}_{i}=(Q_{i},\Sigma,q_{0}^{(i)},\delta_{i},F_{i}),\ i=1,2$
+\end_inset
+
+ -- автомат, который распознает 
+\begin_inset Formula $L_{i}$
+\end_inset
+
+.
+ Будем считать, что 
+\begin_inset Formula $Q_{1}\cap Q_{2}=\varnothing$
+\end_inset
+
+.
+ Определим 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ так:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $Q=Q_{1}\cup Q_{2}\cup\{q_{0}\}$
+\end_inset
+
+, 
+\begin_inset Formula $q_{0}$
+\end_inset
+
+ -- новое начальное состояние, 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $F=F_{1}\cup F_{2}$
+\end_inset
+
+ -- множество заключительных состояний,
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\delta=\delta_{1}\cup\delta_{2}\cup\{(q_{0},a,q)|(\exists q\in Q_{i}):(q_{0}^{(i)},a,q)\in\delta_{i}\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Тогда автомат 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ распознает язык 
+\begin_inset Formula $L_{1}\cup L_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proposition*
+\begin_inset Formula $L\in\Sigma^{\omega}$
+\end_inset
+
+ распознается конечным автоматом (по Бюхи) тогда и только тогда, когда 
+\begin_inset Formula $L$
+\end_inset
+
+ можно представить в виде конечного объединения языков вида 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+, где 
+\begin_inset Formula $J$
+\end_inset
+
+ -- регулярный язык в 
+\begin_inset Formula $\Sigma^{*}$
+\end_inset
+
+, а 
+\begin_inset Formula $K$
+\end_inset
+
+ -- регулярный язык в 
+\begin_inset Formula $\Sigma^{+}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Необходимость.
+ Пусть автомат 
+\begin_inset Formula $\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+ распознает язык 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $J$
+\end_inset
+
+ -- это тот язык, который распознается этим автоматом в 
+\begin_inset Quotes fld
+\end_inset
+
+конечном смысле
+\begin_inset Quotes frd
+\end_inset
+
+, а 
+\begin_inset Formula $K$
+\end_inset
+
+ -- это моножество тех непустых слов, которые в 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ читаются на пути из 
+\begin_inset Formula $F$
+\end_inset
+
+ в 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Через 
+\begin_inset Formula $L_{p,q}$
+\end_inset
+
+ обозначим язык конечных слов, которые можно прочесть на пути из 
+\begin_inset Formula $p\in Q$
+\end_inset
+
+ в 
+\begin_inset Formula $q\in Q$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $L=\bigcup\limits _{q\in F}L_{q_{0},q}L_{q,q}^{\omega}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Достаточность.
+ Чтобы доказать, достаточно (в силу предложения 1) проверить, что каждый
+ язык вида 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+ распознается по Бюхи конечным автоматом.
+ Пусть 
+\begin_inset Formula $\mathcal{B}=(Q,q_{0},F,\delta)$
+\end_inset
+
+ -- автомат, который распознает 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Возьмем новое состояние 
+\begin_inset Formula $q_{0}'$
+\end_inset
+
+ и для каждой стрелки 
+\begin_inset Formula $q_{0}\xrightarrow{a}q$
+\end_inset
+
+ нарисуем стрелку 
+\begin_inset Formula $q_{0}'\xrightarrow{a}q$
+\end_inset
+
+, а для каждой стрелки 
+\begin_inset Formula $q\xrightarrow{a}f\in F$
+\end_inset
+
+ нарисуем стрелку 
+\begin_inset Formula $q\xrightarrow{a}q_{0}^{'}$
+\end_inset
+
+.
+ Обозначим через 
+\begin_inset Formula $\delta'$
+\end_inset
+
+ расширенное множество переходов.
+ Тогда автомат 
+\begin_inset Formula $\mathcal{B}'=(Q\cup\{q_{0}'\},q_{0}',\{q_{0}'\},\delta')$
+\end_inset
+
+ распознает по Бюхи язык 
+\begin_inset Formula $K^{\omega}$
+\end_inset
+
+.
+ Пусть автомат 
+\begin_inset Formula $(P,p_{0},T,\varDelta)$
+\end_inset
+
+ -- автомат, который распознает язык 
+\begin_inset Formula $J$
+\end_inset
+
+.
+ Полагаем, что 
+\begin_inset Formula $P\cap(Q\cup\{q_{0}'\})=\varnothing$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $\varDelta'=\{(p,a,q_{0}'):\exists t\in T,\,(p,a,t)\in\varDelta\}.$
+\end_inset
+
+ Тогда автомат 
+\begin_inset Formula 
+\[
+(P\cup Q\cup\{q_{0}'\},p_{0},\{q_{0}'\},\varDelta'\cup\varDelta\cup\delta')
+\]
+
+\end_inset
+
+ распознает язык 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part*
+Лекция 6 (12.04.2012)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathcal{A}=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w\in\Sigma^{+}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $s(q,q',w)\rightleftharpoons$
+\end_inset
+
+ есть путь из 
+\begin_inset Formula $q$
+\end_inset
+
+ в 
+\begin_inset Formula $q'$
+\end_inset
+
+, помеченный словом 
+\begin_inset Formula $w$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $t(q,q',w)\rightleftharpoons-//-$
+\end_inset
+
+ и проходящий через одно из состояний из 
+\begin_inset Formula $F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Введем отношение эквивалентности:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u\sim v\rightleftharpoons$
+\end_inset
+
+ для всех 
+\begin_inset Formula $q,q'\in Q,\; s(q,q',u)\longleftrightarrow s(q,q',v)\ \&\ t(q,q',u)\longleftrightarrow t(q,q',v)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+У 
+\begin_inset Formula $\sim$
+\end_inset
+
+ конечное число классов и каждый класс --- регулярный язык.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\sim$
+\end_inset
+
+-класс слова 
+\begin_inset Formula $w$
+\end_inset
+
+ определяется набором таких пар 
+\begin_inset Formula $(q,q')$
+\end_inset
+
+, что 
+\begin_inset Formula $s(q,q',w)\ \&\ t(q,q',w)$
+\end_inset
+
+.
+ Поэтому число классов не больше, чем число множеств таких пар.
+ Введем множества слов 
+\begin_inset Formula $S(q,q')=\{u|\ s(q,q',u)$
+\end_inset
+
+ истинно 
+\begin_inset Formula $\}$
+\end_inset
+
+ и 
+\begin_inset Formula $T(q,q')=\{u|\ t(q,q',u)$
+\end_inset
+
+ истинно 
+\begin_inset Formula $\}$
+\end_inset
+
+.
+ Каждый класс -- это булева комбинация таких множеств.
+ Для слова 
+\begin_inset Formula $w$
+\end_inset
+
+ его 
+\begin_inset Formula $\sim$
+\end_inset
+
+- класс:
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+(
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+bigcup
+\backslash
+limits_{
+\backslash
+substack{(q,q'),
+\backslash
+
+\backslash
+
+\backslash
+text{где }s(q,q',w)
+\backslash
+
+\backslash
+
+\backslash
+text{истинно}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+  S(q,q')
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+cap
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+bigcup
+\backslash
+limits_{
+\backslash
+substack{(q,q'),
+\backslash
+
+\backslash
+
+\backslash
+text{где }t(q,q',w)
+\backslash
+
+\backslash
+
+\backslash
+text{истинно}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+  T(q,q')
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setminus
+\end_layout
+
+\begin_layout Plain Layout
+
+(
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+bigcup
+\backslash
+limits_{
+\backslash
+substack{(p,p'),
+\backslash
+
+\backslash
+
+\backslash
+text{где }s(p,p',w)
+\backslash
+
+\backslash
+
+\backslash
+text{ложно}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+  S(p,p')
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+cap
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+bigcup
+\backslash
+limits_{
+\backslash
+substack{(p,p'),
+\backslash
+
+\backslash
+
+\backslash
+text{где }t(p,p',w)
+\backslash
+
+\backslash
+
+\backslash
+text{ложно}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+  T(p,p')
+\end_layout
+
+\begin_layout Plain Layout
+
+).
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Поэтому осталось доказать, что регулярны 
+\begin_inset Formula $S(q,q')$
+\end_inset
+
+ и 
+\begin_inset Formula $T(q,q')$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $S(q,q')=L(q,q')$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $T(q,q')=\bigcup\limits _{f\in F}L_{q,f}\cdot L_{f,q}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Так как множества вида 
+\begin_inset Formula $L(q,q')$
+\end_inset
+
+ --- регулярные языки, все доказано.
+\end_layout
+
+\begin_layout Lemma
+Пусть 
+\begin_inset Formula $J,K$
+\end_inset
+
+ -- 
+\begin_inset Formula $\sim$
+\end_inset
+
+-классы, 
+\begin_inset Formula $L\subseteq\Sigma^{\omega}$
+\end_inset
+
+ и 
+\begin_inset Formula $L=L(\mathcal{A})$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $JK^{\omega}\cap L\neq\varnothing$
+\end_inset
+
+, то 
+\begin_inset Formula $JK^{\omega}\subseteq L$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $\alpha\in JK^{\omega}\cap L$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\alpha=\alpha_{0}\alpha_{1}\alpha_{2}\ldots$
+\end_inset
+
+, где 
+\begin_inset Formula $\alpha_{0}\in J,\alpha_{i}\in K$
+\end_inset
+
+.
+ Значит, в 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ есть последовательность состояний 
+\begin_inset Formula $q_{0},q_{1},q_{2}\ldots$
+\end_inset
+
+ такая, что 
+\begin_inset Formula $s(q_{l},q_{l+1},\alpha_{l})$
+\end_inset
+
+ истинно для всех 
+\begin_inset Formula $l$
+\end_inset
+
+ и 
+\begin_inset Formula $t(q_{j},q_{j+1},\alpha_{j})$
+\end_inset
+
+ истинно для бесконечного множества индексов 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $\beta$
+\end_inset
+
+-- любое слово из 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\beta=\beta_{0}\beta_{1}\beta_{2}\ldots$
+\end_inset
+
+, где 
+\begin_inset Formula $\beta_{0}\in J,\beta_{i}\in K$
+\end_inset
+
+ при 
+\begin_inset Formula $i>0$
+\end_inset
+
+.
+ Имеем 
+\begin_inset Formula $\alpha_{i}\sim\beta_{i}$
+\end_inset
+
+ для всех 
+\begin_inset Formula $i$
+\end_inset
+
+, откуда 
+\begin_inset Formula $s(q_{l},q_{l+1},\beta_{l})$
+\end_inset
+
+ истинно для всех 
+\begin_inset Formula $l$
+\end_inset
+
+ и 
+\begin_inset Formula $t(q_{j},q_{j+1},\beta_{j})$
+\end_inset
+
+ истинно для бесконечно многих 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Значит, 
+\begin_inset Formula $\beta\in L$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Рамсей, конечный вариант]
+\end_layout
+
+\end_inset
+
+ Пусть 
+\begin_inset Formula $k$
+\end_inset
+
+ -- любое число.
+ Найдется такое 
+\begin_inset Formula $R=R(k)$
+\end_inset
+
+, что в любом графе с 
+\begin_inset Formula $R$
+\end_inset
+
+ вершинами есть либо полный подграф с 
+\begin_inset Formula $k$
+\end_inset
+
+ вершинами, либо пустой подграф с 
+\begin_inset Formula $k$
+\end_inset
+
+ вершинами.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $r(m,n)$
+\end_inset
+
+ -- наименьший размер графа, у которого всегда есть либо полный подграф
+ с 
+\begin_inset Formula $m$
+\end_inset
+
+ вершинами либо пустой подграф с 
+\begin_inset Formula $n$
+\end_inset
+
+ вершинами.
+ Тогда 
+\begin_inset Formula $R(k)=r(k,k)$
+\end_inset
+
+.
+ Ясно, что 
+\begin_inset Formula $r(2,n)=n,\ r(m,2)=m$
+\end_inset
+
+.
+ Докажем, что 
+\begin_inset Formula $r(m,n)\leqslant r(m,n-1)+r(m-1,n)$
+\end_inset
+
+.
+ Возьмем граф с 
+\begin_inset Formula $N=r(m,n-1)+r(m-1,n)$
+\end_inset
+
+ вершинами и пусть 
+\begin_inset Formula $v$
+\end_inset
+
+ -- любая вершина.
+ Рассмотрим множество 
+\begin_inset Formula $G$
+\end_inset
+
+ всех вершин, смежных с 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Если в 
+\begin_inset Formula $G$
+\end_inset
+
+ по крайней мере 
+\begin_inset Formula $r(m-1,n)$
+\end_inset
+
+ вершин, то все хорошо.
+ В противном случае в исходном графе по крайней мере 
+\begin_inset Formula $r(m,n-1)$
+\end_inset
+
+ вершин, не смежных с 
+\begin_inset Formula $v$
+\end_inset
+
+ и опять все хорошо.
+ 
+\end_layout
+
+\begin_layout Example*
+Задача про знакомства: 
+\begin_inset Formula $R(3)=6$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Обобщение.
+ Пусть 
+\begin_inset Formula $k,c$
+\end_inset
+
+ любые числа.
+ Тогда 
+\begin_inset Formula $\exists R=R(k,c)$
+\end_inset
+
+, что если ребра полного графа с 
+\begin_inset Formula $R$
+\end_inset
+
+ вершинами покрасить в 
+\begin_inset Formula $c$
+\end_inset
+
+ цветов, то найдется одноцветный полный граф с 
+\begin_inset Formula $k$
+\end_inset
+
+ вершинами.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $R(3,3)=17$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Обобщение.
+ Пусть 
+\begin_inset Formula $k,c,s$
+\end_inset
+
+ -- любые числа.
+ Тогда 
+\begin_inset Formula $\exists R=R(k,c,s)$
+\end_inset
+
+, что в любом подмножестве из 
+\begin_inset Formula $R$
+\end_inset
+
+ элементов покрасить все 
+\begin_inset Formula $s$
+\end_inset
+
+-подмножеств в 
+\begin_inset Formula $c$
+\end_inset
+
+ цветов, то найдется 
+\begin_inset Formula $k$
+\end_inset
+
+- подмножество, у которого все 
+\begin_inset Formula $s$
+\end_inset
+
+-подмножества будут покрашены в один цвет.
+\end_layout
+
+\begin_layout Lemma
+Пусть 
+\begin_inset Formula $\alpha\in\Sigma^{\omega}$
+\end_inset
+
+.
+ Тогда существуют 
+\begin_inset Formula $\sim$
+\end_inset
+
+-классы 
+\begin_inset Formula $J,K$
+\end_inset
+
+ такие, что 
+\begin_inset Formula $\alpha\in JK^{\omega}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $i<j$
+\end_inset
+
+.
+ Обозначим через 
+\begin_inset Formula $\alpha[i,j]$
+\end_inset
+
+ кусок слова 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ от 
+\begin_inset Formula $i$
+\end_inset
+
+-ой позиции до 
+\begin_inset Formula $j-1$
+\end_inset
+
+-й позиции.
+ Покрасим все 2-х элементные подмножества в 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ красками, соответствующими 
+\begin_inset Formula $\sim$
+\end_inset
+
+-классам так: 
+\begin_inset Formula $\{i,j\},$
+\end_inset
+
+где 
+\begin_inset Formula $i<j$
+\end_inset
+
+ -- это 
+\begin_inset Formula $\sim$
+\end_inset
+
+-классы слова 
+\begin_inset Formula $\alpha[i,j]$
+\end_inset
+
+.
+ По теореме Рамсея в 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ есть бесконечное подмножество 
+\begin_inset Formula $\{i_{1}<i_{2}<i_{3}<\ldots\}$
+\end_inset
+
+, у которого все 2-х элементные подмножества покрашены одним цветом.
+ Пусть 
+\begin_inset Formula $K$
+\end_inset
+
+ -- это 
+\begin_inset Formula $\sim$
+\end_inset
+
+-класс, который отвечает этому цвету 
+\begin_inset Formula $\alpha[i_{1},i_{2}],\alpha[i_{2},i_{3}],\ldots\in K$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $Y$
+\end_inset
+
+ - это класс слова 
+\begin_inset Formula $\alpha[1,i_{1}]$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\alpha=\alpha[1,i_{1}]\alpha[1,i_{2}]\ldots\in JK^{\omega}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Claim*
+Если 
+\begin_inset Formula $L\subseteq\Sigma^{\omega}$
+\end_inset
+
+ --- распознаваемый язык, то 
+\begin_inset Formula $\Sigma^{\omega}\setminus L$
+\end_inset
+
+ --- распознаваемый язык.
+\end_layout
+
+\begin_layout Proof
+По лемме 3 для любого 
+\begin_inset Formula $\alpha\in\Sigma^{\omega}\setminus L$
+\end_inset
+
+ существуют 
+\begin_inset Formula $\sim$
+\end_inset
+
+-классы 
+\begin_inset Formula $J,K$
+\end_inset
+
+, такие что 
+\begin_inset Formula $\alpha\in JK^{\omega}$
+\end_inset
+
+.
+ Значит, 
+\begin_inset Formula $\Sigma^{\omega}\setminus L$
+\end_inset
+
+ лежит в объединении множеств 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+.
+ Если бы 
+\begin_inset Formula $JK^{\omega}\cap L\neq\varnothing$
+\end_inset
+
+, то по лемме 2 множество 
+\begin_inset Formula $JK^{\omega}\subseteq L$
+\end_inset
+
+, но 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+ содержит слова из дополнения языка 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ Получили, что 
+\begin_inset Formula $JK^{\omega}\cap L=\varnothing$
+\end_inset
+
+.
+ Отсюда имеем, что объединение множеств 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+ лежит 
+\begin_inset Formula $\Sigma^{\omega}\setminus L$
+\end_inset
+
+.
+ Значит дополнение языка 
+\begin_inset Formula $L$
+\end_inset
+
+ -- это объединение множеств 
+\begin_inset Formula $JK^{\omega}$
+\end_inset
+
+.
+ По лемме 1 объединение конечное и 
+\begin_inset Formula $J,K$
+\end_inset
+
+ --- регулярные языки.
+ По предложению 
+\begin_inset Formula $\Sigma^{\omega}\setminus L$
+\end_inset
+
+ --- распознаваемо.
+ 
+\end_layout
+
+\begin_layout Part*
+Лекция 7 (19.04.2012).
+\end_layout
+
+\begin_layout Corollary
+Монадическая теория 2-го порядка множества 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ с отношением 
+\begin_inset Quotes fld
+\end_inset
+
+следует за
+\begin_inset Quotes frd
+\end_inset
+
+ разрешима.
+\end_layout
+
+\begin_layout Standard
+S2S - то же разрешима (деревья).
+\end_layout
+
+\begin_layout Standard
+Теперь под формулами понимаем формулы первого порядка.
+\end_layout
+
+\begin_layout Standard
+Любую формулу первого порядка можно заменить на эквивалентную ей префиксную
+ формулу, т.е.
+ формулу вида: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\forall x\ \exists y\ \forall z\ \exists w\ \Phi(x,y,z,\ldots,w)\leftarrow\text{бескванторная часть}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\neg(\forall x\ \Phi(x))\sim\exists x\ \neg\Phi(x)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\neg(\exists x\ \Phi(x))\sim\forall x\ \neg\Phi(x)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\forall x\ \Phi(x)\,\&\,\forall x\ \Psi(x)\sim\forall x\ (\Phi(x)\,\&\,\Psi(x))$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\exists x\ \Phi(x)\,\vee\,\exists x\ \Psi(x)\sim\exists x\ (\Phi(x)\,\vee\,\Psi(x))$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\forall x\ \Phi(x)\,\vee\,\forall x\ \Psi(x)\nsim\forall x\ (\Phi(x)\,\vee\,\Psi(x))$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\forall x\ \Phi(x)\,\vee\,\forall x\ \Psi(x)\sim\forall x\forall y\ (\Phi(x)\,\vee\,\Psi(y))$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\exists x\ \Phi(x)\,\&\,\exists x\ \Psi(x)\nsim\exists x\ (\Phi(x)\,\&\,\Psi(x))$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\exists x\ \Phi(x)\,\&\,\exists x\ \Psi(x)\sim\exists x\exists y\ (\Phi(x)\,\&\,\Psi(y))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Игры Эренфойхта-Фрессе.
+\end_layout
+
+\begin_layout Definition*
+Сложность формулы (
+\begin_inset Formula $c$
+\end_inset
+
+): 
+\end_layout
+
+\begin_layout Definition*
+Если 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ -- атомарная формула, 
+\begin_inset Formula $c(\Phi)=0,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $c(\neg\Phi)=c(\Phi),$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $c(\Phi\,\&\,\Psi)=\max\,\{c(\Phi),c(\Psi)\},$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $c(\exists x\ \Phi)=c(\Phi)+1.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition*
+Пусть 
+\begin_inset Formula $v$
+\end_inset
+
+ -- конечный набор переменных.
+ Тогда существует только конечное число формул первого порядка в префиксной
+ форме, у которых сложность 
+\begin_inset Formula $<c$
+\end_inset
+
+, а все переменные лежат в 
+\begin_inset Formula $v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Число атомарных формул ограничено в терминах числа предикатных символов
+ и числа подмножеств в 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Дальше можно применить индукцию по 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $w_{1},w_{2}$
+\end_inset
+
+ - 
+\begin_inset Formula $v$
+\end_inset
+
+-слова
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(a_{1},X_{1})(a_{2},X_{2})\ldots(a_{n},X_{n}),X_{i}\cap X_{j}=\varnothing,\text{ при }i\neq j,\bigcup\limits _{i=1}^{n}X_{i}=v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{1}\sim_{r}w_{2}\rightleftarrows w_{1}$
+\end_inset
+
+ и 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ удовлетворяют одному и тому же набору формул сложности 
+\begin_inset Formula $\leqslant r$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Из предложения следует, что 
+\begin_inset Formula $\sim_{r}$
+\end_inset
+
+ эквивалентность конечного индекса.
+\end_layout
+
+\begin_layout Definition*
+Определим 
+\begin_inset Formula $r$
+\end_inset
+
+-раундовую игру на 
+\begin_inset Formula $(w_{1},w_{2})$
+\end_inset
+
+.
+ Алиса хочет доказать, что 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ и 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ различны, а Боб хочет доказать противоположное.
+ У каждого игрока 
+\begin_inset Formula $r$
+\end_inset
+
+ жетонов.
+ На 
+\begin_inset Formula $i$
+\end_inset
+
+-ом ходу Алиса кладет жетон 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ на букву в одном из слов.
+ В ответ Боб должен положить свой жетон 
+\begin_inset Formula $z$
+\end_inset
+
+ с тем же номером на какую-то букву в другом слове.
+ Когда игра заканчивается, у нас есть два 
+\begin_inset Formula $(v\cup\{z_{1,}\ldots z_{n}\})$
+\end_inset
+
+-слова 
+\begin_inset Formula $w_{1}'$
+\end_inset
+
+ и 
+\begin_inset Formula $w_{2}'$
+\end_inset
+
+.
+ Боб выигрывает, если для каждой атомарной формулы 
+\begin_inset Formula $\alpha$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\alpha\ \text{выполнена}\ \text{на\ }w_{1}'\iff\alpha\ \text{выполнена}\ \text{на}\ w_{2}'.
+\]
+
+\end_inset
+
+В противном случае Алиса выигрывает.
+\end_layout
+
+\begin_layout Part*
+Лекция 8 (26.04.2012).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u\sim_{r}v\rightleftharpoons u\text{ и }v$
+\end_inset
+
+ удовлетворяют одним и тем же формулам сложности 
+\begin_inset Formula $\leqslant r$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $u\sim_{r}v\iff$
+\end_inset
+
+Боб имеет выигрышную стратегию в 
+\begin_inset Formula $r$
+\end_inset
+
+-раундовой игре на 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Необходимость.
+ Индукция по 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $r=0$
+\end_inset
+
+, то Боб сразу выиграл, т.к.
+ 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ и 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ удовлетворяют одним и тем же формулам.
+ Пусть утверждение верно для 
+\begin_inset Formula $r-1$
+\end_inset
+
+ и не верно для 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Это значит, что для какой-то пары слов 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ со свойством 
+\begin_inset Formula $u\sim_{r}v$
+\end_inset
+
+ у Алисы есть выигрышная стратегия.
+ Позволим Алисе сделать первый ход этой стратегии.
+ Можно считать, что она ставит жетон на букву из слова 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ В результате получится такая структура 
+\begin_inset Formula $u'$
+\end_inset
+
+, что при любом ответе Боба получится такая пара 
+\begin_inset Formula $(u',v')$
+\end_inset
+
+, на которой Алиса имеет выигрышную стратегию в игре с 
+\begin_inset Formula $r-1$
+\end_inset
+
+ раундом.
+ По предположению индукции 
+\begin_inset Formula $u'\nsim_{r-1}v'$
+\end_inset
+
+.
+ Пусть 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ -- это конъюнкция нормальных форм всех формул сложности 
+\begin_inset Formula $<r$
+\end_inset
+
+, которые выполнены в 
+\begin_inset Formula $u'$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ не выполнена в 
+\begin_inset Formula $v'$
+\end_inset
+
+ при любом способе получения 
+\begin_inset Formula $v'$
+\end_inset
+
+.
+ Это значит, что формула 
+\begin_inset Formula $\exists z_{1}\ \Phi$
+\end_inset
+
+ не выполнена на 
+\begin_inset Formula $v$
+\end_inset
+
+, но она выолнена на 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Отсюда 
+\begin_inset Formula $u\nsim_{r}v$
+\end_inset
+
+.
+ Противоречие.
+\end_layout
+
+\begin_layout Proof
+Достаточность.
+ Индукция по 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $r=0$
+\end_inset
+
+, то 
+\begin_inset Formula $u\sim_{0}v$
+\end_inset
+
+.
+ Пусть утверждение верно для 
+\begin_inset Formula $r-1$
+\end_inset
+
+ и предположим, что у Боба есть выигрышная стратегия на 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+, но 
+\begin_inset Formula $u\nsim_{r}v$
+\end_inset
+
+.
+ Последнее означает, что существует формула 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ сложности 
+\begin_inset Formula $\leqslant r$
+\end_inset
+
+ такая, что она выполнена на 
+\begin_inset Formula $u$
+\end_inset
+
+, но не выполнена на 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Можно считать, что 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ имеет вид 
+\begin_inset Formula $\exists z\ \Psi$
+\end_inset
+
+, где 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ -- формула сложности 
+\begin_inset Formula $\leqslant r-1$
+\end_inset
+
+.
+ Если Алиса положит свой жетон на то место, которое делает истинным формулу
+ 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ на 
+\begin_inset Formula $u$
+\end_inset
+
+, то Боб может отметить какое-то место в слове 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Получится новая пара слов 
+\begin_inset Formula $(u',v'),$
+\end_inset
+
+ в которой у Боба есть выигрышная стратегия в 
+\begin_inset Formula $r-1$
+\end_inset
+
+ ходов.
+ По предположению индукции имеем, что 
+\begin_inset Formula $u'\text{ и }v'$
+\end_inset
+
+ удовлетворяют одним и тем же формулам сложности 
+\begin_inset Formula $\leqslant r-1$
+\end_inset
+
+.
+ В частности, 
+\begin_inset Formula $v'$
+\end_inset
+
+ удовлетворяет 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ Но тогда слово 
+\begin_inset Formula $v$
+\end_inset
+
+ удовлетворяет формуле 
+\begin_inset Formula $\exists z\ \Psi=\Phi$
+\end_inset
+
+.
+ Противоречие.
+\end_layout
+
+\begin_layout Corollary*
+С помощью теоремы можно доказать, что
+\end_layout
+
+\begin_layout Corollary*
+\begin_inset Formula $(\mathbb{R},<)\ \text{и}\ (\mathbb{Q},<)$
+\end_inset
+
+ удовлетворяют одним и тем же формулам 1-го порядка.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $V=\varnothing,w_{1}=ab,w_{2}=baa$
+\end_inset
+
+.
+ Отношение --- отношение 
+\begin_inset Formula $=$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+В однораундовой игре выигрывает Боб.
+\end_layout
+
+\begin_layout Example*
+В двухраундовой игре выигрывает Алиса: 
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\text{Алиса}\ w_{2}=b\underset{z_{1}}{a}\underset{z_{2}}{a},\text{Боб}\ w_{1}=\underset{z_{1}}{a}\underset{z_{2}}{b}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+Соответствующая формула 
+\begin_inset Formula $\exists x\ \exists y\ (\neg(x=y)\,\&\, Q_{a}x\,\&\, Q_{a}y)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Example*
+2)
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ -- слово, которое кончается на 
+\begin_inset Formula $a$
+\end_inset
+
+,
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ -- слово, которое кончается на 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Отношение 
+\begin_inset Formula $<$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+Алиса выигрывает за два раунда.
+ Первым ходом она ставит 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ на последнюю букву в 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+.
+ Если в 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ нет буквы 
+\begin_inset Formula $a$
+\end_inset
+
+, то Боб сразу проиграл.
+ Если есть, он вынужден поставить 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ на эту букву.
+ Тогда Алиса ставит свой жетон на последнюю букву в 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+.
+ Боб отвечает и проигрывает.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\text{В}\ w_{2}\ z_{1}<z_{2},\text{в}\ w_{1}\ z_{2}<z_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\exists x\ (\forall y\,\neg(x<y)\,\&\, Q_{b}x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Reg = MSO(
+\begin_inset Formula $<$
+\end_inset
+
+) = MSO(
+\begin_inset Formula $y=x+1$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Reg
+\begin_inset Formula $\supsetneqq$
+\end_inset
+
+FO(
+\begin_inset Formula $<$
+\end_inset
+
+)
+\begin_inset Formula $\supsetneqq$
+\end_inset
+
+FO(
+\begin_inset Formula $y=x+1$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Theorem*
+Множество слов четной длины не лежит в FO(
+\begin_inset Formula $<$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Proof
+О/п.
+ Допустим, что есть формула 
+\begin_inset Formula $\Phi$
+\end_inset
+
+, которая определяет множество слов четной длины.
+ Пусть 
+\begin_inset Formula $c(\Phi)=r$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ выполнена на 
+\begin_inset Formula $a^{k}\iff k\ \text{чётно}$
+\end_inset
+
+.
+ Покажем, что 
+\begin_inset Formula $a^{2^{r}}\sim_{r}a^{2^{r}-1}$
+\end_inset
+
+.
+ Мы построим выигрышную стратегию для Боба 
+\begin_inset Formula $r$
+\end_inset
+
+-раундовой игры на паре 
+\begin_inset Formula $(a^{k},a^{k+1})$
+\end_inset
+
+ при 
+\begin_inset Formula $k\geqslant2^{r}-1$
+\end_inset
+
+.
+ Это делается индукцией по 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ При 
+\begin_inset Formula $r=1$
+\end_inset
+
+ любой ответ Боба -- выигрышный.
+ Пусть 
+\begin_inset Formula $r>1$
+\end_inset
+
+ и утверждение верно при 
+\begin_inset Formula $r-1$
+\end_inset
+
+.
+ Допустим, что Алиса положила 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ на одно из двух слов, получив структуру 
+\begin_inset Formula $a^{s}(a,\{z_{1}\})a^{t}$
+\end_inset
+
+.
+ Тогда либо 
+\begin_inset Formula $s\leqslant\frac{k-1}{2}$
+\end_inset
+
+, либо 
+\begin_inset Formula $t\leqslant\frac{k-1}{2}$
+\end_inset
+
+.
+ Считаем, что 
+\begin_inset Formula $s\leqslant\frac{k-1}{2}$
+\end_inset
+
+, если иначе выполняем все симметрично.
+ Боб ставит свой жетон на 
+\begin_inset Formula $(s+1)$
+\end_inset
+
+-ую букву 2-го слова: 
+\begin_inset Formula $a^{s}(a,\{z_{1}\})a^{t'},\text{\ где}\ t'=t+1\ \text{или}\ t'=t-1$
+\end_inset
+
+.
+ Так как 
+\begin_inset Formula $2^{r-1}-1\leqslant k=min\{t,t'\}+s+1\leqslant min\{t,t'\}+\frac{k-1}{2}+1$
+\end_inset
+
+, получаем, что 
+\begin_inset Formula $min\{t,t'\}\geqslant\frac{k-1}{2}\geqslant2^{r-1}-1$
+\end_inset
+
+.
+ По предположению индукции Боб имеет выигрышную стратегию в 
+\begin_inset Formula $(r-1)$
+\end_inset
+
+ раундовой игре на 
+\begin_inset Formula $(a^{t},a^{t'})$
+\end_inset
+
+.
+ Если теперь Алиса ставит жетон на 
+\begin_inset Formula $i$
+\end_inset
+
+-ую букву с 
+\begin_inset Formula $i\leqslant s$
+\end_inset
+
+, тогда Боб отвечает ходом на 
+\begin_inset Formula $i$
+\end_inset
+
+-ую букву второго слова.
+ Иначе Боб действует согласно своей выигрышной стратегии для пары 
+\begin_inset Formula $(a^{t},a^{t'})$
+\end_inset
+
+.
+ Докажем, что Боб выигрывает.
+ В результате получается две 
+\begin_inset Formula $(z_{1},\ldots,z_{r})$
+\end_inset
+
+ - структуры.
+ Надо показать, что они удовлетворяют одинаковым атомарным формулам 
+\begin_inset Formula $z_{i}<z_{j}$
+\end_inset
+
+.
+ Пусть первая структура удовлетворяет этой формуле.
+ Если 
+\begin_inset Formula $z_{i}\text{ и }z_{j}$
+\end_inset
+
+ появляются среди первых 
+\begin_inset Formula $(s+1)$
+\end_inset
+
+ буквы.
+ То они стоят на тех же позициях во второй структуре.
+ Если они стоят среди последних 
+\begin_inset Formula $t(t')$
+\end_inset
+
+ букв, то можно считать, что они появились в результате какой-то игры на
+ паре 
+\begin_inset Formula $(a^{t},a^{t'})$
+\end_inset
+
+, а поскольку Боб придерживался выигрышной стратегии, 
+\begin_inset Formula $z_{i}<z_{j}$
+\end_inset
+
+ выполнено и во втором слове.
+ Если 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ - в голове, а 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ - в хвосте, то и во втором слове это верно.
+ 
+\end_layout
+
+\begin_layout Part*
+Лекция 9(03.05.2012).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $FO(x=y+1)\subseteq FO(<)\subset Reg=MSO(<)=MSO(x=y+1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Локально барьерно тестируемые языки.
+\end_layout
+
+\begin_layout Standard
+Рассмотрим на множестве слов 
+\begin_inset Formula $\Sigma^{*}$
+\end_inset
+
+ отношение 
+\begin_inset Formula $\thickapprox_{r}^{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{1}\thickapprox_{r}^{k}w_{2}\iff$
+\end_inset
+
+ выполняются следующие три условия:
+\end_layout
+
+\begin_layout Standard
+1) у 
+\begin_inset Formula $w_{1}\text{ и }w_{2}$
+\end_inset
+
+ одинаковые приставки длины 
+\begin_inset Formula $k-1$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+2) у 
+\begin_inset Formula $w_{1}\text{ и }w_{2}$
+\end_inset
+
+ одинаковые суффиксы длины 
+\begin_inset Formula $k-1$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+3) если 
+\begin_inset Formula $w$
+\end_inset
+
+ -- слово длины 
+\begin_inset Formula $k$
+\end_inset
+
+, то число вхождений слова 
+\begin_inset Formula $w\text{ в }w_{1}$
+\end_inset
+
+ в качестве фактора равно числу вхождений слова 
+\begin_inset Formula $w\text{ в }w_{2}$
+\end_inset
+
+ в качестве фактора, если оба этих числа 
+\begin_inset Formula $<r$
+\end_inset
+
+; либо оба этих числа 
+\begin_inset Formula $\geqslant r$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Если 
+\begin_inset Formula $w_{1}=uwv$
+\end_inset
+
+, где 
+\begin_inset Formula $u,v\in\Sigma^{*}$
+\end_inset
+
+, то 
+\begin_inset Formula $w$
+\end_inset
+
+ --- фактор слова 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+В слове 
+\begin_inset Formula $abbaabbba$
+\end_inset
+
+ слово 
+\begin_inset Formula $bb$
+\end_inset
+
+ входит 3 раза.
+\end_layout
+
+\begin_layout Standard
+Сканирующее устройство:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (8,0)--(0,0) node [above right] {$
+\backslash
+$$}--(0,0.5) node [above] 
+\end_layout
+
+\begin_layout Plain Layout
+
+    {$
+\backslash
+substack{
+\backslash
+text{начало}
+\backslash
+
+\backslash
+
+\backslash
+text{слова}}$}--(8,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (0.5,0)--(0.5,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (1,0)--(1,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (1.5,0)--(1.5,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (2,0)--(2,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (2.5,0)--(2.5,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (3,0)--(3,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (3.5,0)--(3.5,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (4,0)--(4,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (4.5,0)--(4.5,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (6.5,0) node [above right] {$
+\backslash
+$$}--(6.5,0.5) node [above] 
+\end_layout
+
+\begin_layout Plain Layout
+
+    {$
+\backslash
+substack{
+\backslash
+text{конец}
+\backslash
+
+\backslash
+
+\backslash
+text{слова}}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (7,0) --(7,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (1,-0.3)--(1,0.8)--(2,0.8) node [above] {$k$}--(3,0.8)--(3,-0.3)--(2,-0.3)
+\end_layout
+
+\begin_layout Plain Layout
+
+	node [below] {$
+\backslash
+text {конечная память}$} --(1,-0.3) ;
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Два слова находятся в отношении 
+\begin_inset Formula $w_{1}\thickapprox_{r}^{k}w_{2}$
+\end_inset
+
+, если сканирующее устройство не может их отличить.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{1}\thickapprox_{r}^{k}w_{2}$
+\end_inset
+
+ -- это эквивалентность конечного индекса.
+\end_layout
+
+\begin_layout Definition*
+Язык 
+\begin_inset Formula $L$
+\end_inset
+
+ называется локально барьерно тестируемым, если он является объединением
+ классов 
+\begin_inset Formula $\thickapprox_{r}^{k}$
+\end_inset
+
+ для некоторых 
+\begin_inset Formula $r\ \text{и}\ k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Мы хотим доказать, что именно эти языки соответствуют 
+\begin_inset Formula $FO(x=y+1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma*
+Любой локально барьерно тестируемый язык задаётся формулой теории первого
+ порядка с отношением 
+\begin_inset Formula $(x=y+1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Достаточно доказать, что для всех 
+\begin_inset Formula $k\ \text{и}\ r$
+\end_inset
+
+ каждый 
+\begin_inset Formula $\thickapprox_{r}^{k}$
+\end_inset
+
+ класс задаётся 
+\begin_inset Formula $FO(x=y+1)$
+\end_inset
+
+.
+ Выпишем формулу соответствующую условиям 1),2),3).
+ 
+\end_layout
+
+\begin_layout Proof
+1) Пусть 
+\begin_inset Formula $u$
+\end_inset
+
+ -- какое-то фиксированное слово длины 
+\begin_inset Formula $k-1,u=a_{1}a_{2}\ldots a_{k-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\exists x_{1}\exists x_{2}\ldots\exists x_{k-1}(First(x_{1})\,\&\, x_{2}=x_{1}+1\,\&\ldots\&\, x_{k-1}=x_{k-2}+1\,\&\,\amp{1\leqslant i\leqslant k-1}Q_{a_{i}}x_{i})$
+\end_inset
+
+, где 
+\begin_inset Formula $First(x)$
+\end_inset
+
+ -- сокращение для формулы 
+\begin_inset Formula $\neg\exists y(x=y+1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+2) Аналогично.
+\end_layout
+
+\begin_layout Proof
+3) Пусть 
+\begin_inset Formula $v=a_{1}a_{2}\ldots a_{k}$
+\end_inset
+
+ -- слово длины 
+\begin_inset Formula $k$
+\end_inset
+
+ и 
+\begin_inset Formula $t$
+\end_inset
+
+ -- число меньше 
+\begin_inset Formula $r$
+\end_inset
+
+.
+\begin_inset Formula 
+\[
+\exists x_{11}\exists x_{12}\ldots\exists x_{1k}\exists x_{21}\ldots\exists x_{tk}(\amp{1\leqslant i\leqslant t}\amp{1\leqslant j\leqslant k-1}(x_{ij+1}=x_{ij}+1)\,\&
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\amp{1\leqslant i<j\leqslant t}(x_{i1}\neq x_{j1})\,\&\,\amp{1\leqslant i\leqslant t}\amp{1\leqslant j\leqslant k-1}Q_{a_{j}}x_{ij}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+Языки из 
+\begin_inset Formula $FO(x=y+1)$
+\end_inset
+
+ -- это в точности локально барьерно тестируемые языки.
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $\sim_{r}$
+\end_inset
+
+ -- это отношение, определяемое правилом
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $w_{1}\sim_{r}w_{2}\iff\text{на}\ w_{1}\ \text{и}\ w_{2}$
+\end_inset
+
+ выполнены одни и те же FO
+\begin_inset Formula $(x=y+1)$
+\end_inset
+
+-формулы сложности 
+\begin_inset Formula $\leqslant r$
+\end_inset
+
+.
+ Докажем, что если 
+\begin_inset Formula $R=3^{r}$
+\end_inset
+
+ и 
+\begin_inset Formula $w_{1}\thickapprox_{3R}^{r}w_{2}$
+\end_inset
+
+, то 
+\begin_inset Formula $w_{1}\sim_{r}w_{2}$
+\end_inset
+
+, т.е.
+ у Боба есть выигрышная 
+\begin_inset Formula $r$
+\end_inset
+
+-раундовая стратегия.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw (0,0)--(1,0) node {$[$} node [below] {$i$}--
+\end_layout
+
+\begin_layout Plain Layout
+
+	(2.5,0) node [above] {$
+\backslash
+text {фактор}$}--(4,0) node {$]$} node [below] {$j-1$}--
+\end_layout
+
+\begin_layout Plain Layout
+
+	(4.1,0) node {$[$}--(6,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Множество 
+\begin_inset Formula $\{i,\,\ldots,\, j\}$
+\end_inset
+
+ назовём носителем фактора.
+ Два фактора разделены, если их носители не пересекаются.
+ Все неразделенные факторы объединим -- это объединение множества исходных
+ факторов.
+ Допустим, что 
+\begin_inset Formula $i$
+\end_inset
+
+ раундов уже сыграли.
+ Это значит, что 
+\begin_inset Formula $z_{1},\ldots,z_{i}$
+\end_inset
+
+ уже поставлены в каждом слове.
+ Для каждой позиции 
+\begin_inset Formula $m,$
+\end_inset
+
+на 
+\begin_inset Formula $k$
+\end_inset
+
+-ую поставлен жетон в слове 
+\begin_inset Formula $w_{j},(j=1\text{ или }2)$
+\end_inset
+
+.
+ Рассмотрим фактор 
+\begin_inset Formula $w_{j}[m-3^{r-i}+1,m+3^{r-i}]$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $m-3^{r-i}+1<1$
+\end_inset
+
+ или 
+\begin_inset Formula $m+3^{r-i}>|w_{j}|+1$
+\end_inset
+
+, то соответственно рассматриваем префикс 
+\begin_inset Formula $w_{j}[1,m+3^{r-i}]$
+\end_inset
+
+ или суффикс 
+\begin_inset Formula $w_{j}[m-3^{r-i}+1,|w_{j}|]$
+\end_inset
+
+.
+ Рассмотрим объединение в каждом слове.
+ Пусть это объединение состоит из 
+\begin_inset Formula $k_{i,j}$
+\end_inset
+
+ факторов 
+\begin_inset Formula $u_{i,j,1},\ldots,u_{i,j,k_{i,j}}$
+\end_inset
+
+.
+ Объясним, как Боб должен играть, чтобы для каждого 
+\begin_inset Formula $p,1\leqslant p\leqslant j$
+\end_inset
+
+ фактор 
+\begin_inset Formula $u_{i,1,n}$
+\end_inset
+
+, в котором стоит жетон 
+\begin_inset Formula $z_{p}$
+\end_inset
+
+ в первом слове был равен фактору 
+\begin_inset Formula $u_{i,2,n}$
+\end_inset
+
+, в котором этот же жетон стоит во втором слове, и при этом 
+\begin_inset Formula $z_{p}$
+\end_inset
+
+ стоит в обоих факторах на той же позиции.
+ Индукция по 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $i=0$
+\end_inset
+
+, доказывать нечего.
+ Допустим, что утверждение верно для 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Пусть есть выигрышная 
+\begin_inset Formula $r$
+\end_inset
+
+-раундовая стратегия.
+ Пусть Алиса поставила 
+\begin_inset Formula $z_{i+1}$
+\end_inset
+
+ на какую-то позицию 
+\begin_inset Formula $m$
+\end_inset
+
+ слова 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+.
+ Если фактор 
+\begin_inset Formula $v=w_{1}[m-3^{r-i-1},m+3^{r-i-1}]$
+\end_inset
+
+ целиком попал в один из факторов 
+\begin_inset Formula $u_{i,1,n}$
+\end_inset
+
+, то Боб просто ставит свой жетон на соответствующую позицию в 
+\begin_inset Formula $u_{i,2,n}$
+\end_inset
+
+.
+ Если это не так, то 
+\begin_inset Formula $v$
+\end_inset
+
+ разделен от факторов 
+\begin_inset Formula $u_{i+1,1,h}$
+\end_inset
+
+, которые содержат жетоны 
+\begin_inset Formula $z_{1},\ldots,z_{i}$
+\end_inset
+
+.
+ В слове 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ берем фактор нужной длины, отделенный от всех факторов вида 
+\begin_inset Formula $u_{i+1,2,h}$
+\end_inset
+
+ и ставим 
+\begin_inset Formula $z_{i+1}$
+\end_inset
+
+ в его середину.
+ 
+\end_layout
+
+\begin_layout Part*
+Лекция 10 (10.05.2012).
+\end_layout
+
+\begin_layout Corollary*
+FO(
+\begin_inset Formula $y=x+1$
+\end_inset
+
+)
+\begin_inset Formula $\subset$
+\end_inset
+
+FO(
+\begin_inset Formula $<$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Proof
+Пусть 
+\begin_inset Formula $\Sigma=\{a,b,c\}$
+\end_inset
+
+ и 
+\begin_inset Formula $L=a^{*}ba^{*}ca^{*}$
+\end_inset
+
+.
+ Докажем, что 
+\begin_inset Formula $L\in FO(<)$
+\end_inset
+
+.
+ Просто напишем формулу:
+\begin_inset Formula 
+\[
+\exists x\ \exists y\ (x<y)\ Q_{b}x\,\&\, Q_{c}y\,\&\,\forall z\ (x\neq z\,\&\, y\neq z\rightarrow Q_{a}z).
+\]
+
+\end_inset
+
+Для доказательства того, что 
+\begin_inset Formula $L\notin FO(y=x+1)$
+\end_inset
+
+, воспользуемся теоремой.
+ Допустим, что язык 
+\begin_inset Formula $L$
+\end_inset
+
+ является объединением 
+\begin_inset Formula $\thickapprox_{r}^{k}$
+\end_inset
+
+-классов для каких-то 
+\begin_inset Formula $r$
+\end_inset
+
+ и 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Рассмотрим 
+\begin_inset Formula $a^{k}ba^{k}ca^{k}$
+\end_inset
+
+ и 
+\begin_inset Formula $a^{k}ca^{k}ba^{k}$
+\end_inset
+
+.
+ Видно, что они находятся в одном 
+\begin_inset Formula $\thickapprox_{k}^{r}$
+\end_inset
+
+-классе (при любом 
+\begin_inset Formula $r$
+\end_inset
+
+).
+ У них одинаковые слова длины 
+\begin_inset Formula $k$
+\end_inset
+
+: 
+\begin_inset Formula $a^{l-1}ba^{k-l},a^{l-1}c^{k-l}$
+\end_inset
+
+ .
+ Но 
+\begin_inset Formula $a^{k}ba^{k}ca^{k}\in L$
+\end_inset
+
+, а 
+\begin_inset Formula $a^{k}ca^{k}ba^{k}\notin L$
+\end_inset
+
+.
+ Противоречие.
+\end_layout
+
+\begin_layout Section
+Алгебраическая характеризация 
+\begin_inset Formula $FO(<)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Если 
+\begin_inset Formula $L$
+\end_inset
+
+ - язык в 
+\begin_inset Formula $\Sigma^{*}$
+\end_inset
+
+, то 
+\begin_inset Formula $\sim_{L}$
+\end_inset
+
+(синтаксическая конгруэнция) определяется так:
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $w_{1}\sim_{L}w_{2}\iff(\forall u,v\in\Sigma^{*}\ uw_{1}v\in L\iff uw_{2}v\in L)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Синтаксический моноид --- это 
+\begin_inset Formula $\Sigma^{*}/\sim_{L}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Моноид апериодический, если все подгруппы тривиальны или, что эквивалентно,
+ 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+-тривиальны или, что эквивалетно, 
+\begin_inset Formula $x^{k}=x^{k+1}$
+\end_inset
+
+ для любого 
+\begin_inset Formula $x$
+\end_inset
+
+ и для некоторого 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Макнотон]
+\end_layout
+
+\end_inset
+
+ Язык задаётся формулой первого порядка с предикатом 
+\begin_inset Formula $<$
+\end_inset
+
+ тогда и только тогда, когда его синтаксический моноид -- апериодический.
+\end_layout
+
+\begin_layout Proof
+Необходимость.
+ Индукция по построению формулы.
+\end_layout
+
+\begin_layout Proof
+База индукции.
+ Формула атомарна.
+ Если 
+\begin_inset Formula $uw^{2}v\models Q_{a}x$
+\end_inset
+
+, то 
+\begin_inset Formula $x$
+\end_inset
+
+ появляется либо в 
+\begin_inset Formula $u$
+\end_inset
+
+, либо в 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Но тогда 
+\begin_inset Formula $uw^{3}v\models Q_{a}x$
+\end_inset
+
+ и обратно, если 
+\begin_inset Formula $uw^{3}v\models Q_{a}x$
+\end_inset
+
+, то 
+\begin_inset Formula $uw^{2}v\models Q_{a}x$
+\end_inset
+
+.
+ Отсюда 
+\begin_inset Formula $uw^{2}v$
+\end_inset
+
+ и 
+\begin_inset Formula $uw^{3}v$
+\end_inset
+
+ одновременно принадлежат или не принадлежат 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ Поэтому 
+\begin_inset Formula $w^{3}\sim w^{2}$
+\end_inset
+
+ и в 
+\begin_inset Formula $\Sigma^{*}/\sim\ x^{3}=x^{2}$
+\end_inset
+
+ для любого 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Значит, моноид языка 
+\begin_inset Formula $L(Q_{a}x)$
+\end_inset
+
+ апериодический.
+ Если 
+\begin_inset Formula $uw^{2}v\models x<y$
+\end_inset
+
+, то 
+\begin_inset Formula $x$
+\end_inset
+
+ и 
+\begin_inset Formula $y$
+\end_inset
+
+ появляются либо в 
+\begin_inset Formula $u$
+\end_inset
+
+, либо в 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Но тогда 
+\begin_inset Formula $uw^{3}v\models x<y$
+\end_inset
+
+ и обратно, если 
+\begin_inset Formula $uw^{3}v\models x<y$
+\end_inset
+
+, то 
+\begin_inset Formula $uw^{2}v\models x<y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Шаг индукции.
+ Пусть 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ и 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ -- такие формулы, что 
+\begin_inset Formula $M(L(\Phi))$
+\end_inset
+
+ и 
+\begin_inset Formula $M(L(\Psi))$
+\end_inset
+
+ -- апериодические.
+ Докажем, что и 
+\begin_inset Formula $M(L(\Phi\,\&\,\Psi))$
+\end_inset
+
+ апериодический.
+ Пусть 
+\begin_inset Formula $k$
+\end_inset
+
+ такое, что 
+\begin_inset Formula $x^{k}=x^{k+1}$
+\end_inset
+
+ для всех 
+\begin_inset Formula $x\in M(L(\Phi))$
+\end_inset
+
+ и всех 
+\begin_inset Formula $x\in M(L(\Psi))$
+\end_inset
+
+.
+ Возьмем любые слова 
+\begin_inset Formula $u,w,v$
+\end_inset
+
+.
+ Имеем 
+\begin_inset Formula $w^{k+1}\sim_{L(\Phi)}w^{k}$
+\end_inset
+
+, откуда 
+\begin_inset Formula $uw^{k+1}v\models\Phi\iff uw^{k}v\models\Phi$
+\end_inset
+
+ и 
+\begin_inset Formula $w^{k+1}\sim_{L(\Psi)}w^{k}$
+\end_inset
+
+, откуда 
+\begin_inset Formula $uw^{k}v\models\Psi\iff uw^{k}v\models\Psi$
+\end_inset
+
+.
+ Поэтому 
+\begin_inset Formula $uw^{k+1}v\models\Phi\,\&\,\Psi\iff uw^{k}v\models\Phi\,\&\,\Psi$
+\end_inset
+
+.
+ Отсюда 
+\begin_inset Formula $w^{k}\sim_{L(\Phi\,\&\,\Psi)}w^{k+1}$
+\end_inset
+
+ и 
+\begin_inset Formula $x^{k}=x^{k+1}$
+\end_inset
+
+ в 
+\begin_inset Formula $M(L(\Phi\,\&\,\Psi))$
+\end_inset
+
+.
+ С отрицанием тоже легко.
+ Допустим, что 
+\begin_inset Formula $uw^{2k+1}v\models\exists x\Phi$
+\end_inset
+
+.
+ Можно 
+\begin_inset Formula $x$
+\end_inset
+
+ куда-то 
+\begin_inset Quotes fld
+\end_inset
+
+положить
+\begin_inset Quotes frd
+\end_inset
+
+ так, что получится слово, удовлетворяющее 
+\begin_inset Formula $\Phi$
+\end_inset
+
+: 
+\begin_inset Formula $(a,X)\rightarrow(a,X\cup\{x\})$
+\end_inset
+
+.
+ Это слово можно представить в виде 
+\begin_inset Formula $u'w^{k}v'\models\Phi$
+\end_inset
+
+.
+ Поэтому и 
+\begin_inset Formula $u'w^{k+1}v'\models\Phi$
+\end_inset
+
+.
+ Отсюда следует, что обратное тоже верно
+\begin_inset Formula 
+\[
+uw^{2k+1}v\in L(\exists x\Phi)\iff uw^{2k+2}v\in L(\exists x\Phi).
+\]
+
+\end_inset
+
+Следовательно, 
+\begin_inset Formula $w^{2k+1}\sim_{L(\exists x\Phi)}w^{2k+2}$
+\end_inset
+
+ , т.е.
+ в 
+\begin_inset Formula $M(L(\exists x\Phi))$
+\end_inset
+
+ выполнено равенство 
+\begin_inset Formula $x^{2k+1}=x^{2k+2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Достаточность.
+ Нужно доказать, что если моноид языка 
+\begin_inset Formula $L$
+\end_inset
+
+ апериодический, то 
+\begin_inset Formula $L\in FO(<)$
+\end_inset
+
+.
+ Мы воспользуемся теоремой Шютценберже, согласно которой, 
+\begin_inset Formula $L$
+\end_inset
+
+ - беззвездный язык.
+ Формула строится индукцией по построению беззвездного языка из одноэлементных
+ и единственный сложный элемент -- произведение.
+ Пусть 
+\begin_inset Formula $L_{1}=L(\Phi),L_{2}=L(\Psi)$
+\end_inset
+
+ как построить формулу, задающую 
+\begin_inset Formula $L_{1},L_{2}$
+\end_inset
+
+? Нужно научиться по данной формуле 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ строить новую формулу 
+\begin_inset Formula $\Phi'$
+\end_inset
+
+, такую что 
+\begin_inset Formula $w\models\Phi'\iff$
+\end_inset
+
+ у 
+\begin_inset Formula $w$
+\end_inset
+
+ есть приставка, удовлетворяющая 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Part*
+Лекция 11 (17.05.2012).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $L_{1}L_{2}=\{w|\exists u\in L_{1}\ \exists v\in L_{2}\ w=uv\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Пусть 
+\begin_inset Formula $w$
+\end_inset
+
+ -- слово.
+ Скажем, что 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ выполнена на 
+\begin_inset Formula $w$
+\end_inset
+
+ между 
+\begin_inset Formula $i$
+\end_inset
+
+ и 
+\begin_inset Formula $j$
+\end_inset
+
+, где 
+\begin_inset Formula $i<j$
+\end_inset
+
+, если 
+\begin_inset Formula $w=a_{1}a_{2}\ldots a_{i}a_{i+1}\ldots a_{j-1}a_{j}\ldots a_{n}$
+\end_inset
+
+ и слово 
+\begin_inset Formula $a_{i}a_{i+1}\ldots a_{j-1}$
+\end_inset
+
+ удовлетворяет формуле 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proposition*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[о регуляризации]
+\end_layout
+
+\end_inset
+
+ Для любой формулы 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ теории 1-го порядка с отношением 
+\begin_inset Formula $<$
+\end_inset
+
+ существует формула 
+\begin_inset Formula $\varphi(x,y)$
+\end_inset
+
+ с двумя новыми свободными переменными 
+\begin_inset Formula $x\ \text{и}\ y$
+\end_inset
+
+ такая, что для любого слова 
+\begin_inset Formula $w$
+\end_inset
+
+ и для любых 
+\begin_inset Formula $i,j$
+\end_inset
+
+ таких, что 
+\begin_inset Formula $1\leqslant i<j\leqslant|w|$
+\end_inset
+
+, слово 
+\begin_inset Formula $w$
+\end_inset
+
+ удовлетворяет 
+\begin_inset Formula $\varphi(i,j)\iff w$
+\end_inset
+
+ удовлетворяет 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ между 
+\begin_inset Formula $i$
+\end_inset
+
+ и 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Для атомарной формулы 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ полагаем 
+\begin_inset Formula $\varphi(x,y)=\varphi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Если 
+\begin_inset Formula $\varphi=\neg\psi$
+\end_inset
+
+, то 
+\begin_inset Formula $\varphi(x,y)=\neg\psi(x,y)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Если 
+\begin_inset Formula $\varphi=\psi_{1}\vee\psi_{2}$
+\end_inset
+
+, то 
+\begin_inset Formula $\varphi(x,y)=\psi_{1}(x,y)\vee\psi_{2}(x,y)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Если 
+\begin_inset Formula $\varphi=\exists z\psi$
+\end_inset
+
+, то 
+\begin_inset Formula $\varphi(x,y)=\exists z((x\leqslant z)\&(z<y)\&\psi(x,y))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\exists x_{1}\exists x_{2}\ldots\exists x_{n}(x_{1}<x_{2}<x_{3}<\ldots<x_{n}\,\&\, Q_{a}x_{1}\,\&\, Q_{a}x_{2}\,\&\ldots\&Q_{a}x_{n})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout SpecialSection*
+Точечная иерархия.
+\end_layout
+
+\begin_layout Standard
+Языки уровня 1 --- кусочно-тестируемые (нет перемен кванторов).
+\end_layout
+
+\begin_layout Standard
+Языки уровня 
+\begin_inset Formula $k$
+\end_inset
+
+ --- это булева комбинация языков вида 
+\begin_inset Formula $L_{1}a_{1}L_{2}a_{2}\ldots L_{n}a_{n}L_{n+1}$
+\end_inset
+
+, где 
+\begin_inset Formula $a_{1},a_{2},\ldots,a_{n}\in\Sigma$
+\end_inset
+
+, а 
+\begin_inset Formula $L_{1},L,\ldots,L_{n+1}$
+\end_inset
+
+ -- языки уровня 
+\begin_inset Formula $\leqslant k-1$
+\end_inset
+
+.
+ Это в точности языки, задаваемые формулами первого порядка с 
+\begin_inset Formula $k-1$
+\end_inset
+
+ переменой кванторов.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $FO(x=y+1)\subsetneq FO(<)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Боке, Пэн]
+\end_layout
+
+\end_inset
+
+ Язык принадлежит к классу 
+\begin_inset Formula $FO(x=y+1)$
+\end_inset
+
+ тогда и только тогда, когда его синтаксический моноид 
+\begin_inset Formula $M$
+\end_inset
+
+ апериодический и для любых 
+\begin_inset Formula $e,e',s,s',s''$
+\end_inset
+
+ из образа языка в синтаксическом моноиде, где 
+\begin_inset Formula $e$
+\end_inset
+
+ и 
+\begin_inset Formula $e'$
+\end_inset
+
+ -- идемпотенты 
+\begin_inset Formula $ese's'es''=es''e's'ese'$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

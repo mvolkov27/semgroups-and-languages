@@ -1,0 +1,139 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[russian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\title{Лекция (N), 16.12.2011}
+\date{}
+\author{}
+\begin{document}
+\maketitle
+
+\parНапомним из предыдущей лекции операцию: \\
+\begin{math}
+M_1 \diamond M_2 = \left.\left\{ \left(\begin{array}{cc}
+\left\{m_1\right\} & P \\
+0 & \left\{m_2\right\} \\
+\end{array}\right) \right| m_1\in M_1, m_2\in M_2, P\in \mathcal{P}\left( M_1 \times  M_2 \right)
+\right\}
+\end{math}
+\\\\
+\begin{math}
+\left( \begin{array}{cc} m_1 & P \\ 0 & m_2 \\ \end{array} \right)
+\left( \begin{array}{cc} n_1 & Q \\ 0 & n_2 \\ \end{array} \right)
+=
+\left( \begin{array}{cc} m_1n_1 &  m_1Q \cup Pn_2 \\ 0 & m_2n_2 \\ \end{array} \right) , \end{math}\\
+где \begin{math}
+m_1Q=\left\{ \left( m_1q_1,q_2\right) | \left( q_1, q_2\right) \in Q\right\},\end{math} а \begin{math}
+Pn_2=\left\{ \left( p_1,p_2n_2\right) | \left( p_1, p_2\right) \in P\right\}
+\end{math}.
+\\
+\par\textbf{Предложение.} \textit{Если язык $L_i$ распознаётся моноидом $M_i$ при гомоморфизме $\mu_i : \Sigma^*\to M_i$  $(i=1,2)$, то язык $L_1L_2$ распознаётся моноидом $M_1 \diamond M_2$.}\\
+\par\textit{Доказательство.} Рассмотрим отображение $\mu \colon \Sigma^*\to M_1 \diamond M_2$, определённое так:
+\begin{center}
+\begin{math}
+\mu(\omega)=\left( \begin{array}{cc} \mu_1(\omega) & P \\ 0 & \mu_2(\omega)\end{array}\right), 
+\end{math}\end{center}
+где P - множество всех пар: $P=\{ ( \mu_1(u),\mu_2(v))| uv=\omega\}$
+
+\parПроверим, что это гомоморфизм, т.е. $\mu(\omega_1\omega_2)=\mu(\omega_1)\mu(\omega_2)$.
+\\
+\parПроблемы, если они есть, только на месте (1,2). Для $\mu(\omega_1\omega_2)$ там стоит
+$P=\{ ( \mu_1(u),\mu_2(v))| uv=\omega_1\omega_2\}$.
+\\\parДля $\mu(\omega_1)\mu(\omega_2)$ имеем:
+\begin{center}$Q=\underbrace{\{ ( \mu_1(\omega_1u_2),\mu_2(v_2))| u_2v_2=\omega_2\}}_{Q_1 \textrm{- обозначим}} \cup \underbrace{\{ ( \mu_1(u_1),\mu_2(v_1\omega_2))| u_1v_1=\omega_1\}}_{Q_2}$.\end{center}
+\parПроверим, что P=Q.
+\parСначала возьмём $(s,t) \in Q$. Б.о.о. можно считать, что эта пара из $Q_1$.
+\\$(s,t)=(\mu_1(\omega_1u_2),\mu_2(v_2))$, причём $u_2v_2=\omega_2$. Но тогда $(\omega_1u_2)v_2=\omega_1\omega_2$ $\Rightarrow$ $(s,t) \in P$.
+\parОбратно, пусть $(s,t) \in P$, т.е. $(s,t)=(\mu_1(u),\mu_2(v))$, где $uv=\omega_1\omega_2$.
+\parВоспользуемся свойством равноделимости.\\
+\begin{tikzpicture}
+\coordinate [label=center:$\uppercase\expandafter{\romannumeral 1}$] (1) at (-2.5,0.5); %name
+\draw (-2,0)--(2,0);
+\draw (-2,0.2)--(-2,-0.2);
+\draw (2,0.2)--(2,-0.2);
+\draw (0,-0.4)--(0,.2);
+\draw (-1,0.4)--(-1,0);
+%bottom
+\draw[<->] (-2,-0.1)--(0,-0.1);
+\draw[<->] (0,-0.1)--(2,-0.1);
+\coordinate [label=center:$\omega_1$] (1) at (-0.5,-0.4);
+\coordinate [label=center:$\omega_2$] (1) at (1.5,-0.4);
+%top
+\draw[<->] (-2,0.1)--(-1,0.1);
+\draw[<->] (-1,0.1)--(0,0.1);
+\draw[<->] (0,0.1)--(2,0.1);
+\coordinate [label=center:$u$] (1) at (-1.5,0.4);
+\coordinate [label=center:$z$] (1) at (-0.4,0.4);
+\coordinate [label=center:$v$] (1) at (1,0.4);
+\end{tikzpicture}\quad\quad\quad\quad\quad\quad
+\begin{tikzpicture}
+\coordinate [label=center:$\uppercase\expandafter{\romannumeral 2}$] (1) at (-2.5,0.5); %name
+\draw (-2,0)--(2,0);
+\draw (-2,0.2)--(-2,-0.2);
+\draw (2,0.2)--(2,-0.2);
+\draw (0,-0.4)--(0,.2);
+\draw (1,0.4)--(1,0);
+%bottom
+\draw[<->] (-2,-0.1)--(0,-0.1);
+\draw[<->] (0,-0.1)--(2,-0.1);
+\coordinate [label=center:$\omega_1$] (1) at (-0.5,-0.4);
+\coordinate [label=center:$\omega_2$] (1) at (1.5,-0.4);
+%top
+\draw[<->] (-2,0.1)--(0,0.1);
+\draw[<->] (0,0.1)--(1,0.1);
+\draw[<->] (1,0.1)--(2,0.1);
+\coordinate [label=center:$u$] (1) at (-1,0.4);
+\coordinate [label=center:$t$] (1) at (0.5,0.4);
+\coordinate [label=center:$v$] (1) at (1.5,0.4);
+\end{tikzpicture}\\
+Тогда либо $v=z\omega_2$, а $\omega_1=uz$, либо $u=\omega_1t$, а $\omega_2=tv$.
+\parДля определённости, пусть имеет место $\uppercase\expandafter{\romannumeral 2}$.
+\parТогда $\mu_1(u)=\mu_1(\omega_1)\mu_1(y)$
+\\$(s,t)=(\mu_1(\omega_1y),\mu_2(v))$, причём $yv=\omega_2$, откуда $(s,t) \in Q_1$ $\Rightarrow$ $\mu$ - гомоморфизм.
+\parПроверим, что $\mu$ распознаёт язык $L_1L_2$, т.е. что слово $\omega \in L_1L_2$ $\Leftrightarrow$ $\mu(\omega) \in \mu(L_1L_2)$.
+\parДействительно, пусть $\mu(\omega) \in \mu(L_1L_2)$. Это значит, что есть два слова $l_1 \in L_1$ и $l_2 \in L_2$ такие, что $\mu(\omega)=\mu(l_1l_2)$.
+\parВ частности, у этих матриц совпадают те компоненты, которые стоят на месте (1,2). Заметим, что у $\mu(l_1l_2)$ в этой компоненте есть пара $(\mu_1(l_1)\mu_2(l_2))$ (по определению). Значит, в соответствующей компоненте (1,2) у $\mu(\omega)$ есть такая пара $(\mu_1(u)\mu_2(v))$, что $uv=\omega$ и
+\\\notag\begin{equation}
+\begin{split}\mu_1(u)&=\mu_1(l_1),\\ &\Downarrow \\ u &\in L_1 \textrm{(по опр)}\end{split}\quad\quad\quad\quad\quad\quad
+\begin{split}\mu_2(v)&=\mu_2(l_2)\\ &\Downarrow \\ v &\in L_2\end{split}
+\end{equation}
+\\$\Rightarrow$  $\omega=uv \in L_1L_2$.\begin{flushright}$\Box$\end{flushright}
+
+\par\textbf{Лемма.} \textit{Пусть $M_1$ и $M_2$ - апериодические моноиды. Тогда $M_1 \diamond M_2$ - апериодический моноид.}\\
+\par\textit{Доказательство.} Если $M_1$ и $M_2$ - апериодические,то существет k, что $s^k=s^{k+1}$ для всех $s \in M_1$, и $t^k=t^{k+1}$ для всех $t \in M_2$. Тогда для любой матрицы a из $M_1 \diamond M_2$ имеем $a^{2n}=a^{2k+1}$.
+\parПусть $a=\left(\begin{array}{cc} s & P \\ 0 & t \end{array}\right)$, где $s \in M_1, t \in M_2, P=\{(p,q)| p \in M_1, q \in M_2\}$.
+\\$a^n=\left(\begin{array}{cc} s^n & Q \\ 0 & t^n \end{array}\right)$, где $Q=s^nP \cup s^{n-1}Pt \cup s^{n-2}Pt^2 \cup \ldots \cup sPt^{n-1} \cup Pt^n$.
+\parЕсли $n \ge (2k-1)$, то в любом выражении $s^iPt^j, i+j=n$, либо $i \ge k$, либо $j \ge k$.
+\\\notag\begin{equation}
+\begin{split}s^{i+1}P&t^{j-1} \cup s^iPt^j\\ &\Arrowvert \\ s^{i+1}&Pt^j\end{split}\end{equation}
+\begin{flushright}$\Box$\end{flushright}
+
+\par\textbf{Определение.} Пусть S - полугруппа. \textit{Идеал I полугруппы} -- это такое множество $I \subseteq S$, что: \begin{center}$\forall s \in S\quad\forall i \in I\quad si, is \in I$\end{center}
+\par\textbf{Определение.}  \textit{(Фактор полугруппы Риса.)} Если S - полугруппа, а I - идеал в S, то \textit{фактор полугруппы Риса} $S/I$  - полугруппа на множестве $(S\backslash I) \cup\{0\}$ (0 - новый символ), с умножением \textbf{*}, определённым так:
+\\1. $0*x=x*0=0\quad\forall x \in S/I$
+\\2. $\forall x,y \in S\backslash I \quad x*y=\left\{ \begin{array}{ll} xy & \textrm{, если $xy \notin I$},\\ 0 & \textrm{, если $xy \in I.$}\end{array}\right.$\\
+\parРисунок:\begin{center}
+\begin{tikzpicture}
+\draw (0,0) .. controls (1,.5) and (1,1.5) .. (0,2);
+\draw (0,0) .. controls (-1,.5) and (-1,1.5) .. (0,2);
+\draw (-.6,.5) .. controls (-1,1) and (1,1) .. (.6,.5);
+\coordinate [label=center:$I$] (1) at (0,0.5);
+\coordinate [label=center:$S$] (1) at (0,1.5);
+\end{tikzpicture} как бы заменяем \textit{I} одной точкой 
+\begin{tikzpicture}
+\begin{scope}
+\clip (-1,.5)  rectangle (1,2);
+\draw (0,0) .. controls (1,.5) and (1,1.5) .. (0,2);
+\draw (0,0) .. controls (-1,.5) and (-1,1.5) .. (0,2);
+\end{scope}
+\draw (-.6,.5) .. controls (-1,1) and (1,1) .. (.6,.5);
+\coordinate [label=center:$0$] (1) at (0,0.5);
+\draw[line width=1.5pt] (-.2,0.3) circle (1pt);
+\coordinate [label=center:$S$] (1) at (0,1.5);
+\path (0,0) -- (0,0);
+\end{tikzpicture}\end{center}
+
+\end{document}

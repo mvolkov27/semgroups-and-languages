@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4}
+
+\mathsurround 1pt
+
+
+\DeclareSymbolFont{rsfscript}{OMS}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfscript}
+%для отношений Грина - например, $\mathrsfs{R}$
+
+\newtheorem{exercise}{Упражнение}
+\newtheorem{example}{Пример}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corollary}{Следствие}
+\renewcommand{\proofname}{Доказательство}
+
+\begin{document}
+
+\begin{center}
+\large\bf Лекция 2, 30.09.11
+\end{center}
+
+Элемент $e$ некоторой полугруппы называется \emph{идемпотентом}, если $e^2=e$.
+
+\begin{lemma}
+\label{idempotent}
+  В конечной полугруппе для любого элемента найдется его степень,
+  которая является идемпотентом.
+\end{lemma}
+\begin{proof}
+  Пусть $S$ -- конечная полугруппа, $a\in S$. Рассмотрим последовательность степеней
+  $a, a^2, a^3, \dotsc$. Поскольку последовательность бесконечна, а полугруппа конечна, найдутся
+  такие натуральные числа $n$ и $k$, что $a^n=a^{n+k}$. Понятно, что тогда $a^m=a^{m+k}$ для
+  любого $m\ge n$. Рассмотрим элемент  $a^{nk}$. Имеем
+  $$a^{nk}=a^{nk+k}=a^{nk+2k}=\dots=a^{nk+nk}=(a^{nk})^2.$$
+  Следовательно, $a^{nk}$ -- идемпотент.
+\end{proof}
+
+\begin{exercise}
+Пусть полугруппа $S$ имеет порядок $n$. Доказать, что для любого $a\in S$
+элемент $a^{n!}$ -- идемпотент.
+\end{exercise}
+
+\begin{proposition}
+В конечной полугруппе $\mathrsfs{D}=\mathrsfs{J}$
+\end{proposition}
+\begin{proof}
+Включение $\mathrsfs{D}\subseteq\mathrsfs{J}$ выполняется в силу того, что
+$\mathrsfs{J}$ содержит $\mathrsfs{L}$ и $\mathrsfs{R}$, а $\mathrsfs{D}$ --
+наименьшее отношение эквивалентности, содержащее и $\mathrsfs{L}$, и
+$\mathrsfs{R}$.
+
+Пусть $a\mathrsfs{J} b$. Найдутся такие $u,v,x,y \in S^1$, что $uav=b$ и
+$xby=a$, откуда $xuavy=a$. Подставляя в левую часть этого равенства $xuavy$
+вместо $a$, получим $(xu)^2a(vy)^2=a$. Повторяя этот процесс, получим, что
+$(xu)^ka(vy)^k=a$ для любого $k$. По лемме \ref{idempotent} найдется такое $k$,
+что элементы $e=(xu)^k$ и $f=(vy)^k$ -- идемпотенты. Равенство
+$(xu)^ka(vy)^k=a$ можно переписать как $eaf=a$. Домножая его слева на  $e$,
+получим $eaf=ea$, откуда $ea=a$. Аналогично, домножая равенство $eaf=a$ справа
+на $f$, получим $eaf=af$, откуда $af=a$.
+
+Покажем, что $ua\,\mathrsfs{L}\,a$. Ясно, что $ua\in S^1a$. Обратно, имеем
+$a=ea=(xu)^ka=(xu)^{k-1}x\cdot ua\in S^1ua$. Аналогично проверяется, что
+$a\,\mathrsfs{R}\,av$. Учитывая, что отношение $\mathrsfs{R}$ стабильно справа,
+получаем, что $ua\,\mathrsfs{R}\,uav=b$. Итак,
+$a\,\mathrsfs{L}\,ua\,\mathrsfs{R}\,b$, т.\,е.\
+$a\,\mathrsfs{L}\mathrsfs{R}\,b$ и $a\,\mathrsfs{D\,}b$
+\end{proof}
+
+\begin{proposition}
+  \begin{enumerate}
+    \item Пусть $e$ -- идемпотент. Тогда $a\leq_{\mathrsfs{R}}e$ тогда
+    и только тогда, когда $ea=a$, и $a\leq_{\mathrsfs{L}}e$ тогда
+    и только тогда, когда $ae=a$.
+    \item Если $a\leq_\mathrsfs{R}axy$, то $a\,\mathrsfs{R}\,
+    ax\,\mathrsfs{R}\,
+    axy$. Если $a\leq_\mathrsfs{L}yxa$, то $a\,\mathrsfs{L}\, xa\mathrsfs{L}\,yxa$.\\
+
+\hbox to 0 pt {В конечных полугруппах верны еще два свойства.}
+    \item Если $a\leq_{\mathrsfs{J}} ax$, то $a\,\mathrsfs{R}\,ax$. Если $a\leq_{\mathrsfs{J}} xa$,
+    то $a\,\mathrsfs{L}\,xa$.
+    \item Если $a\leq_\mathrsfs{L}b$ и $a\,\mathrsfs{J}\,b$, то
+    $a\,\mathrsfs{L}\,b$. Если $a\leq_\mathrsfs{R}b$ и $a\,\mathrsfs{J}\,b$, то $a\,\mathrsfs{R}\,b$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+1. Если  $a\leq_\mathrsfs{R}e$, то найдется такой элемент $u\in S^1$, что
+$a=eu$. Умножив это равенство на $e$ слева, получим $ea=eu=a$. Обратная
+импликация очевидна.
+
+2. Ясно, что $a\geq_\mathrsfs{R}ax\geq_\mathrsfs{R}axy$. Поэтому если $a
+\leq_\mathrsfs{R}axy$, то $a\,\mathrsfs{R}\, ax\,\mathrsfs{R}\, axy$.
+
+3. Если $a\leq_{\mathrsfs{J}} ax$, то найдутся такие элементы $u,v\in S^1$, что
+$a=uaxv$. Подставляя в правую часть этого равенства $uaxv$ вместо $a$, получим,
+что $a=u^ka(xv)^k$ для всех натуральных $k$. По лемме \ref{idempotent} найдется
+такое $k$, что $u^k=e$ -- идемпотент. Тогда $a=ea(xv)^k$, откуда $a=ea$ и $a=
+a(xv)^k=ax\cdot v(xv)^{k-1}$. Мы видим, что $a\leq_\mathrsfs{R} ax$. Поскольку
+всегда выполняется $a\geq_\mathrsfs{R}ax$, заключаем, что
+$a\,\mathrsfs{R}\,ax$.
+
+4. Если $a\leq_\mathrsfs{L}b$, то $a=ub$ для
+    некоторого $u\in S^1$. Поэтому $ub\,\mathrsfs{J}\,b$, откуда по предыдущему пункту
+имеем $b\,\mathrsfs{L}\,ub$, т.\,е.\ $a\,\mathrsfs{L}\,b$.
+\end{proof}
+Пусть $a\in S$, договоримся обозначать
+\begin{center}
+$\mathrsfs{R}$-класс, содержащий $a$, через $R_a$;\\
+$\mathrsfs{L}$-класс, содержащий $a$, через $L_a$;\\
+$\mathrsfs{H}$-класс, содержащий $a$, через $H_a$;\\
+$\mathrsfs{D}$-класс, содержащий $a$, через $D_a$.
+\end{center}
+Заметим, что  $H_a=L_a\cap R_a$ для любого $a$.
+
+\begin{lemma}
+\label{egg-box}
+  Пусть $L$ -- $\mathrsfs{L}$-класс, $R$ -- $\mathrsfs{R}$-класс. Тогда $R\cap L\neq\varnothing$ тогда и только тогда,
+  когда $L$ и $R$ содержатся  в одном $D$-классе.
+\end{lemma}
+\begin{proof}
+  Пусть $a \in L\cap R$. Тогда ясно, что $L$ и $R$ содержатся в $D_a$.
+
+  Обратно, пусть $L$ и $R$ содержатся в $\mathrsfs{D}$-классе $D$. Возьмем произвольные $x\in L$
+  и $y\in R$. Тогда $x\mathrsfs{D}y$, т.\,е.\ существует такой элемент $a$, что
+  $x\,\mathrsfs{L}\,a\,\mathrsfs{R}\,y$. Тогда $a\in L\cap R$, откуда $L\cap R \neq
+  \varnothing$.
+\end{proof}
+
+Лемма \ref{egg-box} подсказывает, что $\mathrsfs{D}$-классы удобно мыслить себе
+как прямоугольные таблицы (по традиции именуемые \emph{egg-box картинками}), в
+которых строки изображают $\mathrsfs{R}$-классы, столбцы --
+$\mathrsfs{L}$-классы, а ячейки -- $\mathrsfs{H}$-классы.
+
+\begin{figure}[hb]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+&&&&&&&\\
+\hline
+&&&&&&&\\
+\hline
+&&&&&&&\\
+\hline
+&&&&&&&\\
+\hline
+\end{tabular}
+\caption{Egg-box картинка}
+\end{center}
+\end{figure}
+
+Следующий важный результат показывает, что элементы каждого
+$\mathrsfs{D}$-класса распределены по ячейкам соответствующей egg-box картинки
+равномерно.
+
+\begin{proposition} [Лемма Грина]
+Пусть $a\mathrsfs{R}b$, т.\,е.\ существуют $u,v\in S^1$, такие что $au=b$ и
+$bv=a$. Рассмотрим отображения $\rho_u:S\rightarrow S$, задаваемое правилом
+$x\rho u=xu$, и $\rho_u:S\rightarrow S$, задаваемое правилом $x\rho v=xv$.
+Тогда ограничение $\rho_u$ на класс $L_a$ -- это биекция $L_a$ на $L_b$,
+ограничение $\rho_v$ на класс $L_b$ -- обратная к ней биекция, и оба
+ограничения сохраняют $\mathrsfs{H}$-классы.
+\end{proposition}
+
+\begin{proof}
+Возьмем произвольный элемент $x\in L_a$. Из $x\,\mathrsfs{L}\,a$ следует, что
+$xu\,\mathrsfs{L}\,au=b$, поскольку отношение $\mathrsfs{L}$ стабильно справа.
+Следовательно, $L_a\rho_u\subseteq L_b$. Далее, существует элемент $t\in S^1$,
+такой, что $x=ta$. Имеем
+$$x\rho_u\rho_v=xuv=tauv=tbv=ta=x,$$ т.\,е.\ ограничение $\rho_v$ на класс $L_b$ --
+обратное отображение к ограничению $\rho_u$ на класс $L_a$.
+
+Получается, что ограничение $\rho_v$ на класс $L_b$ отображает $L_b$ на $L_a$,
+следовательно, ограничения $\rho_u$ и $\rho_v$ на соответственно  $L_a$ на
+$L_b$ -- взаимно обратные биекции. Поскольку $xuv=x$, имеем $x \mathrsfs{R}
+xu$, и если $x\,\mathrsfs{H}\,y$, то $xu\,\mathrsfs{H}\,yu$. Обратно, если
+$xu\,\mathrsfs{H}\,yu$, то $x\,\mathrsfs{H}\,y$
+\end{proof}
+
+\begin{proposition}[Теорема Миллера-Клиффорда]
+Пусть $a,b\in S$, тогда $ab\in R_a\cap L_b$ тогда и только тогда, когда
+пересечение $R_b \cap L_a$ содержит идемпотент.
+\end{proposition}
+\begin{proof}
+Пусть $ab\in R_a\cap L_b$. По лемме Грина $\rho_b|_{L_a}$ -- биекция $L_a$ на
+$L_b$. Поэтому в $R_b\cap L_a$ найдется такой элемент $e$, что $e\rho_b=eb=b$.
+Поскольку $e\,\mathrsfs{R}\,b$, имеем $e=bx$ для некоторого $x\in S^1$. Отсюда
+$e^2=e(bx)=(eb)x=bx=e$, т.\,е.\ $e$ -- идемпотент.
+
+Обратно, пусть $e$ -- идемпотент из $R_b\cap L_a$. Имеем $eb=b$ и $ae=a$.
+Умножив отношение $e\,\mathrsfs{R}\,b$ слева на $a$, получим
+$a=ae,\mathrsfs{R}\,ab$. Аналогично, умножив отношение $e\,\mathrsfs{L}\,a$
+справа на $b$, получим $b=eb\mathrsfs{L} ab$. Следовательно $ab\in R_a \cap
+L_b$.
+\end{proof}
+
+\begin{corollary}
+Пусть $H$ --- $\mathrsfs{H}$-класс, тогда следующие условия эквивалентны:
+\begin{enumerate}
+\item $H$ содержит идемпотент.
+\item Существуют $a,b\in H$, такие, что $ab\in H$.
+\item $H$ -- группа.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+  Импликации $1\Rightarrow 2$ и $3 \Rightarrow 1$ очевидны.
+
+  $2 \Rightarrow 3$. Имеем $H=R_a\cap L_b=R_b\cap L_a$. По теореме Миллера-Клиффорда
+  в $H$ найдется идемпотент $e$. Применяя ту же теорему в обратную сторону, заключаем, что
+  для любых $g,h\in H$ произведение $gh$ принадлежит $H$, т.\,е.\ $H$ -- полугруппа.
+  Для любого $h\in H$ отображение $\rho_h|_H$ --
+  биекция $H$ на $H$. Отсюда, в частности, следует, что $ge=g$ для любого $g\in H$.
+  В силу симметричных рассуждений $eg=g$ для любого $g\in H$,  т.\,е.\ $e$ -- единица
+  в $H$. Наконец, из того, что $\rho_h|_H$ --
+  биекция $H$ на $H$, следует, что для любого $h\in H$ существует элемент $h'$,
+  такой,  что $h'h=e$. Следовательно $H$ -- группа.
+\end{proof}
+
+Заметим, что если $H$ -- группа, то $H$ -- максимальная подгруппа.
+Действительно, если $G$ -- какая-то подгруппа полугруппы $S$, то любые два
+элемента $g,h\in G$ делят друг друга и справа, и слева: $g=h\cdot h^{-1}g$,
+$h=g\cdot g^{-1}h$ и аналогично слева. Поэтому $G$ содержится в некотором
+$\mathrsfs{H}$-классе $H$. Поскольку $H$ содержит идемпотент (а именно, единицу
+подгруппы $G$), по только что доказанному следствию $H$ есть подгруппа. Итак,
+каждая подгруппа полугруппы содержится ровно в одной максимальной подгруппе, а
+именно, в $\mathrsfs{H}$-классе единицы этой подгруппы.
+\end{document}

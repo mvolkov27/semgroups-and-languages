@@ -1,0 +1,257 @@
+This is TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  28 OCT 2012 19:43
+**lectures.tex
+(./lectures.tex
+LaTeX2e <2001/06/01>
+Loading CZ hyphenation patterns: Pavel Sevecek, v3, 1995
+Loading SK hyphenation patterns: Jana Chlebikova, 1992
+Babel <v3.7h> and hyphenation patterns for english, dumylang, nohyphenation, cz
+ech, slovak, german, ngerman, spanish, catalan, french, ukenglish, italian, dut
+ch, polish, portuguese, russian, loaded.
+(c:/Program Files/TeXLive/texmf/tex/latex/base/book.cls
+Document Class: book 2001/04/21 v1.4e Standard LaTeX document class
+(c:/Program Files/TeXLive/texmf/tex/latex/base/bk12.clo
+File: bk12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2001/06/05 v1.94 Standard LaTeX package
+
+(c:/Program Files/TeXLive/texmf/tex/latex/cyrillic/t2aenc.def
+File: t2aenc.def 2001/08/11 v1.0f Cyrillic encoding definition file
+)
+LaTeX Font Info:    Try loading font information for T2A+cmr on input line 95.
+
+(c:/Program Files/TeXLive/texmf/tex/latex/cyrillic/t2acmr.fd
+File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
+))
+(c:/Program Files/TeXLive/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2001/07/10 v0.99a Input encoding file 
+
+(c:/Program Files/TeXLive/texmf/tex/latex/cyrillic/cp1251.def
+File: cp1251.def 1999/11/16 v1.0d Input encoding file
+))
+(c:/Program Files/TeXLive/texmf/tex/generic/babel/babel.sty
+Package: babel 2001/03/01 v3.7h The Babel package
+
+(c:/Program Files/TeXLive/texmf/tex/generic/babel/english.ldf
+Language: english 2001/04/15 v3.3l English support from the babel system
+
+(c:/Program Files/TeXLive/texmf/tex/generic/babel/babel.def
+File: babel.def 2001/03/01 v3.7h Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+)
+\l@canadian = a dialect from \language\l@english 
+)
+(c:/Program Files/TeXLive/texmf/tex/generic/babel/russianb.ldf
+Language: russianb 2001/02/21 v1.1n Russian support from the babel system
+LaTeX Info: Redefining \latintext on input line 118.
+LaTeX Info: Redefining \textlatin on input line 123.
+Package babel Info: Making " an active character on input line 188.
+))
+(c:/Program Files/TeXLive/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/Program Files/TeXLive/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/Program Files/TeXLive/texmf-local/tex/latex/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/texlive/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(c:/Program Files/TeXLive/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsthm.sty
+Package: amsthm 2000/10/26 v2.08
+\thm@style=\toks15
+\thm@bodyfont=\toks16
+\thm@headfont=\toks17
+\thm@notefont=\toks18
+\thm@headpunct=\toks19
+\thm@preskip=\skip43
+\thm@postskip=\skip44
+\thm@headsep=\skip45
+\dth@everypar=\toks20
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip46
+
+For additional information on amsmath, use the `?' option.
+(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks21
+\ex@=\dimen106
+))
+(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen107
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count89
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count90
+\leftroot@=\count91
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count92
+\DOTSCASE@=\count93
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen108
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count94
+\c@MaxMatrixCols=\count95
+\dotsspace@=\muskip10
+\c@parentequation=\count96
+\dspbrk@lvl=\count97
+\tag@help=\toks22
+\row@=\count98
+\column@=\count99
+\maxfields@=\count100
+\andhelp@=\toks23
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
+\@envbody=\toks24
+\multlinegap=\skip47
+\multlinetaggap=\skip48
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+
+(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+))
+(c:/Program Files/TeXLive/texmf-local/tex/latex/a4.sty
+Style option `A4' 1.2 <26 Feb 90> (NP and JLB)
+English documentation   <26 Feb 90> (JLB)
+)
+\symrsfscript=\mathgroup6
+\c@exercise=\count101
+\c@proposition=\count102
+\c@corollary=\count103
+\c@lemma=\count104
+\c@example=\count105
+\c@definition=\count106
+ (./lectures.aux)
+\openout1 = `lectures.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+
+{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 1.
+LaTeX Font Info:    Try loading font information for U+msa on input line 40.
+(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 40.
+
+(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 40.
+
+
+(c:/Program Files/TeXLive/texmf/tex/latex/calrsfs/omsrsfs.fd) [1
+
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 86.
+
+(c:/Program Files/TeXLive/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
+ [2]
+File: hydra.eps Graphic file (type eps)
+ <hydra.eps>
+[3] [4]
+{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 2.
+[5
+
+] [6]
+Overfull \hbox (4.64587pt too wide) has occurred while \output is active
+\T2A/cmr/m/sl/12 2.2.  œ–»Ã≈–: Œ“ÕŒÿ≈Õ»ﬂ √–»Õ¿ ¬ ÃŒÕŒ»ƒ≈ œ–≈Œ¡–¿«Œ¬¿Õ»… \T2A/cm
+r/m/n/12 7
+ []
+
+[7]
+File: eggbox.eps Graphic file (type eps)
+ <eggbox.eps>
+Overfull \hbox (5.86154pt too wide) in paragraph at lines 448--452
+\T2A/cmr/bx/n/12 œÂ‰ÎÓÊÂÌËÂ 2.3.1 (ÀÂÏ-Ï‡ √Ë-Ì‡). \T2A/cmr/m/it/12 œÛÒÚ¸ $\OM
+L/cmm/m/it/12 a\OMS/rsfs/m/n/12 R\OML/cmm/m/it/12 b$\T2A/cmr/m/it/12 , Ú.Â. ÒÛ-
+˘Â-ÒÚ‚Û-˛Ú $\OML/cmm/m/it/12 u; v \OMS/cmsy/m/n/12 2
+ []
+
+[8]
+File: green.eps Graphic file (type eps)
+ <green.eps> [9]
+File: millcliff.eps Graphic file (type eps)
+ <millcliff.eps> [10] [11] [12] [13] (./lectures.aux) ) 
+Here is how much of TeX's memory you used:
+ 2477 strings out of 50491
+ 28653 string characters out of 1189754
+ 83930 words of memory out of 1500001
+ 5379 multiletter control sequences out of 10000+15000
+ 21106 words of font info for 59 fonts, out of 400000 for 1000
+ 288 hyphenation exceptions out of 1000
+ 27i,14n,24p,2436b,597s stack positions out of 1500i,500n,1500p,200000b,5000s
+
+Output written on lectures.dvi (13 pages, 51476 bytes).
