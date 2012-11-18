@@ -1,4 +1,4 @@
-This is TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  28 OCT 2012 19:43
+This is TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  18 NOV 2012 20:05
 **lectures.tex
 (./lectures.tex
 LaTeX2e <2001/06/01>
@@ -165,6 +165,7 @@ Package: amsfonts 2001/10/25 v2.2f
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
 ))
+(c:/Program Files/TeXLive/texmf/tex/latex/misc209/multind.sty)
 (c:/Program Files/TeXLive/texmf-local/tex/latex/a4.sty
 Style option `A4' 1.2 <26 Feb 90> (NP and JLB)
 English documentation   <26 Feb 90> (JLB)
@@ -176,82 +177,110 @@ English documentation   <26 Feb 90> (JLB)
 \c@lemma=\count104
 \c@example=\count105
 \c@definition=\count106
- (./lectures.aux)
+\index@idxfile=\write3
+\openout3 = `index.idx'.
+
+
+Writing index file index.idx 
+\names@idxfile=\write4
+\openout4 = `names.idx'.
+
+Writing index file names.idx 
+(./lectures.aux)
 \openout1 = `lectures.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+ (./lectures.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 3.
 
-{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 1.
-LaTeX Font Info:    Try loading font information for U+msa on input line 40.
 (c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 40.
+LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 (c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 40.
+LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 3.
+
+(c:/Program Files/TeXLive/texmf/tex/latex/calrsfs/omsrsfs.fd))
+\tf@toc=\write5
+\openout5 = `lectures.toc'.
+
+ [1
 
 
-(c:/Program Files/TeXLive/texmf/tex/latex/calrsfs/omsrsfs.fd) [1
-
+] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 86.
-
-(c:/Program Files/TeXLive/texmf/tex/latex/base/omscmr.fd
+{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 1.
+[3]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 91.
+ (c:/Program Files/TeXLive/texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
- [2]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
+ [4]
 File: hydra.eps Graphic file (type eps)
  <hydra.eps>
-[3] [4]
+[5] [6]
 {\Russian \CYRG \cyrl \cyra \cyrv \cyra } 2.
-[5
+[7
 
-] [6]
+] [8]
 Overfull \hbox (4.64587pt too wide) has occurred while \output is active
 \T2A/cmr/m/sl/12 2.2.  œ–»Ã≈–: Œ“ÕŒÿ≈Õ»ﬂ √–»Õ¿ ¬ ÃŒÕŒ»ƒ≈ œ–≈Œ¡–¿«Œ¬¿Õ»… \T2A/cm
-r/m/n/12 7
+r/m/n/12 9
  []
 
-[7]
+[9]
 File: eggbox.eps Graphic file (type eps)
  <eggbox.eps>
-Overfull \hbox (5.86154pt too wide) in paragraph at lines 448--452
+Overfull \hbox (5.86154pt too wide) in paragraph at lines 445--449
 \T2A/cmr/bx/n/12 œÂ‰ÎÓÊÂÌËÂ 2.3.1 (ÀÂÏ-Ï‡ √Ë-Ì‡). \T2A/cmr/m/it/12 œÛÒÚ¸ $\OM
 L/cmm/m/it/12 a\OMS/rsfs/m/n/12 R\OML/cmm/m/it/12 b$\T2A/cmr/m/it/12 , Ú.Â. ÒÛ-
 ˘Â-ÒÚ‚Û-˛Ú $\OML/cmm/m/it/12 u; v \OMS/cmsy/m/n/12 2
  []
 
-[8]
+[10]
 File: green.eps Graphic file (type eps)
- <green.eps> [9]
+ <green.eps> [11]
 File: millcliff.eps Graphic file (type eps)
- <millcliff.eps> [10] [11] [12] [13] (./lectures.aux) ) 
+ <millcliff.eps> [12] [13] [14] [15] (./index.ind [16
+
+
+])
+(./names.ind
+Overfull \hbox (10.89598pt too wide) in paragraph at lines 5--7
+[]\T2A/cmr/m/n/12 ÿ˛ÚˆÂÌ·ÂÊÂ (M.P.Sch^^Dutzenberger),
+ []
+
+[17
+
+
+
+]) (./lectures.aux) ) 
 Here is how much of TeX's memory you used:
- 2477 strings out of 50491
- 28653 string characters out of 1189754
+ 2498 strings out of 50491
+ 28997 string characters out of 1189754
  83930 words of memory out of 1500001
- 5379 multiletter control sequences out of 10000+15000
+ 5386 multiletter control sequences out of 10000+15000
  21106 words of font info for 59 fonts, out of 400000 for 1000
  288 hyphenation exceptions out of 1000
  27i,14n,24p,2436b,597s stack positions out of 1500i,500n,1500p,200000b,5000s
 
-Output written on lectures.dvi (13 pages, 51476 bytes).
+Output written on lectures.dvi (17 pages, 55892 bytes).
