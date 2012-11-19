@@ -1,4 +1,5 @@
-This is TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  18 NOV 2012 20:05
+This is derived from TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  19 NOV 2012 10:38
+Source specials enabled.
 **lectures.tex
 (./lectures.tex
 LaTeX2e <2001/06/01>
@@ -7,9 +8,9 @@ Loading SK hyphenation patterns: Jana Chlebikova, 1992
 Babel <v3.7h> and hyphenation patterns for english, dumylang, nohyphenation, cz
 ech, slovak, german, ngerman, spanish, catalan, french, ukenglish, italian, dut
 ch, polish, portuguese, russian, loaded.
-(c:/Program Files/TeXLive/texmf/tex/latex/base/book.cls
+(c:/TeXLive/texmf/tex/latex/base/book.cls
 Document Class: book 2001/04/21 v1.4e Standard LaTeX document class
-(c:/Program Files/TeXLive/texmf/tex/latex/base/bk12.clo
+(c:/TeXLive/texmf/tex/latex/base/bk12.clo
 File: bk12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -25,67 +26,67 @@ File: bk12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/base/fontenc.sty
+(c:/TeXLive/texmf/tex/latex/base/fontenc.sty
 Package: fontenc 2001/06/05 v1.94 Standard LaTeX package
 
-(c:/Program Files/TeXLive/texmf/tex/latex/cyrillic/t2aenc.def
+(c:/TeXLive/texmf/tex/latex/cyrillic/t2aenc.def
 File: t2aenc.def 2001/08/11 v1.0f Cyrillic encoding definition file
 )
 LaTeX Font Info:    Try loading font information for T2A+cmr on input line 95.
 
-(c:/Program Files/TeXLive/texmf/tex/latex/cyrillic/t2acmr.fd
+(c:/TeXLive/texmf/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 ))
-(c:/Program Files/TeXLive/texmf/tex/latex/base/inputenc.sty
+(c:/TeXLive/texmf/tex/latex/base/inputenc.sty
 Package: inputenc 2001/07/10 v0.99a Input encoding file 
 
-(c:/Program Files/TeXLive/texmf/tex/latex/cyrillic/cp1251.def
+(c:/TeXLive/texmf/tex/latex/cyrillic/cp1251.def
 File: cp1251.def 1999/11/16 v1.0d Input encoding file
 ))
-(c:/Program Files/TeXLive/texmf/tex/generic/babel/babel.sty
+(c:/TeXLive/texmf/tex/generic/babel/babel.sty
 Package: babel 2001/03/01 v3.7h The Babel package
 
-(c:/Program Files/TeXLive/texmf/tex/generic/babel/english.ldf
+(c:/TeXLive/texmf/tex/generic/babel/english.ldf
 Language: english 2001/04/15 v3.3l English support from the babel system
 
-(c:/Program Files/TeXLive/texmf/tex/generic/babel/babel.def
+(c:/TeXLive/texmf/tex/generic/babel/babel.def
 File: babel.def 2001/03/01 v3.7h Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 )
 \l@canadian = a dialect from \language\l@english 
 )
-(c:/Program Files/TeXLive/texmf/tex/generic/babel/russianb.ldf
+(c:/TeXLive/texmf/tex/generic/babel/russianb.ldf
 Language: russianb 2001/02/21 v1.1n Russian support from the babel system
 LaTeX Info: Redefining \latintext on input line 118.
 LaTeX Info: Redefining \textlatin on input line 123.
 Package babel Info: Making " an active character on input line 188.
 ))
-(c:/Program Files/TeXLive/texmf/tex/latex/graphics/graphicx.sty
+(c:/TeXLive/texmf/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(c:/Program Files/TeXLive/texmf/tex/latex/graphics/keyval.sty
+(c:/TeXLive/texmf/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/graphics/graphics.sty
+(c:/TeXLive/texmf/tex/latex/graphics/graphics.sty
 Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
 
-(c:/Program Files/TeXLive/texmf-local/tex/latex/trig.sty
+(c:/TeXLive/texmf-local/tex/latex/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/texlive/graphics.cfg
+(c:/TeXLive/texmf/tex/latex/texlive/graphics.cfg
 File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: dvips.def on input line 80.
 
-(c:/Program Files/TeXLive/texmf/tex/latex/graphics/dvips.def
+(c:/TeXLive/texmf/tex/latex/graphics/dvips.def
 File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsthm.sty
+(c:/TeXLive/texmf/tex/latex/amslatex/amsthm.sty
 Package: amsthm 2000/10/26 v2.08
 \thm@style=\toks15
 \thm@bodyfont=\toks16
@@ -97,24 +98,24 @@ Package: amsthm 2000/10/26 v2.08
 \thm@headsep=\skip45
 \dth@everypar=\toks20
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsmath.sty
+(c:/TeXLive/texmf/tex/latex/amslatex/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip46
 
 For additional information on amsmath, use the `?' option.
-(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amstext.sty
+(c:/TeXLive/texmf/tex/latex/amslatex/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsgen.sty
+(c:/TeXLive/texmf/tex/latex/amslatex/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks21
 \ex@=\dimen106
 ))
-(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsbsy.sty
+(c:/TeXLive/texmf/tex/latex/amslatex/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen107
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/amslatex/amsopn.sty
+(c:/TeXLive/texmf/tex/latex/amslatex/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count89
@@ -155,18 +156,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/amssymb.sty
+(c:/TeXLive/texmf/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2002/01/22 v2.2d
 
-(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/amsfonts.sty
+(c:/TeXLive/texmf/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2001/10/25 v2.2f
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
 ))
-(c:/Program Files/TeXLive/texmf/tex/latex/misc209/multind.sty)
-(c:/Program Files/TeXLive/texmf-local/tex/latex/a4.sty
+(c:/TeXLive/texmf/tex/latex/misc209/multind.sty)
+(c:/TeXLive/texmf-local/tex/latex/a4.sty
 Style option `A4' 1.2 <26 Feb 90> (NP and JLB)
 English documentation   <26 Feb 90> (JLB)
 )
@@ -205,18 +206,17 @@ LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
  (./lectures.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 3.
-
-(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/umsa.fd
+ (c:/TeXLive/texmf/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
-(c:/Program Files/TeXLive/texmf/tex/latex/amsfonts/umsb.fd
+(c:/TeXLive/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 )
 LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 3.
 
-(c:/Program Files/TeXLive/texmf/tex/latex/calrsfs/omsrsfs.fd))
+(c:/TeXLive/texmf/tex/latex/calrsfs/omsrsfs.fd))
 \tf@toc=\write5
 \openout5 = `lectures.toc'.
 
@@ -229,19 +229,28 @@ LaTeX Font Info:    Try loading font information for OMS+rsfs on input line 3.
 {\Russian \CYRG \cyrl \cyra \cyrv \cyra } 1.
 [3]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 91.
- (c:/Program Files/TeXLive/texmf/tex/latex/base/omscmr.fd
+ (c:/TeXLive/texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
  [4]
 File: hydra.eps Graphic file (type eps)
- <hydra.eps>
-[5] [6]
+ <hydra.eps> [5] [6]
 {\Russian \CYRG \cyrl \cyra \cyrv \cyra } 2.
 [7
 
-] [8]
+]
+Overfull \hbox (3.00487pt too wide) in paragraph at lines 266--276
+[][][]\T2A/cmr/m/n/12 Пусть $\OML/cmm/m/it/12 a\OMS/rsfs/m/n/12 LR\OML/cmm/m/it
+/12 b$\T2A/cmr/m/n/12 : $\OMS/cmsy/m/n/12 9\OML/cmm/m/it/12 c \OMS/cmsy/m/n/12 
+2 \OML/cmm/m/it/12 S$ \T2A/cmr/m/n/12 та-кое, что $\OML/cmm/m/it/12 a\OMS/rsfs/
+m/n/12 L\OML/cmm/m/it/12 c$ \T2A/cmr/m/n/12 и $\OML/cmm/m/it/12 c\OMS/rsfs/m/n/
+12 R\OML/cmm/m/it/12 b$\T2A/cmr/m/n/12 , т.е. $\OMS/cmsy/m/n/12 9 \OML/cmm/m/it
+/12 u; v \OMS/cmsy/m/n/12 2
+ []
+
+[8]
 Overfull \hbox (4.64587pt too wide) has occurred while \output is active
 \T2A/cmr/m/sl/12 2.2.  ПРИМЕР: ОТНОШЕНИЯ ГРИНА В МОНОИДЕ ПРЕОБРАЗОВАНИЙ \T2A/cm
 r/m/n/12 9
@@ -249,38 +258,36 @@ r/m/n/12 9
 
 [9]
 File: eggbox.eps Graphic file (type eps)
- <eggbox.eps>
-Overfull \hbox (5.86154pt too wide) in paragraph at lines 445--449
-\T2A/cmr/bx/n/12 Предложение 2.3.1 (Лем-ма Гри-на). \T2A/cmr/m/it/12 Пусть $\OM
-L/cmm/m/it/12 a\OMS/rsfs/m/n/12 R\OML/cmm/m/it/12 b$\T2A/cmr/m/it/12 , т.е. су-
-ще-ству-ют $\OML/cmm/m/it/12 u; v \OMS/cmsy/m/n/12 2
- []
-
-[10]
+ <eggbox.eps> [10]
 File: green.eps Graphic file (type eps)
  <green.eps> [11]
 File: millcliff.eps Graphic file (type eps)
- <millcliff.eps> [12] [13] [14] [15] (./index.ind [16
-
-
-])
-(./names.ind
-Overfull \hbox (10.89598pt too wide) in paragraph at lines 5--7
-[]\T2A/cmr/m/n/12 Шютценберже (M.P.Sch^^Dutzenberger),
+ <millcliff.eps> [12] [13] [14]
+Overfull \hbox (16.20108pt too wide) in paragraph at lines 690--690
+[][]\T2A/cmr/bx/n/17.28 Алгоритм вы-чис-ле-ния ре-гу-ляр-ных $\OMS/rsfs/m/n/17.
+28 D$\T2A/cmr/bx/n/17.28 -классов
  []
 
-[17
+[15] [16] [17] (./index.ind [18
+
+
+]) (./names.ind
+Overfull \hbox (10.89598pt too wide) in paragraph at lines 5--7
+[][]\T2A/cmr/m/n/12 Шютценберже (M.P.Sch^^Dutzenberger),
+ []
+
+[19
 
 
 
 ]) (./lectures.aux) ) 
 Here is how much of TeX's memory you used:
- 2498 strings out of 50491
- 28997 string characters out of 1189754
+ 2510 strings out of 50491
+ 28221 string characters out of 1189754
  83930 words of memory out of 1500001
- 5386 multiletter control sequences out of 10000+15000
- 21106 words of font info for 59 fonts, out of 400000 for 1000
+ 5395 multiletter control sequences out of 10000+15000
+ 22817 words of font info for 66 fonts, out of 400000 for 1000
  288 hyphenation exceptions out of 1000
  27i,14n,24p,2436b,597s stack positions out of 1500i,500n,1500p,200000b,5000s
 
-Output written on lectures.dvi (17 pages, 55892 bytes).
+Output written on lectures.dvi (19 pages, 77304 bytes).
