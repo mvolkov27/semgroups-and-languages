@@ -1,4 +1,4 @@
-This is derived from TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  19 NOV 2012 10:38
+This is derived from TeX, Version 3.14159 (Web2c 7.3.7x) (format=latex 2006.11.20)  24 NOV 2012 17:47
 Source specials enabled.
 **lectures.tex
 (./lectures.tex
@@ -268,7 +268,11 @@ Overfull \hbox (16.20108pt too wide) in paragraph at lines 690--690
 28 D$\T2A/cmr/bx/n/17.28 -классов
  []
 
-[15] [16] [17] (./index.ind [18
+[15] [16] [17] [18
+
+]
+{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 3.
+[19] (./index.ind [20
 
 
 ]) (./names.ind
@@ -276,7 +280,7 @@ Overfull \hbox (10.89598pt too wide) in paragraph at lines 5--7
 [][]\T2A/cmr/m/n/12 Ўютценберже (M.P.Sch^^Dutzenberger),
  []
 
-[19
+[21
 
 
 
@@ -290,4 +294,4 @@ Here is how much of TeX's memory you used:
  288 hyphenation exceptions out of 1000
  27i,14n,24p,2436b,597s stack positions out of 1500i,500n,1500p,200000b,5000s
 
-Output written on lectures.dvi (19 pages, 77304 bytes).
+Output written on lectures.dvi (21 pages, 77792 bytes).
