@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.8.31)  3 DEC 2012 14:09
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.8.31)  6 DEC 2012 09:41
 entering extended mode
 **lectures.tex
 
@@ -745,11 +745,13 @@ L/cmm/m/it/12 a[]a[] [] a[]$ \T2A/cmr/m/n/12 и $\OML/cmm/m/it/12 v \OT1/cmr/m/n
 ; a[]; [] ; a[]$\T2A/cmr/m/n/12 ,
  []
 
-[24]
-{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 4.
-[25
 
-] [26
+Overfull \hbox (2.35226pt too wide) in paragraph at lines 1068--1077
+[][]\T2A/cmr/m/n/12 Применим те-перь двой-ствен-ную кон-струк-цию к сло-ву $\OM
+L/cmm/m/it/12 v$\T2A/cmr/m/n/12 . Рас-смот-рим \T2A/cmr/m/it/12 крас-
+ []
+
+[24] [25] [26
 
 ]
 runsystem(makeindex index.idx)...executed (allowed).
@@ -779,4 +781,4 @@ Here is how much of TeX's memory you used:
  715 hyphenation exceptions out of 8191
  45i,14n,32p,2436b,474s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on lectures.dvi (29 pages, 123976 bytes).
+Output written on lectures.dvi (29 pages, 132184 bytes).
