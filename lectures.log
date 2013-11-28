@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.8.31)  6 DEC 2012 09:41
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2012.8.31)  27 NOV 2013 18:35
 entering extended mode
 **lectures.tex
 
@@ -725,19 +725,20 @@ Overfull \hbox (16.20108pt too wide) in paragraph at lines 692--692
 
 ]
 {\Russian \CYRG \cyrl \cyra \cyrv \cyra } 3.
-LaTeX Font Info:    Try loading font information for T2A+cmss on input line 930
+[21]
+LaTeX Font Info:    Try loading font information for T2A+cmss on input line 931
 .
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\cyrillic\t2acmss.fd"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\cyrillic\t2acmss.fd"
 File: t2acmss.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
-) [21]
+)
 [22]
-Overfull \hbox (1.32861pt too wide) in paragraph at lines 1017--1021
+Overfull \hbox (1.32861pt too wide) in paragraph at lines 1019--1023
 [][]\T2A/cmr/m/it/12 Необходимость. \T2A/cmr/m/n/12 Пусть язык $\OML/cmm/m/it/1
 2 L$ \T2A/cmr/m/n/12 ку-соч-но те-сти-ру-ем. По лем-
  []
 
 [23]
-Overfull \hbox (4.03415pt too wide) in paragraph at lines 1039--1051
+Overfull \hbox (4.03415pt too wide) in paragraph at lines 1041--1053
 [][]\T2A/cmr/m/n/12 Рассмотрим сло-ва $\OML/cmm/m/it/12 u \OT1/cmr/m/n/12 = \OM
 L/cmm/m/it/12 a[]a[] [] a[]$ \T2A/cmr/m/n/12 и $\OML/cmm/m/it/12 v \OT1/cmr/m/n
 /12 = \OML/cmm/m/it/12 b[]b[] [] b[]$\T2A/cmr/m/n/12 , где $\OML/cmm/m/it/12 p;
@@ -746,39 +747,42 @@ L/cmm/m/it/12 a[]a[] [] a[]$ \T2A/cmr/m/n/12 и $\OML/cmm/m/it/12 v \OT1/cmr/m/n
  []
 
 
-Overfull \hbox (2.35226pt too wide) in paragraph at lines 1068--1077
+Overfull \hbox (2.35226pt too wide) in paragraph at lines 1070--1079
 [][]\T2A/cmr/m/n/12 Применим те-перь двой-ствен-ную кон-струк-цию к сло-ву $\OM
 L/cmm/m/it/12 v$\T2A/cmr/m/n/12 . Рас-смот-рим \T2A/cmr/m/it/12 крас-
  []
 
-[24] [25] [26
+[24] [25] [26]
+{\Russian \CYRG \cyrl \cyra \cyrv \cyra } 4.
+[27
 
-]
+] [28]
 runsystem(makeindex index.idx)...executed (allowed).
 
 
 ("B:\Р Р°Р±РѕС‚Р° Р›РµРЅР°\РЈРЅРёРІРµСЂ\Semigroups and languages\semgroups-and-
-languages\index.ind") [27
+languages\index.ind") [29
 
-] [28
+
+] [30
 
 ]
 runsystem(makeindex names.idx)...executed (allowed).
 
 
 ("B:\Р Р°Р±РѕС‚Р° Р›РµРЅР°\РЈРЅРёРІРµСЂ\Semigroups and languages\semgroups-and-
-languages\names.ind") [29
+languages\names.ind") [31
 
 ]
 ("B:\Р Р°Р±РѕС‚Р° Р›РµРЅР°\РЈРЅРёРІРµСЂ\Semigroups and languages\semgroups-and-
 languages\lectures.aux") ) 
 Here is how much of TeX's memory you used:
- 8750 strings out of 494046
- 146411 string characters out of 3145995
- 196063 words of memory out of 3000000
- 11868 multiletter control sequences out of 15000+200000
+ 8751 strings out of 494046
+ 146422 string characters out of 3145995
+ 196076 words of memory out of 3000000
+ 11869 multiletter control sequences out of 15000+200000
  26181 words of font info for 70 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  45i,14n,32p,2436b,474s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on lectures.dvi (29 pages, 132184 bytes).
+Output written on lectures.dvi (31 pages, 149452 bytes).
